@@ -3,6 +3,7 @@ buildscript {
         kotlin_version = "1.4.31"
         build_tools_version = "4.1.1"
         google_services_version = "4.3.5"
+        crashlytics_version = "2.5.1"
     }
     repositories {
         google()
@@ -12,6 +13,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$build_tools_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.gms:google-services:$google_services_version"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$crashlytics_version"
     }
 }
 
