@@ -8,4 +8,50 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Splash">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="TextInputLayoutOutlinedBoxWhite" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/selector_text_input_layout_box</item>
+        <item name="hintTextColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="hintTextAppearance">@style/textStyleRegular14</item>
+        <item name="android:theme">@style/TextInputLayoutOutlinedBoxWhite.Theme</item>
+    </style>
+
+    <style name="Button" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textAppearance">@style/textStyleBold16</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <style name="TextButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAppearance">@style/textStyleBold16</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:colorControlActivated">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAppearance">@style/textStyleRegular16</item>
+        <item name="android:imeOptions">actionNext</item>
+    </style>
+
+    <style name="TextInputLayoutOutlinedBoxWhite.Theme" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorControlActivated">@color/colorWhite</item>
+    </style>
+
 </resources>

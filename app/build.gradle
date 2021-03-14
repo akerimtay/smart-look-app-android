@@ -95,4 +95,7 @@ dependencies {
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // View Binding
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.4'
 }

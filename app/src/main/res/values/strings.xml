@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">SmartWardrobe</string>
+    <string name="app_name">SmartLook</string>
+    <string name="please_wait">Пожалуйста подождите…</string>
+    <string name="enter_email">Ваш Email</string>
+    <string name="enter_password">Ваш пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="forget_password">Забыл пароль?</string>
 </resources>

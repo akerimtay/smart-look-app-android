@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.TextAppearance" parent="TextAppearance.AppCompat.Body1" />
+
+    <style name="Base.TextAppearance.Regular">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="Base.TextAppearance.Bold">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textStyleRegular12" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="textStyleRegular14" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="textStyleRegular16" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textStyleRegular18" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="textStyleRegular20" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textStyleRegular24" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="textStyleRegular22" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="textStyleRegular26" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="textStyleRegular28" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="textStyleRegular30" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="textStyleRegular36" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="textStyleRegular40" parent="Base.TextAppearance.Regular">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="textStyleBold14" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="textStyleBold12" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="textStyleBold16" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textStyleBold18" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="textStyleBold20" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textStyleBold22" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="textStyleBold24" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="textStyleBold26" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="textStyleBold30" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="textStyleBold34" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="textStyleBold38" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">38sp</item>
+    </style>
+
+    <style name="textStyleBold40" parent="Base.TextAppearance.Bold">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+</resources>
