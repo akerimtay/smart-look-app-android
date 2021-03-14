@@ -9,6 +9,8 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import com.akerimtay.smartwardrobe.R
 import org.koin.ext.getFullName
 
@@ -52,4 +54,20 @@ fun View.showKeyboard() {
     requestFocus()
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         .showSoftInput(this, 0)
+}
+
+fun Fragment.hideKeyboard() {
+    view?.hideKeyboard()
+}
+
+fun View.hideKeyboard() {
+    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+        .hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+}
+
+inline fun <T> LiveData<T>.observeNotNull(
+    owner: LifecycleOwner,
+    crossinline observer: (T) -> Unit
+) {
+    this.observe(owner) { it?.run(observer) }
 }

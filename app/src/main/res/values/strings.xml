@@ -6,4 +6,9 @@
     <string name="sign_in">Войти</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="forget_password">Забыл пароль?</string>
+    <string name="invalid_email">Некорректный email</string>
+    <string name="invalid_password">Некорректный пароль</string>
+    <string name="check_internet_connection">Проверьте интернет-соединение</string>
+    <string name="invalid_email_or_password">Неправильный email или пароль</string>
+    <string name="error_auth">Не удалось авторизоваться, пожалуйста попробуйте позже</string>
 </resources>
