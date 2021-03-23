@@ -7,16 +7,17 @@ import kotlinx.coroutines.Dispatchers
 
 class SignInUseCase(
     private val networkManager: NetworkManager,
-    private val firebaseAuthService: FirebaseAuthService
+    private val firebaseService: FirebaseService
 ) : UseCase<SignInUseCase.Param, Unit>() {
     override val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override suspend fun execute(parameters: Param) {
         networkManager.throwIfNoConnection()
-        val firebaseUser = firebaseAuthService.signInWithEmailAndPassword(
+        val firebaseUser = firebaseService.signInWithEmailAndPassword(
             email = parameters.email,
             password = parameters.password
         )
+        val user = firebaseService.getUser(firebaseUser.uid)
     }
 
     data class Param(val email: String, val password: String)

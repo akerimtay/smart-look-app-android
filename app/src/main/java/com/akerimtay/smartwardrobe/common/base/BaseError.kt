@@ -8,4 +8,5 @@ private const val NO_RES_ID = 0
 abstract class BaseError(@StringRes val errorResId: Int = NO_RES_ID) : Throwable() {
     object NoInternetError : BaseError(errorResId = R.string.check_internet_connection)
     object InvalidEmailOrPasswordError : BaseError(errorResId = R.string.invalid_email_or_password)
+    object UserNotFound: BaseError(errorResId = R.string.error_user_not_found)
 }

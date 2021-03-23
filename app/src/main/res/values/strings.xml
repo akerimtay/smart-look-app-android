@@ -11,4 +11,9 @@
     <string name="check_internet_connection">Проверьте интернет-соединение</string>
     <string name="invalid_email_or_password">Неправильный email или пароль</string>
     <string name="error_auth">Не удалось авторизоваться, пожалуйста попробуйте позже</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="select_gender">Укажите пол</string>
+    <string name="male">Мужчина</string>
+    <string name="female">Женщина</string>
+    <string name="error_user_not_found">Такого пользователя не существует</string>
 </resources>
