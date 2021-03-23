@@ -2,6 +2,7 @@ package com.akerimtay.smartwardrobe.auth
 
 import com.akerimtay.smartwardrobe.auth.domain.FirebaseService
 import com.akerimtay.smartwardrobe.auth.domain.SignInUseCase
+import com.akerimtay.smartwardrobe.auth.domain.SignUpUseCase
 import com.akerimtay.smartwardrobe.auth.ui.signIn.SignInViewModel
 import com.akerimtay.smartwardrobe.common.di.InjectionModule
 import com.google.firebase.auth.FirebaseAuth
@@ -17,5 +18,6 @@ object AuthModule : InjectionModule {
         single { FirebaseFirestore.getInstance() }
         single { FirebaseService(get(), get()) }
         single { SignInUseCase(get(), get()) }
+        single { SignUpUseCase(get(), get()) }
     }
 }

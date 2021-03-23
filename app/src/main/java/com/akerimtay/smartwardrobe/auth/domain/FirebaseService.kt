@@ -20,6 +20,11 @@ class FirebaseService(
         return task.user ?: throw BaseError.InvalidEmailOrPasswordError
     }
 
+    suspend fun signUpWithEmailAndPassword(email: String, password: String): FirebaseUser {
+        val task = auth.createUserWithEmailAndPassword(email, password).await()
+        return task.user ?: throw BaseError.UserNotCreated
+    }
+
     suspend fun getUser(id: String): User {
         val task = database.collection(USERS)
             .document(id)
@@ -27,5 +32,12 @@ class FirebaseService(
             .await()
         val response = task.toObject(FirebaseUserResponse::class.java) ?: throw BaseError.UserNotFound
         return UserConverter.fromNetwork(response)
+    }
+
+    suspend fun createUser(user: User) {
+        database.collection(USERS)
+            .document(user.id)
+            .set(UserConverter.toNetwork(user))
+            .await()
     }
 }
