@@ -8,6 +8,7 @@ import androidx.core.widget.doAfterTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.MainActivity
 import com.akerimtay.smartwardrobe.R
+import com.akerimtay.smartwardrobe.auth.ui.forgotPassword.ForgotPasswordFragment
 import com.akerimtay.smartwardrobe.auth.ui.signUp.SignUpFragment
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.utils.*
@@ -38,6 +39,9 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             }
             signUpButton.setThrottleOnClickListener {
                 activity?.supportFragmentManager?.replaceFragment(fragment = SignUpFragment())
+            }
+            forgetPasswordButton.setThrottleOnClickListener {
+                activity?.supportFragmentManager?.replaceFragment(fragment = ForgotPasswordFragment())
             }
 
             emailEditText.showKeyboard()

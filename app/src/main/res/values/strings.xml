@@ -26,4 +26,5 @@
     <string name="not_equal_passwords">Не одинаковые пароли</string>
     <string name="name_should_be_more">Имя должна содержать больше 2 символов</string>
     <string name="error_auth_user_collision">Пользователь с таким email уже существует</string>
+    <string name="restore_password">Восстановить пароль</string>
 </resources>
