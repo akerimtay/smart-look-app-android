@@ -9,10 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.model.Gender
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
-import com.akerimtay.smartwardrobe.common.utils.FormatHelper
-import com.akerimtay.smartwardrobe.common.utils.observeNotNull
-import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
-import com.akerimtay.smartwardrobe.common.utils.showToast
+import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentSignUpBinding
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.google.android.material.textfield.TextInputLayout
@@ -66,6 +63,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                     .display()
             }
             signUpButton.setThrottleOnClickListener {
+                hideKeyboard()
                 viewModel.signUp(
                     name = nameEditText.editableText.trim().toString(),
                     email = emailEditText.editableText.trim().toString(),

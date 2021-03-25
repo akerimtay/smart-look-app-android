@@ -25,6 +25,10 @@ class FirebaseService(
         return task.user ?: throw BaseError.UserNotCreated
     }
 
+    suspend fun restorePassword(email: String) {
+        auth.sendPasswordResetEmail(email).await()
+    }
+
     suspend fun getUser(id: String): User {
         val task = database.collection(USERS)
             .document(id)
