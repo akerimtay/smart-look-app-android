@@ -22,4 +22,8 @@
     <string name="create_password">Придумайте пароль</string>
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="enter_birth_date">Укажите дату рождения</string>
+    <string name="required_field">Обязательное поле</string>
+    <string name="not_equal_passwords">Не одинаковые пароли</string>
+    <string name="name_should_be_more">Имя должна содержать больше 2 символов</string>
+    <string name="error_auth_user_collision">Пользователь с таким email уже существует</string>
 </resources>

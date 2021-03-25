@@ -48,6 +48,7 @@ class SignInViewModel(
                 finish = { _progressLoading.postValue(false) },
                 body = {
                     signInUseCase(SignInUseCase.Param(email = email, password = password))
+                    _actions.postValue(SignInAction.ShowMainScreen)
                 },
                 handleError = {
                     Timber.e(it, "Error while sign in")
@@ -77,4 +78,5 @@ sealed class SignInAction : Action {
     ) : SignInAction()
 
     data class ShowMessage(@StringRes val errorResId: Int) : SignInAction()
+    object ShowMainScreen : SignInAction()
 }

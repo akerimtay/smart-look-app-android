@@ -3,6 +3,7 @@ package com.akerimtay.smartwardrobe.auth.ui.signUp
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
@@ -11,6 +12,7 @@ import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.utils.FormatHelper
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
+import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentSignUpBinding
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.google.android.material.textfield.TextInputLayout
@@ -73,8 +75,24 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             }
         }
 
+        viewModel.progressLoading.observeNotNull(viewLifecycleOwner) { binding.progressStateView.isVisible = it }
         viewModel.selectedBirthDate.observeNotNull(viewLifecycleOwner) { date ->
             binding.birthDateEditText.setText(FormatHelper.getDate(date))
+        }
+        viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
+            when (action) {
+                is SignUpAction.ShowFieldError -> showTextFieldError(
+                    textInputLayout = when (action.field) {
+                        SignUpViewModel.Field.NAME -> binding.nameTextInputLayout
+                        SignUpViewModel.Field.EMAIL -> binding.emailTextInputLayout
+                        SignUpViewModel.Field.PASSWORD -> binding.passwordTextInputLayout
+                        SignUpViewModel.Field.CONFIRM_PASSWORD -> binding.confirmPasswordTextInputLayout
+                    },
+                    message = getString(action.errorMessageId)
+                )
+                is SignUpAction.ShowMessage -> showToast(messageResId = action.errorResId)
+                is SignUpAction.ShowSignInScreen -> activity?.onBackPressed()
+            }
         }
     }
 

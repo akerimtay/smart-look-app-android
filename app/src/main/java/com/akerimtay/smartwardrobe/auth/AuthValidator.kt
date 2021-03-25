@@ -16,4 +16,6 @@ object AuthValidator {
         override fun isValid(text: String): Boolean =
             super.isValid(text) && Pattern.compile(PASSWORD_PATTERN).matcher(text).matches()
     }
+
+    val nameValidator = LengthValidator(minLength = 3, maxLength = 50)
 }
