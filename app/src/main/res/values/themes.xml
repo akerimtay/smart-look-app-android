@@ -54,4 +54,28 @@
         <item name="colorControlActivated">@color/colorWhite</item>
     </style>
 
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/colorPrimaryDark</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTheme.TitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertDialogTheme.BodyTextStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogTheme.ButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogTheme.ButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/AlertDialogTheme.ButtonStyle</item>
+    </style>
+
+    <style name="AlertDialogTheme.TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAppearance">@style/textStyleBold20</item>
+    </style>
+
+    <style name="AlertDialogTheme.BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAppearance">@style/textStyleRegular14</item>
+    </style>
+
+    <style name="AlertDialogTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="rippleColor">@color/colorWhiteAlpha70</item>
+    </style>
+
 </resources>

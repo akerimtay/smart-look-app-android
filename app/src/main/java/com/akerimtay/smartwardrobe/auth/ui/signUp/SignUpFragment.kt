@@ -2,31 +2,80 @@ package com.akerimtay.smartwardrobe.auth.ui.signUp
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
+import com.akerimtay.smartwardrobe.auth.model.Gender
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
+import com.akerimtay.smartwardrobe.common.utils.FormatHelper
+import com.akerimtay.smartwardrobe.common.utils.observeNotNull
+import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
 import com.akerimtay.smartwardrobe.databinding.FragmentSignUpBinding
+import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.google.android.material.textfield.TextInputLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     private val binding: FragmentSignUpBinding by viewBinding()
+    private val viewModel: SignUpViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val adapter = ArrayAdapter(
-//            requireContext(),
-//            android.R.layout.simple_list_item_single_choice,
-//            Gender.values().map { getString(it.displayName) }
-//        )
-//        MaterialAlertDialogBuilder(requireContext())
-//            .setTitle(R.string.select_gender)
-//            .setNeutralButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-//            .setPositiveButton(R.string.choose) { dialog, _ -> dialog.dismiss() }
-//            .setSingleChoiceItems(adapter, -1) { dialog, position ->
-//                val selectedGender = Gender.toGender(adapter.getItem(position))
-//
-//            }
-//            .show()
+        with(binding) {
+            emailEditText.doAfterTextChanged { emailTextInputLayout.isErrorEnabled = false }
+            nameEditText.doAfterTextChanged { nameTextInputLayout.isErrorEnabled = false }
+            passwordEditText.doAfterTextChanged { passwordTextInputLayout.isErrorEnabled = false }
+            confirmPasswordEditText.doAfterTextChanged {
+                confirmPasswordTextInputLayout.isErrorEnabled = false
+            }
+            birthDateEditText.doAfterTextChanged { birthDateTextInputLayout.isErrorEnabled = false }
+            toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+            genderRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                viewModel.selectGender(
+                    when (checkedId) {
+                        R.id.male_radio_button -> Gender.MALE
+                        R.id.female_radio_button -> Gender.FEMALE
+                        else -> null
+                    }
+                )
+            }
+            maleRadioButton.isChecked = true
+            birthDateButton.setThrottleOnClickListener {
+                SingleDateAndTimePickerDialog.Builder(context)
+                    .bottomSheet()
+                    .curved()
+                    .backgroundColor(
+                        ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+                    )
+                    .mainColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                    .displayHours(false)
+                    .displayMinutes(false)
+                    .displayDays(false)
+                    .displayMonth(true)
+                    .displayDaysOfMonth(true)
+                    .displayYears(true)
+                    .displayMonthNumbers(true)
+                    .title(getString(R.string.enter_birth_date))
+                    .titleTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                    .listener { selectedDate ->
+                        viewModel.selectBirthDate(selectedDate)
+                    }
+                    .display()
+            }
+            signUpButton.setThrottleOnClickListener {
+                viewModel.signUp(
+                    name = nameEditText.editableText.trim().toString(),
+                    email = emailEditText.editableText.trim().toString(),
+                    password = passwordEditText.editableText.trim().toString(),
+                    confirmPassword = confirmPasswordEditText.editableText.trim().toString()
+                )
+            }
+        }
+
+        viewModel.selectedBirthDate.observeNotNull(viewLifecycleOwner) { date ->
+            binding.birthDateEditText.setText(FormatHelper.getDate(date))
+        }
     }
 
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {

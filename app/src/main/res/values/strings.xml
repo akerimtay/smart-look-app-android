@@ -19,4 +19,7 @@
     <string name="error_user_not_created">Ошибка при созданий пользователя</string>
     <string name="cancel">Отмена</string>
     <string name="choose">Выбрать</string>
+    <string name="create_password">Придумайте пароль</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="enter_birth_date">Укажите дату рождения</string>
 </resources>

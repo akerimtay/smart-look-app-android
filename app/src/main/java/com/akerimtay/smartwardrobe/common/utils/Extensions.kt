@@ -71,3 +71,8 @@ inline fun <T> LiveData<T>.observeNotNull(
 ) {
     this.observe(owner) { it?.run(observer) }
 }
+
+inline fun <T> T.applyIf(applyCondition: Boolean, block: T.() -> Unit): T {
+    if (applyCondition) block(this)
+    return this
+}
