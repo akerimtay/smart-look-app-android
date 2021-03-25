@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "907780274583",
+    "project_id": "smartwardrobe-535fe",
+    "storage_bucket": "smartwardrobe-535fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907780274583:android:7eadd0943c35b54b556cd2",
+        "android_client_info": {
+          "package_name": "com.akerimtay.smartwardrobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907780274583-g566kgajbbg7hot543vg538q4ekftst3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYsytsuRYT7JsllUXZUe85zgDFiZK9AUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907780274583-g566kgajbbg7hot543vg538q4ekftst3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907780274583:android:cf48cbf146fd8909556cd2",
+        "android_client_info": {
+          "package_name": "com.akerimtay.smartwardrobe.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907780274583-g566kgajbbg7hot543vg538q4ekftst3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYsytsuRYT7JsllUXZUe85zgDFiZK9AUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907780274583-g566kgajbbg7hot543vg538q4ekftst3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

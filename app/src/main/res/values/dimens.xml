@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_radius">4dp</dimen>
+    <dimen name="logo_width">252dp</dimen>
+    <dimen name="logo_height">59dp</dimen>
+</resources>
