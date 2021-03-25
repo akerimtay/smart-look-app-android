@@ -5,13 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.AuthValidator
+import com.akerimtay.smartwardrobe.auth.domain.RestorePasswordUseCase
 import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import timber.log.Timber
 
-class ForgotPasswordViewModel : BaseViewModel() {
+class ForgotPasswordViewModel(
+    private val restorePasswordUseCase: RestorePasswordUseCase
+) : BaseViewModel() {
     private val _actions = SingleLiveEvent<ForgotPasswordAction>()
     val actions: LiveData<ForgotPasswordAction> = _actions
 
@@ -35,7 +39,7 @@ class ForgotPasswordViewModel : BaseViewModel() {
                 start = { _progressLoading.postValue(true) },
                 finish = { _progressLoading.postValue(false) },
                 body = {
-
+                    restorePasswordUseCase(RestorePasswordUseCase.Param(email = email))
                     _actions.postValue(ForgotPasswordAction.ShowSignInScreen)
                 },
                 handleError = {
@@ -43,6 +47,7 @@ class ForgotPasswordViewModel : BaseViewModel() {
                     _actions.postValue(
                         when (it) {
                             is BaseError -> ForgotPasswordAction.ShowMessage(it.errorResId)
+                            is FirebaseAuthInvalidUserException -> ForgotPasswordAction.ShowMessage(R.string.error_user_not_found)
                             else -> ForgotPasswordAction.ShowMessage(R.string.error_auth)
                         }
                     )

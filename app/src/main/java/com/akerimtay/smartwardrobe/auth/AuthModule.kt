@@ -1,6 +1,7 @@
 package com.akerimtay.smartwardrobe.auth
 
 import com.akerimtay.smartwardrobe.auth.domain.FirebaseService
+import com.akerimtay.smartwardrobe.auth.domain.RestorePasswordUseCase
 import com.akerimtay.smartwardrobe.auth.domain.SignInUseCase
 import com.akerimtay.smartwardrobe.auth.domain.SignUpUseCase
 import com.akerimtay.smartwardrobe.auth.ui.forgotPassword.ForgotPasswordViewModel
@@ -17,11 +18,12 @@ object AuthModule : InjectionModule {
     override fun create(): Module = module {
         viewModel { SignInViewModel(get()) }
         viewModel { SignUpViewModel(get()) }
-        viewModel { ForgotPasswordViewModel() }
+        viewModel { ForgotPasswordViewModel(get()) }
         single { FirebaseAuth.getInstance() }
         single { FirebaseFirestore.getInstance() }
         single { FirebaseService(get(), get()) }
         single { SignInUseCase(get(), get()) }
         single { SignUpUseCase(get(), get()) }
+        single { RestorePasswordUseCase(get(), get()) }
     }
 }

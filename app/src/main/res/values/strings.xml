@@ -27,4 +27,5 @@
     <string name="name_should_be_more">Имя должна содержать больше 2 символов</string>
     <string name="error_auth_user_collision">Пользователь с таким email уже существует</string>
     <string name="restore_password">Восстановить пароль</string>
+    <string name="mail_for_restore_password_sent">На вашу почту была отправлена письмо для восстановления пароля</string>
 </resources>

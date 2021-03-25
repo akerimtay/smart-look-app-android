@@ -45,7 +45,10 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password) {
                     message = getString(action.errorMessageId)
                 )
                 is ForgotPasswordAction.ShowMessage -> showToast(messageResId = action.errorResId)
-                is ForgotPasswordAction.ShowSignInScreen -> activity?.onBackPressed()
+                is ForgotPasswordAction.ShowSignInScreen -> {
+                    showToast(messageResId = R.string.mail_for_restore_password_sent)
+                    activity?.onBackPressed()
+                }
             }
         }
     }
