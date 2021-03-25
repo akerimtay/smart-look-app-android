@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.auth.ui
+package com.akerimtay.smartwardrobe.auth.ui.signIn
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
@@ -53,8 +53,7 @@ class SignInViewModel(
                     Timber.e(it, "Error while sign in")
                     _actions.postValue(
                         when (it) {
-                            is BaseError.NoInternetError -> SignInAction.ShowMessage(it.errorResId)
-                            is BaseError.InvalidEmailOrPasswordError -> SignInAction.ShowMessage(it.errorResId)
+                            is BaseError -> SignInAction.ShowMessage(it.errorResId)
                             is FirebaseAuthInvalidCredentialsException -> SignInAction.ShowMessage(R.string.invalid_email_or_password)
                             else -> SignInAction.ShowMessage(R.string.error_auth)
                         }

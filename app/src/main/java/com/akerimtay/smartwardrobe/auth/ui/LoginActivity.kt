@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.akerimtay.smartwardrobe.R
+import com.akerimtay.smartwardrobe.auth.ui.signIn.SignInFragment
 import com.akerimtay.smartwardrobe.common.utils.replaceFragment
 
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {

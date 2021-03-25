@@ -17,4 +17,6 @@
     <string name="female">Женщина</string>
     <string name="error_user_not_found">Такого пользователя не существует</string>
     <string name="error_user_not_created">Ошибка при созданий пользователя</string>
+    <string name="cancel">Отмена</string>
+    <string name="choose">Выбрать</string>
 </resources>

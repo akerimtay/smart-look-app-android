@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.auth.ui
+package com.akerimtay.smartwardrobe.auth.ui.signIn
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
+import com.akerimtay.smartwardrobe.auth.ui.signUp.SignUpFragment
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentSignInBinding
@@ -33,6 +34,9 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                     email = emailEditText.editableText.toString(),
                     password = passwordEditText.editableText.toString()
                 )
+            }
+            signUpButton.setThrottleOnClickListener {
+                activity?.supportFragmentManager?.replaceFragment(fragment = SignUpFragment())
             }
 
             emailEditText.showKeyboard()
