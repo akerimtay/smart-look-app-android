@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.akerimtay.smartwardrobe.MainActivity
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.utils.*
@@ -57,14 +56,15 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                     message = getString(action.errorMessageId)
                 )
                 is SignInAction.ShowMessage -> showToast(messageResId = action.errorResId)
-                is SignInAction.ShowMainScreen -> MainActivity.start(requireContext())
+                is SignInAction.ShowMainScreen -> {
+                    val result = findNavController().popBackStack(R.id.auth_navigation_graph, true)
+                    if (!result) {
+                        findNavController().navigate(R.id.mainFragment)
+                    }
+                }
             }
         }
     }
-
-    override fun isActionBarVisible(): Boolean = false
-
-    override fun isBottomNavigationViewVisible(): Boolean = false
 
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {
         textInputLayout.error = message

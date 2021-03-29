@@ -54,10 +54,6 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password) {
         }
     }
 
-    override fun isActionBarVisible(): Boolean = false
-
-    override fun isBottomNavigationViewVisible(): Boolean = false
-
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {
         textInputLayout.error = message
         textInputLayout.isErrorEnabled = true

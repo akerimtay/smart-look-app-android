@@ -95,10 +95,6 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         }
     }
 
-    override fun isActionBarVisible(): Boolean = false
-
-    override fun isBottomNavigationViewVisible(): Boolean = false
-
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {
         textInputLayout.error = message
         textInputLayout.isErrorEnabled = true
