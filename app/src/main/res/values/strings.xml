@@ -28,4 +28,10 @@
     <string name="error_auth_user_collision">Пользователь с таким email уже существует</string>
     <string name="restore_password">Восстановить пароль</string>
     <string name="mail_for_restore_password_sent">На вашу почту была отправлена письмо для восстановления пароля</string>
+    <string name="title_feed">Главная</string>
+    <string name="title_articles">Статьи</string>
+    <string name="title_profile">Профиль</string>
+    <string name="main_bottom_navigation_feed">Feed</string>
+    <string name="main_bottom_navigation_articles">Responses</string>
+    <string name="main_bottom_navigation_profile">Profile</string>
 </resources>

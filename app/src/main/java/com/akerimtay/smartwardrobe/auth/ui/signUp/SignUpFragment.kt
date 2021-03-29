@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.model.Gender
@@ -29,7 +30,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                 confirmPasswordTextInputLayout.isErrorEnabled = false
             }
             birthDateEditText.doAfterTextChanged { birthDateTextInputLayout.isErrorEnabled = false }
-            toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+            toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
             genderRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 viewModel.selectGender(
                     when (checkedId) {
@@ -89,7 +90,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                     message = getString(action.errorMessageId)
                 )
                 is SignUpAction.ShowMessage -> showToast(messageResId = action.errorResId)
-                is SignUpAction.ShowSignInScreen -> activity?.onBackPressed()
+                is SignUpAction.ShowSignInScreen -> findNavController().popBackStack()
             }
         }
     }

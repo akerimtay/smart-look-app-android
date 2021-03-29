@@ -29,19 +29,6 @@ fun View.setThrottleOnClickListener(callback: (view: View) -> Unit) {
     }
 }
 
-fun FragmentManager.replaceFragment(
-    @IdRes containerViewId: Int = R.id.content,
-    fragment: Fragment,
-    tag: String? = fragment.tag,
-    backStackName: String = fragment::class.getFullName(),
-    shouldAddToBackStack: Boolean = true
-) {
-    commit {
-        replace(containerViewId, fragment, tag)
-        if (shouldAddToBackStack) addToBackStack(backStackName)
-    }
-}
-
 fun Fragment.showToast(@StringRes messageResId: Int, duration: Int = Toast.LENGTH_SHORT) {
     context?.toast(message = getString(messageResId), duration = duration)
 }
