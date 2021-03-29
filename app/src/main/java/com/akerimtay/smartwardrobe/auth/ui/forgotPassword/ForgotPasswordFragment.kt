@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
@@ -23,7 +24,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+            toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
             emailEditText.doAfterTextChanged { emailTextInputLayout.isErrorEnabled = false }
             emailEditText.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) restorePasswordButton.callOnClick()
@@ -47,11 +48,15 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password) {
                 is ForgotPasswordAction.ShowMessage -> showToast(messageResId = action.errorResId)
                 is ForgotPasswordAction.ShowSignInScreen -> {
                     showToast(messageResId = R.string.mail_for_restore_password_sent)
-                    activity?.onBackPressed()
+                    findNavController().popBackStack()
                 }
             }
         }
     }
+
+    override fun isActionBarVisible(): Boolean = false
+
+    override fun isBottomNavigationViewVisible(): Boolean = false
 
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {
         textInputLayout.error = message
