@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.common.AppContract
 import com.akerimtay.smartwardrobe.common.base.BaseActivity
-import com.akerimtay.smartwardrobe.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity(R.layout.activity_main),
     AppContract {
@@ -19,11 +17,10 @@ class MainActivity : BaseActivity(R.layout.activity_main),
             )
     }
 
-    private val binding: ActivityMainBinding by viewBinding()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navHostFragment.navController.setGraph(R.navigation.navigation_auth)
     }
 
