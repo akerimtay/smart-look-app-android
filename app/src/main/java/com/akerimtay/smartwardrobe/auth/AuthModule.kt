@@ -1,10 +1,7 @@
 package com.akerimtay.smartwardrobe.auth
 
 import com.akerimtay.smartwardrobe.auth.data.AuthService
-import com.akerimtay.smartwardrobe.auth.domain.AuthRemoteGateway
-import com.akerimtay.smartwardrobe.auth.domain.RestorePasswordUseCase
-import com.akerimtay.smartwardrobe.auth.domain.SignInUseCase
-import com.akerimtay.smartwardrobe.auth.domain.SignUpUseCase
+import com.akerimtay.smartwardrobe.auth.domain.*
 import com.akerimtay.smartwardrobe.auth.ui.forgotPassword.ForgotPasswordViewModel
 import com.akerimtay.smartwardrobe.auth.ui.signIn.SignInViewModel
 import com.akerimtay.smartwardrobe.auth.ui.signUp.SignUpViewModel
@@ -19,11 +16,15 @@ object AuthModule : InjectionModule {
         viewModel { SignInViewModel(get()) }
         viewModel { SignUpViewModel(get()) }
         viewModel { ForgotPasswordViewModel(get()) }
+
         single { FirebaseAuth.getInstance() }
         single<AuthRemoteGateway> { AuthService(get()) }
+
         single { SignInUseCase(get(), get(), get(), get(), get()) }
         single { SignUpUseCase(get(), get(), get()) }
         single { RestorePasswordUseCase(get(), get()) }
+        single { LogOutUseCase(get(), get(), get(), get()) }
+
         single { SessionManager(get()) }
     }
 }

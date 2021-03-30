@@ -6,4 +6,5 @@ interface AuthRemoteGateway {
     suspend fun signInWithEmailAndPassword(email: String, password: String): FirebaseUser
     suspend fun signUpWithEmailAndPassword(email: String, password: String): FirebaseUser
     suspend fun restorePassword(email: String)
+    suspend fun logOut()
 }

@@ -22,4 +22,8 @@ class AuthService(
     override suspend fun restorePassword(email: String) {
         auth.sendPasswordResetEmail(email).await()
     }
+
+    override suspend fun logOut() {
+        auth.signOut()
+    }
 }

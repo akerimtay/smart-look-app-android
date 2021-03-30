@@ -14,7 +14,7 @@ class SessionManager(
             preferences.userId = value
             _isLoggedIn.postValue(isAuthorized)
         }
-    private val isAuthorized: Boolean
+    val isAuthorized: Boolean
         get() = !userId.isNullOrEmpty()
 
     private val _isLoggedIn = MutableLiveData(isAuthorized)
