@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.user.domain
+package com.akerimtay.smartwardrobe.user.domain.gateway
 
 import com.akerimtay.smartwardrobe.user.model.User
 

@@ -3,7 +3,7 @@ package com.akerimtay.smartwardrobe.user.data
 import com.akerimtay.smartwardrobe.auth.data.model.FirebaseUserResponse
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.user.UserConverter
-import com.akerimtay.smartwardrobe.user.domain.UserRemoteGateway
+import com.akerimtay.smartwardrobe.user.domain.gateway.UserRemoteGateway
 import com.akerimtay.smartwardrobe.user.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

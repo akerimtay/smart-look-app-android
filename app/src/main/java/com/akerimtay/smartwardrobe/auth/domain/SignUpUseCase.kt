@@ -2,7 +2,7 @@ package com.akerimtay.smartwardrobe.auth.domain
 
 import com.akerimtay.smartwardrobe.common.base.UseCase
 import com.akerimtay.smartwardrobe.network.NetworkManager
-import com.akerimtay.smartwardrobe.user.domain.UserRemoteGateway
+import com.akerimtay.smartwardrobe.user.domain.gateway.UserRemoteGateway
 import com.akerimtay.smartwardrobe.user.model.Gender
 import com.akerimtay.smartwardrobe.user.model.User
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,6 +1,7 @@
 package com.akerimtay.smartwardrobe
 
 import com.akerimtay.smartwardrobe.auth.AuthModule
+import com.akerimtay.smartwardrobe.database.DatabaseModule
 import com.akerimtay.smartwardrobe.network.NetworkModule
 import com.akerimtay.smartwardrobe.splash.SplashModule
 import com.akerimtay.smartwardrobe.user.UserModule
@@ -11,6 +12,7 @@ object KoinModules {
         AuthModule.create(),
         NetworkModule.create(),
         SplashModule.create(),
-        UserModule.create()
+        UserModule.create(),
+        DatabaseModule.create()
     )
 }
