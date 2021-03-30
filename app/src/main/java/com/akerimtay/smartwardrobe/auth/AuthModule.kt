@@ -21,8 +21,9 @@ object AuthModule : InjectionModule {
         viewModel { ForgotPasswordViewModel(get()) }
         single { FirebaseAuth.getInstance() }
         single<AuthRemoteGateway> { AuthService(get()) }
-        single { SignInUseCase(get(), get(), get(), get()) }
+        single { SignInUseCase(get(), get(), get(), get(), get()) }
         single { SignUpUseCase(get(), get(), get()) }
         single { RestorePasswordUseCase(get(), get()) }
+        single { SessionManager(get()) }
     }
 }

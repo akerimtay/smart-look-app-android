@@ -9,10 +9,11 @@ import org.koin.core.module.Module
 
 object KoinModules {
     fun create(): List<Module> = listOf(
+        AppModule.create(),
         AuthModule.create(),
-        NetworkModule.create(),
         SplashModule.create(),
+        NetworkModule.create(),
         UserModule.create(),
-        DatabaseModule.create()
+        DatabaseModule.create(),
     )
 }
