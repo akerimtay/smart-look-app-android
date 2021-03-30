@@ -41,8 +41,6 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             forgetPasswordButton.setThrottleOnClickListener {
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
             }
-
-            emailEditText.showKeyboard()
         }
 
         viewModel.progressLoading.observeNotNull(viewLifecycleOwner) { binding.progressStateView.isVisible = it }

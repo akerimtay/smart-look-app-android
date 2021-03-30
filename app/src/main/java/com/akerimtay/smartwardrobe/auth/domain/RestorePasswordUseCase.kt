@@ -7,13 +7,13 @@ import kotlinx.coroutines.Dispatchers
 
 class RestorePasswordUseCase(
     private val networkManager: NetworkManager,
-    private val firebaseService: FirebaseService
+    private val authRemoteGateway: AuthRemoteGateway
 ) : UseCase<RestorePasswordUseCase.Param, Unit>() {
     override val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override suspend fun execute(parameters: Param) {
         networkManager.throwIfNoConnection()
-        firebaseService.restorePassword(email = parameters.email)
+        authRemoteGateway.restorePassword(email = parameters.email)
     }
 
     data class Param(val email: String)

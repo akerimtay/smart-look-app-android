@@ -1,8 +1,8 @@
-package com.akerimtay.smartwardrobe.auth.data
+package com.akerimtay.smartwardrobe.user
 
 import com.akerimtay.smartwardrobe.auth.data.model.FirebaseUserResponse
-import com.akerimtay.smartwardrobe.auth.model.Gender
-import com.akerimtay.smartwardrobe.auth.model.User
+import com.akerimtay.smartwardrobe.user.model.Gender
+import com.akerimtay.smartwardrobe.user.model.User
 
 object UserConverter {
     fun fromNetwork(user: FirebaseUserResponse): User =

@@ -1,22 +1,24 @@
 package com.akerimtay.smartwardrobe.auth.domain
 
-import com.akerimtay.smartwardrobe.auth.model.Gender
-import com.akerimtay.smartwardrobe.auth.model.User
 import com.akerimtay.smartwardrobe.common.base.UseCase
 import com.akerimtay.smartwardrobe.network.NetworkManager
+import com.akerimtay.smartwardrobe.user.domain.UserRemoteGateway
+import com.akerimtay.smartwardrobe.user.model.Gender
+import com.akerimtay.smartwardrobe.user.model.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 class SignUpUseCase(
     private val networkManager: NetworkManager,
-    private val firebaseService: FirebaseService
+    private val authRemoteGateway: AuthRemoteGateway,
+    private val userRemoteGateway: UserRemoteGateway
 ) : UseCase<SignUpUseCase.Param, Unit>() {
     override val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override suspend fun execute(parameters: Param) {
         networkManager.throwIfNoConnection()
-        val firebaseUser = firebaseService.signUpWithEmailAndPassword(
+        val firebaseUser = authRemoteGateway.signUpWithEmailAndPassword(
             email = parameters.email,
             password = parameters.password
         )
@@ -27,7 +29,7 @@ class SignUpUseCase(
             email = parameters.email,
             birthDate = parameters.birthDate
         )
-        firebaseService.createUser(user)
+        userRemoteGateway.createUser(user)
     }
 
     data class Param(
