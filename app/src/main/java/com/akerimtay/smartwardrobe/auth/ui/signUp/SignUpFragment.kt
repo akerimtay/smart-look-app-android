@@ -84,7 +84,10 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                     textInputLayout = when (action.field) {
                         SignUpViewModel.Field.NAME -> binding.nameTextInputLayout
                         SignUpViewModel.Field.EMAIL -> binding.emailTextInputLayout
-                        SignUpViewModel.Field.PASSWORD -> binding.passwordTextInputLayout
+                        SignUpViewModel.Field.PASSWORD -> {
+                            binding.passwordRequirementsCardView.isVisible = true
+                            binding.passwordTextInputLayout
+                        }
                         SignUpViewModel.Field.CONFIRM_PASSWORD -> binding.confirmPasswordTextInputLayout
                     },
                     message = getString(action.errorMessageId)

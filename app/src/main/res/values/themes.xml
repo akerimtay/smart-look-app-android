@@ -46,6 +46,7 @@
     <style name="EditText" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlActivated">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhiteAlpha70</item>
         <item name="android:textAppearance">@style/textStyleRegular16</item>
         <item name="android:imeOptions">actionNext</item>
     </style>
