@@ -9,15 +9,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_white" />
 
@@ -25,14 +24,11 @@
             android:id="@+id/logo_image_view"
             android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
-            android:layout_marginBottom="48dp"
             android:adjustViewBounds="false"
             android:src="@drawable/ic_logo"
-            app:layout_constraintBottom_toTopOf="@id/name_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,8 +36,8 @@
             style="@style/TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
             android:hint="@string/enter_name"
-            app:layout_constraintBottom_toTopOf="@id/email_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/logo_image_view">
@@ -62,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/enter_email"
-            app:layout_constraintBottom_toTopOf="@id/password_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/name_text_input_layout">
@@ -85,7 +80,6 @@
             android:hint="@string/create_password"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/colorWhiteAlpha60"
-            app:layout_constraintBottom_toTopOf="@id/confirm_password_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/email_text_input_layout">
@@ -99,6 +93,29 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/password_requirements_card_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#2F323F"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/password_text_input_layout"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="start"
+                android:text="@string/password_requirements"
+                android:textColor="@color/colorWhiteAlpha70" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirm_password_text_input_layout"
             style="@style/TextInputLayoutOutlinedBoxWhite"
@@ -108,10 +125,9 @@
             android:hint="@string/confirm_password"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/colorWhiteAlpha60"
-            app:layout_constraintBottom_toTopOf="@id/gender_radio_group"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/password_text_input_layout">
+            app:layout_constraintTop_toBottomOf="@id/password_requirements_card_view">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirm_password_edit_text"
@@ -129,7 +145,6 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/birth_date_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/confirm_password_text_input_layout"
@@ -167,7 +182,6 @@
             app:endIconDrawable="@drawable/ic_baseline_calendar_today_white"
             app:endIconMode="custom"
             app:endIconTint="@color/colorWhiteAlpha60"
-            app:layout_constraintBottom_toTopOf="@id/sign_up_button"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/gender_radio_group">
@@ -186,7 +200,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="@id/birth_date_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/birth_date_text_input_layout"
             app:layout_constraintStart_toStartOf="@id/birth_date_text_input_layout"
             app:layout_constraintTop_toTopOf="@id/birth_date_text_input_layout" />
@@ -199,7 +212,6 @@
             android:layout_marginTop="25dp"
             android:background="@drawable/background_button_gradient_blue"
             android:text="@string/sign_up"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/birth_date_text_input_layout" />

@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.AuthValidator
 import com.akerimtay.smartwardrobe.auth.domain.SignUpUseCase
-import com.akerimtay.smartwardrobe.auth.model.Gender
 import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
+import com.akerimtay.smartwardrobe.user.model.Gender
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import timber.log.Timber
 import java.util.*

@@ -34,4 +34,13 @@
     <string name="main_bottom_navigation_feed">Feed</string>
     <string name="main_bottom_navigation_articles">Responses</string>
     <string name="main_bottom_navigation_profile">Profile</string>
+    <string name="password_requirements">Пароль должен отвечать следующим требованиям:\n
+        * Длина пароля должна быть не менее 6 символов;\n
+        * Как минимум одна заглавная и одна строчная буква;\n
+        * Только латинские буквы;\n
+        * Как минимум одна цифра;\n
+        * Только арабские цифры;\n
+        * Без пробелов;\n
+        * Другие допустимые символы:@ # $ % ^ &amp; + =;</string>
+    <string name="log_out">Выйти</string>
 </resources>

@@ -8,21 +8,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.akerimtay.smartwardrobe.splash.ui.SplashFragment"
-        tools:layout="@layout/fragment_splash">
-
-        <action
-            android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-
-        <!-- No popUpTo, because I build my forward navigation logic on Splash screen -->
-        <!-- So, I need to store splash screen in back stack -->
-        <action
-            android:id="@+id/action_splashFragment_to_authFlow"
-            app:destination="@id/auth_navigation_graph" />
-
-    </fragment>
+        tools:layout="@layout/fragment_splash" />
 
     <fragment
         android:id="@+id/mainFragment"
@@ -31,7 +17,9 @@
 
         <action
             android:id="@+id/action_mainFragment_to_authFlow"
-            app:destination="@id/auth_navigation_graph" />
+            app:destination="@id/auth_navigation_graph"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 

@@ -1,18 +1,24 @@
 package com.akerimtay.smartwardrobe.splash.ui
 
 import androidx.lifecycle.LiveData
+import com.akerimtay.smartwardrobe.auth.SessionManager
 import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
 import timber.log.Timber
 
-class SplashViewModel : BaseViewModel() {
+class SplashViewModel(
+    private val sessionManager: SessionManager
+) : BaseViewModel() {
     private val _actions = SingleLiveEvent<SplashAction>()
     val actions: LiveData<SplashAction> = _actions
 
     init {
         launchSafe(
-            body = { _actions.postValue(SplashAction.ShowStartPage(startPage = StartPage.AUTH)) },
+            body = {
+                val startPage = if (sessionManager.isAuthorized) StartPage.MAIN else StartPage.AUTH
+                _actions.postValue(SplashAction.ShowStartPage(startPage = startPage))
+            },
             handleError = { Timber.e(it) }
         )
     }

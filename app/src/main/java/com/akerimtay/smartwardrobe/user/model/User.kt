@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.auth.model
+package com.akerimtay.smartwardrobe.user.model
 
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.auth.model
+package com.akerimtay.smartwardrobe.user.model
 
 import androidx.annotation.StringRes
 import com.akerimtay.smartwardrobe.R
