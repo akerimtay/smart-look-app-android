@@ -19,6 +19,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             settingsImageButton.setThrottleOnClickListener { showToast(R.string.on_dev) }
+            editProfileCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             favoritesCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             aboutAppCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             contactUsCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }

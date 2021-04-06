@@ -47,4 +47,5 @@
     <string name="about_app">О приложений</string>
     <string name="contact_us">Связаться с нами</string>
     <string name="on_dev">Разработчики все еще работают над этим</string>
+    <string name="edit_profile">Редактировать профиль</string>
 </resources>
