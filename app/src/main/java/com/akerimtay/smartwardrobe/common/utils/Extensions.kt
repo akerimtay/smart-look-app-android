@@ -3,16 +3,15 @@ package com.akerimtay.smartwardrobe.common.utils
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.IdRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.akerimtay.smartwardrobe.R
-import org.koin.ext.getFullName
+import com.bumptech.glide.Glide
 
 private const val CLICK_DELAY_MILLIS = 500L
 
@@ -62,4 +61,14 @@ inline fun <T> LiveData<T>.observeNotNull(
 inline fun <T> T.applyIf(applyCondition: Boolean, block: T.() -> Unit): T {
     if (applyCondition) block(this)
     return this
+}
+
+fun ImageView.loadImage(
+    url: String?,
+    @DrawableRes placeholder: Int = R.drawable.placeholder_person
+) {
+    Glide.with(context)
+        .load(url)
+        .placeholder(placeholder)
+        .into(this)
 }
