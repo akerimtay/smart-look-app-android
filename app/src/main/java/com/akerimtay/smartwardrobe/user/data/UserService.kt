@@ -22,7 +22,7 @@ class UserService(
         return UserConverter.fromNetwork(response)
     }
 
-    override suspend fun createUser(user: User) {
+    override suspend fun saveUser(user: User) {
         database.collection(USERS)
             .document(user.id)
             .set(UserConverter.toNetwork(user))

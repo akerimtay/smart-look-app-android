@@ -3,7 +3,7 @@ package com.akerimtay.smartwardrobe.user
 import com.akerimtay.smartwardrobe.common.di.InjectionModule
 import com.akerimtay.smartwardrobe.user.data.UserService
 import com.akerimtay.smartwardrobe.user.data.db.UserDatabase
-import com.akerimtay.smartwardrobe.user.domain.SaveUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.gateway.UserLocalGateway
 import com.akerimtay.smartwardrobe.user.domain.gateway.UserRemoteGateway
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +15,6 @@ object UserModule : InjectionModule {
         single { FirebaseFirestore.getInstance() }
         single<UserRemoteGateway> { UserService(get()) }
         single<UserLocalGateway> { UserDatabase(get()) }
-        single { SaveUserUseCase(get()) }
+        single { UpdateUserUseCase(get(), get()) }
     }
 }

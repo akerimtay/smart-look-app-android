@@ -191,7 +191,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,6 +200,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="@id/birth_date_text_input_layout"
             app:layout_constraintEnd_toEndOf="@id/birth_date_text_input_layout"
             app:layout_constraintStart_toStartOf="@id/birth_date_text_input_layout"
             app:layout_constraintTop_toTopOf="@id/birth_date_text_input_layout" />
