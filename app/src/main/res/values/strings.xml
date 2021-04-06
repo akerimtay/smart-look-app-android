@@ -43,4 +43,8 @@
         * Без пробелов;\n
         * Другие допустимые символы:@ # $ % ^ &amp; + =;</string>
     <string name="log_out">Выйти</string>
+    <string name="favorites">Избранные</string>
+    <string name="about_app">О приложений</string>
+    <string name="contact_us">Связаться с нами</string>
+    <string name="on_dev">Разработчики все еще работают над этим</string>
 </resources>

@@ -179,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/enter_birth_date"
-            app:endIconDrawable="@drawable/ic_baseline_calendar_today_white"
+            app:endIconDrawable="@drawable/ic_twotone_calendar_today_white"
             app:endIconMode="custom"
             app:endIconTint="@color/colorWhiteAlpha60"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
