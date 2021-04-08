@@ -33,7 +33,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name_text_input_layout"
-            style="@style/TextInputLayoutOutlinedBoxWhite"
+            style="@style/AppTheme.TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -44,7 +44,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name_edit_text"
-                style="@style/EditText"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text|textCapSentences|textAutoCorrect|textAutoComplete" />
@@ -53,7 +53,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_text_input_layout"
-            style="@style/TextInputLayoutOutlinedBoxWhite"
+            style="@style/AppTheme.TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -64,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_edit_text"
-                style="@style/EditText"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -73,7 +73,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_text_input_layout"
-            style="@style/TextInputLayoutOutlinedBoxWhite"
+            style="@style/AppTheme.TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_edit_text"
-                style="@style/EditText"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -118,7 +118,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirm_password_text_input_layout"
-            style="@style/TextInputLayoutOutlinedBoxWhite"
+            style="@style/AppTheme.TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -131,7 +131,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirm_password_edit_text"
-                style="@style/EditText"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -174,7 +174,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/birth_date_text_input_layout"
-            style="@style/TextInputLayoutOutlinedBoxWhite"
+            style="@style/AppTheme.TextInputLayoutOutlinedBoxWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -188,7 +188,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/birth_date_edit_text"
-                style="@style/EditText"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -207,7 +207,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_up_button"
-            style="@style/Button"
+            style="@style/AppTheme.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"

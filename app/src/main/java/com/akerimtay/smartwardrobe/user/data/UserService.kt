@@ -19,14 +19,10 @@ class UserService(
     private val storageReference: StorageReference
 ) : UserRemoteGateway {
     override suspend fun getUser(id: String): User {
-        val task = database.collection(USERS)
-            .document(id)
-            .get()
-            .await()
+        val task = database.collection(USERS).document(id).get().await()
         val userResponse = task.toObject(FirebaseUserResponse::class.java) ?: throw BaseError.UserNotFound
         val bitmap = userResponse.imageUrl?.let {
-            val reference = storageReference.child("$USERS_AVATARS/$it")
-            val byteArray = reference.getBytes(FIVE_MEGABYTE).await()
+            val byteArray = storageReference.child("$USERS_AVATARS/$it").getBytes(FIVE_MEGABYTE).await()
             Converters().toBitmap(byteArray = byteArray)
         }
         return UserConverter.fromNetwork(user = userResponse, bitmap = bitmap)

@@ -1,9 +1,10 @@
-package com.akerimtay.smartwardrobe.profile
+package com.akerimtay.smartwardrobe.profile.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
@@ -19,7 +20,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             settingsImageButton.setThrottleOnClickListener { showToast(R.string.on_dev) }
-            editProfileCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
+            editProfileCardView.setThrottleOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
+            }
             favoritesCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             aboutAppCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             contactUsCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }

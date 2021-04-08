@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.profile
+package com.akerimtay.smartwardrobe.profile.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

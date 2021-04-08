@@ -5,4 +5,6 @@
     <dimen name="logo_height">59dp</dimen>
     <dimen name="header_view_height_percent">0.45</dimen>
     <dimen name="radius_value">6dp</dimen>
+    <dimen name="toolbar_start_inset">8dp</dimen>
+    <dimen name="user_avatar_size">80dp</dimen>
 </resources>
