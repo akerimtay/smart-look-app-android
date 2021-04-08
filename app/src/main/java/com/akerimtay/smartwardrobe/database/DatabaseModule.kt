@@ -12,6 +12,9 @@ object DatabaseModule : InjectionModule {
     override fun create(): Module = module {
         single {
             Room.databaseBuilder(androidContext(), AppDatabase::class.java, DATABASE_NAME)
+                //TODO add migrations
+                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigrationOnDowngrade()
                 .build()
         }
         single { get<AppDatabase>().userDao() }

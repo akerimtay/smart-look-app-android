@@ -1,5 +1,6 @@
 package com.akerimtay.smartwardrobe.user.model
 
+import android.graphics.Bitmap
 import java.util.*
 
 data class User(
@@ -8,5 +9,5 @@ data class User(
     val gender: Gender,
     val email: String,
     val birthDate: Date?,
-    val imageUrl: String? = null
+    val image: Bitmap? = null
 )

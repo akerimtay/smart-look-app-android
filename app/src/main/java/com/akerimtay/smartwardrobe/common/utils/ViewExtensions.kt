@@ -1,6 +1,7 @@
 package com.akerimtay.smartwardrobe.common.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -50,11 +51,11 @@ fun View.hideKeyboard() {
 }
 
 fun ImageView.loadImage(
-    url: String?,
+    bitmap: Bitmap?,
     @DrawableRes placeholder: Int = R.drawable.placeholder_person
 ) {
     Glide.with(context)
-        .load(url)
+        .load(bitmap)
         .placeholder(placeholder)
         .into(this)
 }

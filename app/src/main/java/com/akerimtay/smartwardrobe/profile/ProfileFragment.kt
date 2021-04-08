@@ -36,13 +36,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
-            if (user != null) {
-                binding.avatarImageView.loadImage(user.imageUrl)
-                binding.nameTextView.text = user.name
-                binding.emailTextView.text = user.email
-                binding.birthDateTextView.text = FormatHelper.getDate(user.birthDate)
-                binding.birthDateTextView.isVisible = user.birthDate != null
-                binding.genderTextView.text = getString(user.gender.displayName)
+            user?.let {
+                binding.avatarImageView.loadImage(it.image)
+                binding.nameTextView.text = it.name
+                binding.emailTextView.text = it.email
+                binding.birthDateTextView.text = FormatHelper.getDate(it.birthDate)
+                binding.birthDateTextView.isVisible = it.birthDate != null
+                binding.genderTextView.text = getString(it.gender.displayName)
             }
         }
     }
