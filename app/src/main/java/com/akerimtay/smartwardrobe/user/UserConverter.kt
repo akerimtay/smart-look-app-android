@@ -12,7 +12,8 @@ object UserConverter {
             name = user.name.orEmpty(),
             gender = Gender.toGender(user.gender),
             email = user.email.orEmpty(),
-            birthDate = user.birthDate
+            birthDate = user.birthDate,
+            imageUrl = user.imageUrl
         )
 
     fun toNetwork(user: User): FirebaseUserResponse =
@@ -21,7 +22,8 @@ object UserConverter {
             name = user.name,
             gender = user.gender.serializedName,
             email = user.email,
-            birthDate = user.birthDate
+            birthDate = user.birthDate,
+            imageUrl = user.imageUrl
         )
 
     fun fromDatabase(entity: UserEntity): User =
@@ -30,7 +32,8 @@ object UserConverter {
             name = entity.name,
             gender = entity.gender,
             email = entity.email,
-            birthDate = entity.birthDate
+            birthDate = entity.birthDate,
+            imageUrl = entity.imageUrl
         )
 
     fun toDatabase(user: User): UserEntity =
@@ -39,6 +42,7 @@ object UserConverter {
             name = user.name,
             gender = user.gender,
             email = user.email,
-            birthDate = user.birthDate
+            birthDate = user.birthDate,
+            imageUrl = user.imageUrl
         )
 }

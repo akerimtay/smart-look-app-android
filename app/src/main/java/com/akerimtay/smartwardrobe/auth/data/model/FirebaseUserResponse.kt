@@ -7,5 +7,6 @@ data class FirebaseUserResponse(
     val name: String? = null,
     val gender: String? = null,
     val email: String? = null,
-    val birthDate: Date? = null
+    val birthDate: Date? = null,
+    val imageUrl: String? = null
 )

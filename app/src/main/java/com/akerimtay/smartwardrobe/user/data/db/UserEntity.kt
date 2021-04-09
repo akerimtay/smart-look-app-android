@@ -20,7 +20,9 @@ data class UserEntity(
     @ColumnInfo(name = EMAIL)
     val email: String,
     @ColumnInfo(name = BIRTH_DATE)
-    val birthDate: Date?
+    val birthDate: Date?,
+    @ColumnInfo(name = IMAGE)
+    val imageUrl: String?
 ) {
     companion object {
         const val TABLE_NAME = "user"
@@ -29,5 +31,6 @@ data class UserEntity(
         const val GENDER = "gender"
         const val EMAIL = "email"
         const val BIRTH_DATE = "birth_date"
+        const val IMAGE = "image"
     }
 }

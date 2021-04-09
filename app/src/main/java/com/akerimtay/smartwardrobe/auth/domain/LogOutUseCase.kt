@@ -6,6 +6,7 @@ import com.akerimtay.smartwardrobe.network.NetworkManager
 import com.akerimtay.smartwardrobe.user.domain.gateway.UserLocalGateway
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import timber.log.Timber
 
 class LogOutUseCase(
     private val userLocalGateway: UserLocalGateway,
@@ -21,5 +22,6 @@ class LogOutUseCase(
             userLocalGateway.deleteById(userId)
             sessionManager.clearSession()
         }
+        Timber.d("log out")
     }
 }

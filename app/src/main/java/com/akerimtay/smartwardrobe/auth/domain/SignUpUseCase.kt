@@ -7,6 +7,7 @@ import com.akerimtay.smartwardrobe.user.model.Gender
 import com.akerimtay.smartwardrobe.user.model.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import timber.log.Timber
 import java.util.*
 
 class SignUpUseCase(
@@ -29,7 +30,8 @@ class SignUpUseCase(
             email = parameters.email,
             birthDate = parameters.birthDate
         )
-        userRemoteGateway.createUser(user)
+        userRemoteGateway.saveUser(user)
+        Timber.d("user: $user")
     }
 
     data class Param(

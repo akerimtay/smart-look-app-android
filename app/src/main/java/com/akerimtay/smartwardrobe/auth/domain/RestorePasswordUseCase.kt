@@ -4,6 +4,7 @@ import com.akerimtay.smartwardrobe.common.base.UseCase
 import com.akerimtay.smartwardrobe.network.NetworkManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import timber.log.Timber
 
 class RestorePasswordUseCase(
     private val networkManager: NetworkManager,
@@ -14,6 +15,7 @@ class RestorePasswordUseCase(
     override suspend fun execute(parameters: Param) {
         networkManager.throwIfNoConnection()
         authRemoteGateway.restorePassword(email = parameters.email)
+        Timber.d("email: ${parameters.email}")
     }
 
     data class Param(val email: String)

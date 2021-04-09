@@ -7,8 +7,18 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.akerimtay.smartwardrobe.profile.ProfileFragment"
+        android:name="com.akerimtay.smartwardrobe.profile.ui.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.akerimtay.smartwardrobe.profileedit.ui.ProfileEditFragment"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/fragment_profile_edit" />
 
 </navigation>

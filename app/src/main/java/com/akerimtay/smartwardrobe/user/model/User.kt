@@ -7,5 +7,6 @@ data class User(
     val name: String,
     val gender: Gender,
     val email: String,
-    val birthDate: Date?
+    val birthDate: Date?,
+    val imageUrl: String? = null
 )

@@ -6,18 +6,14 @@ import java.util.*
 
 class Converters {
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return if (value == null) null else Date(value)
-    }
+    fun fromTimestamp(value: Long?): Date? = if (value == null) null else Date(value)
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time
-    }
+    fun toTimestamp(date: Date?): Long? = date?.time
 
     @TypeConverter
-    fun genderToString(gender: Gender): String = gender.serializedName
+    fun fromGender(gender: Gender): String = gender.serializedName
 
     @TypeConverter
-    fun stringToGender(value: String?): Gender = Gender.toGender(value)
+    fun toGender(value: String?): Gender = Gender.toGender(value)
 }
