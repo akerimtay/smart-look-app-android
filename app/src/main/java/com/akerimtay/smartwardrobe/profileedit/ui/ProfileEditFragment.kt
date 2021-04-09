@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-
 class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
     ActionsDialog.ActionsDialogCallback {
     private val binding: FragmentProfileEditBinding by viewBinding()
@@ -38,13 +37,13 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
                 imageUri?.let {
                     val inputStream = activity?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    viewModel.selectImage(bitmap)
+                    viewModel.uploadImage(bitmap)
                 }
             }.onFailure {
                 Timber.e(it, "Can't get image from gallery")
                 showToast(R.string.error_getting_image_from_gallery)
             }.onSuccess {
-                showToast(R.string.success)
+                showToast(R.string.start_upload_image)
             }
         }
     }
@@ -133,7 +132,7 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
                     MediaStore.Images.Media.INTERNAL_CONTENT_URI
                 )
             )
-            ActionMenuType.DELETE_IMAGE -> viewModel.selectImage(bitmap = null)
+            ActionMenuType.DELETE_IMAGE -> viewModel.selectImage(value = null)
         }
     }
 

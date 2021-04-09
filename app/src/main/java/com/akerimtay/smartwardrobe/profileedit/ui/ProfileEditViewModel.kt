@@ -42,8 +42,8 @@ class ProfileEditViewModel(
         _selectedBirthDate.value = date
     }
 
-    fun selectImage(bitmap: String?) {
-        _selectedImage.value = bitmap
+    fun selectImage(value: String?) {
+        _selectedImage.value = value
     }
 
     fun uploadImage(bitmap: Bitmap) {
@@ -51,15 +51,18 @@ class ProfileEditViewModel(
             start = { _progressLoading.postValue(true) },
             finish = { _progressLoading.postValue(false) },
             body = {
-                val imageUrl = uploadImageUseCase(
-                    UploadImageUseCase.Param(
-                        fileName = "$FILE_LOCATION/$${currentUser.value?.id}",
-                        bitmap = bitmap
+                selectImage(
+                    uploadImageUseCase(
+                        UploadImageUseCase.Param(
+                            fileName = "$FILE_LOCATION/${UUID.randomUUID()}",
+                            bitmap = bitmap
+                        )
                     )
                 )
             },
             handleError = {
-
+                Timber.e(it, "Can't upload image")
+                _actions.postValue(ProfileEditAction.ShowMessage(errorResId = R.string.error_upload_image))
             }
         )
     }
@@ -81,18 +84,10 @@ class ProfileEditViewModel(
                 start = { _progressLoading.postValue(true) },
                 finish = { _progressLoading.postValue(false) },
                 body = {
-                    val imageUrl = selectedImage.value?.let { bitmap ->
-                        uploadImageUseCase(
-                            UploadImageUseCase.Param(
-                                fileName = "$FILE_LOCATION/$${currentUser.value?.id}",
-                                bitmap = bitmap
-                            )
-                        )
-                    }
                     val user = currentUser.value?.copy(
                         name = name,
                         birthDate = selectedBirthDate.value,
-                        imageUrl = imageUrl
+                        imageUrl = selectedImage.value
                     ) ?: throw BaseError.UserNotFound
                     updateUserUseCase(UpdateUserUseCase.Param(user = user))
                     _actions.postValue(ProfileEditAction.ShowPreviousScreen)

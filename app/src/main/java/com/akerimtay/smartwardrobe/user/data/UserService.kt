@@ -23,14 +23,14 @@ class UserService(
             .get()
             .await()
             .toObject(FirebaseUserResponse::class.java) ?: throw BaseError.UserNotFound
-        return UserConverter.fromNetwork(user = userResponse)
+        return UserConverter.fromNetwork(userResponse)
     }
 
     override suspend fun uploadImage(fileName: String, bitmap: Bitmap): String {
         val byteArray = BitmapUtils.fromBitmap(bitmap)
         val storageReference = storage.reference.child(fileName)
-        val uploadTask = storageReference.putBytes(byteArray).await()
-        return uploadTask.uploadSessionUri.toString()
+        storageReference.putBytes(byteArray).await()
+        return storageReference.downloadUrl.await().toString()
     }
 
     override suspend fun saveUser(user: User) {
