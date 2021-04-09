@@ -59,4 +59,5 @@
     <string name="success">Успешно</string>
     <string name="error_upload_image">Не удалось загрузить фото</string>
     <string name="start_upload_image">Начинаем загрузку</string>
+    <string name="error_load_user">Не удалось получить пользователя</string>
 </resources>

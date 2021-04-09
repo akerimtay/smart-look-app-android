@@ -19,6 +19,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            )
+            swipeRefreshLayout.setOnRefreshListener { viewModel.loadUser() }
             settingsImageButton.setThrottleOnClickListener { showToast(R.string.on_dev) }
             editProfileCardView.setThrottleOnClickListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
@@ -29,13 +36,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             logOutCardView.setThrottleOnClickListener { viewModel.logOut() }
         }
 
+        viewModel.swipeRefreshLoading.observeNotNull(viewLifecycleOwner) {
+            binding.swipeRefreshLayout.isRefreshing = it
+        }
         viewModel.progressLoading.observeNotNull(viewLifecycleOwner) { binding.progressStateView.isVisible = it }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
-                ProfileAction.ShowLoginScreen -> {
+                is ProfileAction.ShowLoginScreen -> {
                     val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     navController.navigate(R.id.action_mainFragment_to_authFlow)
                 }
+                is ProfileAction.ShowMessage -> showToast(action.messageResId)
             }
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->

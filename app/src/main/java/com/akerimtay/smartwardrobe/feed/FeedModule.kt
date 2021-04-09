@@ -1,13 +1,12 @@
-package com.akerimtay.smartwardrobe.profile
+package com.akerimtay.smartwardrobe.feed
 
 import com.akerimtay.smartwardrobe.common.di.InjectionModule
-import com.akerimtay.smartwardrobe.profile.ui.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-object ProfileModule : InjectionModule {
+object FeedModule : InjectionModule {
     override fun create(): Module = module {
-        viewModel { ProfileViewModel(get(), get(),get()) }
+        viewModel { FeedViewModel() }
     }
 }
