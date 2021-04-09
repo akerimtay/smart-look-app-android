@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
+
+        <View
+            android:id="@+id/header_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintHeight_percent="@dimen/header_view_height_percent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/settings_image_button"
+            style="?android:attr/actionButtonStyle"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_twotone_settings_white"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/avatar_image_view"
+            android:layout_width="@dimen/user_avatar_size"
+            android:layout_height="@dimen/user_avatar_size"
+            android:layout_margin="16dp"
+            android:adjustViewBounds="false"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/name_text_view"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/header_view"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:riv_border_color="@color/colorWhite"
+            app:riv_oval="true"
+            tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:textAppearance="@style/textStyleBold18"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@id/email_text_view"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/avatar_image_view"
+            tools:text="@tools:sample/full_names" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/email_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:textAppearance="@style/textStyleRegular16"
+            android:textColor="@color/colorWhite"
+            app:drawableStartCompat="@drawable/ic_twotone_email_white"
+            app:layout_constraintBottom_toTopOf="@id/birth_date_text_view"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/name_text_view"
+            tools:text="akerimtay@gmail.com" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/birth_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_twotone_calendar_today_white"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textAppearance="@style/textStyleRegular16"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/gender_text_view"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/email_text_view"
+            tools:text="03 декабря 1999 года"
+            tools:visibility="visible" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/gender_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/ic_outline_person_white"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textAppearance="@style/textStyleRegular16"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@id/footer_of_header_view"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/birth_date_text_view"
+            tools:text="@string/male" />
+
+        <View
+            android:id="@+id/footer_of_header_view"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@drawable/background_profile_header_view"
+            app:layout_constraintBottom_toBottomOf="@id/header_view" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/edit_profile_card_view"
+            style="@style/AppTheme.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/header_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twotone_edit_white"
+                    android:drawableEnd="@drawable/ic_round_keyboard_arrow_right_white"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/edit_profile"
+                    android:textAppearance="@style/textStyleRegular18" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/favorites_card_view"
+            style="@style/AppTheme.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/edit_profile_card_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twotone_favorite_white"
+                    android:drawableEnd="@drawable/ic_round_keyboard_arrow_right_white"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/favorites"
+                    android:textAppearance="@style/textStyleRegular18" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/about_app_card_view"
+            style="@style/AppTheme.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/favorites_card_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twotone_help_white"
+                    android:drawableEnd="@drawable/ic_round_keyboard_arrow_right_white"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/about_app"
+                    android:textAppearance="@style/textStyleRegular18" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/contact_us_card_view"
+            style="@style/AppTheme.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/about_app_card_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twotone_call_white"
+                    android:drawableEnd="@drawable/ic_round_keyboard_arrow_right_white"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/contact_us"
+                    android:textAppearance="@style/textStyleRegular18" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/log_out_card_view"
+            style="@style/AppTheme.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/contact_us_card_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twotone_exit_to_app_white"
+                    android:drawableEnd="@drawable/ic_round_keyboard_arrow_right_white"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/log_out"
+                    android:textAppearance="@style/textStyleRegular18" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <com.akerimtay.smartwardrobe.common.ui.ProgressStateView
+            android:id="@+id/progress_state_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:translationZ="100dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@string/please_wait" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

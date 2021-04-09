@@ -28,4 +28,35 @@
     <string name="error_auth_user_collision">Пользователь с таким email уже существует</string>
     <string name="restore_password">Восстановить пароль</string>
     <string name="mail_for_restore_password_sent">На вашу почту была отправлена письмо для восстановления пароля</string>
+    <string name="title_feed">Главная</string>
+    <string name="title_articles">Статьи</string>
+    <string name="title_profile">Профиль</string>
+    <string name="main_bottom_navigation_feed">Feed</string>
+    <string name="main_bottom_navigation_articles">Responses</string>
+    <string name="main_bottom_navigation_profile">Profile</string>
+    <string name="password_requirements">Пароль должен отвечать следующим требованиям:\n
+        * Длина пароля должна быть не менее 6 символов;\n
+        * Как минимум одна заглавная и одна строчная буква;\n
+        * Только латинские буквы;\n
+        * Как минимум одна цифра;\n
+        * Только арабские цифры;\n
+        * Без пробелов;\n
+        * Другие допустимые символы:@ # $ % ^ &amp; + =;</string>
+    <string name="log_out">Выйти</string>
+    <string name="favorites">Избранные</string>
+    <string name="about_app">О приложений</string>
+    <string name="contact_us">Связаться с нами</string>
+    <string name="on_dev">Разработчики все еще работают над этим</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="save">Сохранить</string>
+    <string name="edit">Изменить</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="success_saved">Успешно сохранено</string>
+    <string name="choose_from_gallery">Выбрать из галереи</string>
+    <string name="delete">Удалить</string>
+    <string name="error_getting_image_from_gallery">Ошибка при получений фотографий из галереи</string>
+    <string name="success">Успешно</string>
+    <string name="error_upload_image">Не удалось загрузить фото</string>
+    <string name="start_upload_image">Начинаем загрузку</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.auth.model
+package com.akerimtay.smartwardrobe.user.model
 
 import java.util.*
 
@@ -7,5 +7,6 @@ data class User(
     val name: String,
     val gender: Gender,
     val email: String,
-    val birthDate: Date?
+    val birthDate: Date?,
+    val imageUrl: String? = null
 )

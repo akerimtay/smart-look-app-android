@@ -18,7 +18,7 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="TextInputLayoutOutlinedBoxWhite" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="AppTheme.TextInputLayoutOutlinedBoxWhite" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/selector_text_input_layout_box</item>
         <item name="hintTextColor">@color/colorWhite</item>
         <item name="android:textColorHint">@color/colorWhite</item>
@@ -26,7 +26,7 @@
         <item name="android:theme">@style/TextInputLayoutOutlinedBoxWhite.Theme</item>
     </style>
 
-    <style name="Button" parent="@style/Widget.MaterialComponents.Button">
+    <style name="AppTheme.Button" parent="@style/Widget.MaterialComponents.Button">
         <item name="android:textAllCaps">true</item>
         <item name="android:textAppearance">@style/textStyleBold16</item>
         <item name="android:textColor">@color/colorWhite</item>
@@ -37,15 +37,16 @@
         <item name="backgroundTint">@null</item>
     </style>
 
-    <style name="TextButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+    <style name="AppTheme.TextButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:textAppearance">@style/textStyleBold16</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="backgroundTint">@android:color/transparent</item>
     </style>
 
-    <style name="EditText" parent="Widget.AppCompat.EditText">
+    <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlActivated">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhiteAlpha70</item>
         <item name="android:textAppearance">@style/textStyleRegular16</item>
         <item name="android:imeOptions">actionNext</item>
     </style>
@@ -54,7 +55,7 @@
         <item name="colorControlActivated">@color/colorWhite</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="AppTheme.AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="colorSurface">@color/colorPrimaryDark</item>
         <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTheme.TitleTextStyle</item>
         <item name="materialAlertDialogBodyTextStyle">@style/AlertDialogTheme.BodyTextStyle</item>
@@ -76,6 +77,35 @@
     <style name="AlertDialogTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="rippleColor">@color/colorWhiteAlpha70</item>
+    </style>
+
+    <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Card</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Card" parent="">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSurface">@color/colorPrimaryDark</item>
+        <item name="colorOnSurface">@color/colorWhite</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_value</item>
+    </style>
+
+    <style name="AppTheme.MaterialToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:contentInsetStartWithNavigation">@dimen/toolbar_start_inset</item>
+        <item name="titleTextAppearance">@style/textStyleRegular18</item>
+    </style>
+
+    <style name="AppTheme.BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetModalStyle</item>
+    </style>
+
+    <style name="BottomSheetModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottom_sheet_dialog_fragment</item>
     </style>
 
 </resources>
