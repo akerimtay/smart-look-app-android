@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
+import com.akerimtay.smartwardrobe.common.model.ActionMenuType
+import com.akerimtay.smartwardrobe.common.ui.ActionsDialog
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileEditBinding
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
@@ -16,7 +18,8 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit) {
+class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
+    ActionsDialog.ActionsDialogCallback {
     private val binding: FragmentProfileEditBinding by viewBinding()
     private val viewModel: ProfileEditViewModel by viewModel()
 
@@ -32,6 +35,16 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit) {
                     }
                 }
                 return@setOnMenuItemClickListener true
+            }
+            editButton.setThrottleOnClickListener {
+                val actionMenuTypes = mutableSetOf(ActionMenuType.CHOOSE_IMAGE_FROM_GALLERY)
+                viewModel.currentUser.value?.image?.let {
+                    actionMenuTypes.add(ActionMenuType.DELETE_IMAGE)
+                }
+                ActionsDialog.show(
+                    fragmentManager = childFragmentManager,
+                    actionMenuTypes = actionMenuTypes
+                )
             }
             nameEditText.doAfterTextChanged { nameTextInputLayout.isErrorEnabled = false }
             birthDateButton.setThrottleOnClickListener {
@@ -83,6 +96,10 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit) {
                 )
             }
         }
+    }
+
+    override fun onActionMenuClick(actionMenuType: ActionMenuType) {
+
     }
 
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {

@@ -21,12 +21,12 @@ class Converters {
     fun toGender(value: String?): Gender = Gender.toGender(value)
 
     @TypeConverter
-    fun fromBitmap(bitmap: Bitmap): ByteArray {
+    fun fromBitmap(bitmap: Bitmap?): ByteArray? {
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
         return outputStream.toByteArray()
     }
 
     @TypeConverter
-    fun toBitmap(byteArray: ByteArray): Bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    fun toBitmap(byteArray: ByteArray?): Bitmap? = BitmapFactory.decodeByteArray(byteArray, 0, byteArray?.size ?: 0)
 }

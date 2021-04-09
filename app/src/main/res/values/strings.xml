@@ -53,6 +53,6 @@
     <string name="your_name">Ваше имя</string>
     <string name="birth_date">Дата рождения</string>
     <string name="success_saved">Успешно сохранено</string>
-    <string name="choose_from_gallery">Выбрать с галлерей</string>
+    <string name="choose_from_gallery">Выбрать из галереи</string>
     <string name="delete">Удалить</string>
 </resources>

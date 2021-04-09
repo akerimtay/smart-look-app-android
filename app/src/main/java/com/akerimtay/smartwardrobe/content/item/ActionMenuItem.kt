@@ -2,7 +2,7 @@ package com.akerimtay.smartwardrobe.content.item
 
 import com.akerimtay.smartwardrobe.common.base.adapter.BaseContentItem
 import com.akerimtay.smartwardrobe.common.model.ActionMenuType
-import com.akerimtay.smartwardrobe.content.model.ItemContentType
+import com.akerimtay.smartwardrobe.content.ItemContentType
 
 data class ActionMenuItem(
     val actionMenuType: ActionMenuType,

@@ -59,3 +59,8 @@ fun ImageView.loadImage(
         .placeholder(placeholder)
         .into(this)
 }
+
+fun Context.dip(value: Int): Int = dipF(value).toInt()
+fun Context.dipF(value: Int): Float = value * resources.displayMetrics.density
+
+fun View.dip(value: Int): Int = context.dip(value)

@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.content.model
+package com.akerimtay.smartwardrobe.content
 
 import android.view.View
 import com.akerimtay.smartwardrobe.R
