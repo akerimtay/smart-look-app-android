@@ -1,5 +1,6 @@
 package com.akerimtay.smartwardrobe.profileedit.ui
 
+import android.graphics.Bitmap
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,10 +29,17 @@ class ProfileEditViewModel(
     private val _selectedBirthDate = MutableLiveData<Date?>()
     val selectedBirthDate: LiveData<Date?> = _selectedBirthDate
 
+    private val _selectedImage = MutableLiveData<Bitmap?>()
+    val selectedImage: LiveData<Bitmap?> = _selectedImage
+
     val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
 
     fun selectBirthDate(date: Date?) {
         _selectedBirthDate.value = date
+    }
+
+    fun selectImage(bitmap: Bitmap?) {
+        _selectedImage.value = bitmap
     }
 
     fun save(name: String) {
@@ -53,7 +61,8 @@ class ProfileEditViewModel(
                 body = {
                     val user = currentUser.value?.copy(
                         name = name,
-                        birthDate = selectedBirthDate.value
+                        birthDate = selectedBirthDate.value,
+                        image = selectedImage.value
                     ) ?: throw BaseError.UserNotFound
                     updateUserUseCase(UpdateUserUseCase.Param(user = user))
                     _actions.postValue(ProfileEditAction.ShowPreviousScreen)

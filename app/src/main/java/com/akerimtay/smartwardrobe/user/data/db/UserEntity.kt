@@ -22,7 +22,7 @@ data class UserEntity(
     val email: String,
     @ColumnInfo(name = BIRTH_DATE)
     val birthDate: Date?,
-    @ColumnInfo(name = IMAGE)
+    @ColumnInfo(name = IMAGE, typeAffinity = ColumnInfo.TEXT)
     val image: Bitmap?
 ) {
     companion object {

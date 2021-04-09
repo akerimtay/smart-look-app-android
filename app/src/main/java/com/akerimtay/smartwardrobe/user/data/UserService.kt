@@ -7,7 +7,7 @@ import com.akerimtay.smartwardrobe.user.UserConverter
 import com.akerimtay.smartwardrobe.user.domain.gateway.UserRemoteGateway
 import com.akerimtay.smartwardrobe.user.model.User
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 private const val USERS = "users"
@@ -16,22 +16,32 @@ private const val FIVE_MEGABYTE = 1024 * 1024 * 5L
 
 class UserService(
     private val database: FirebaseFirestore,
-    private val storageReference: StorageReference
+    private val storage: FirebaseStorage
 ) : UserRemoteGateway {
     override suspend fun getUser(id: String): User {
-        val task = database.collection(USERS).document(id).get().await()
-        val userResponse = task.toObject(FirebaseUserResponse::class.java) ?: throw BaseError.UserNotFound
+        val userResponse = database.collection(USERS)
+            .document(id)
+            .get()
+            .await()
+            .toObject(FirebaseUserResponse::class.java) ?: throw BaseError.UserNotFound
         val bitmap = userResponse.imageUrl?.let {
-            val byteArray = storageReference.child("$USERS_AVATARS/$it").getBytes(FIVE_MEGABYTE).await()
-            Converters().toBitmap(byteArray = byteArray)
+            val storageReference = storage.reference.child("$USERS_AVATARS/$it")
+            val byteArray = storageReference.getBytes(FIVE_MEGABYTE).await()
+            Converters().byteArrayToBitmap(byteArray = byteArray)
         }
         return UserConverter.fromNetwork(user = userResponse, bitmap = bitmap)
     }
 
     override suspend fun saveUser(user: User) {
+        val byteArray = Converters().bitmapToByteArray(user.image)
+        val imageUrl = byteArray?.let {
+            val storageReference = storage.reference.child("$USERS_AVATARS/${user.id}")
+            val uploadTask = storageReference.putBytes(it).await()
+            uploadTask.uploadSessionUri.toString()
+        }
         database.collection(USERS)
             .document(user.id)
-            .set(UserConverter.toNetwork(user, null))
+            .set(UserConverter.toNetwork(user, imageUrl = imageUrl))
             .await()
     }
 }

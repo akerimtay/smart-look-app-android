@@ -55,4 +55,6 @@
     <string name="success_saved">Успешно сохранено</string>
     <string name="choose_from_gallery">Выбрать из галереи</string>
     <string name="delete">Удалить</string>
+    <string name="error_getting_image_from_gallery">Ошибка при получений фотографий из галереи</string>
+    <string name="success">Успешно</string>
 </resources>

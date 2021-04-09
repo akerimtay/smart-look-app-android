@@ -2,6 +2,7 @@ package com.akerimtay.smartwardrobe.database
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.room.TypeConverter
 import com.akerimtay.smartwardrobe.user.model.Gender
 import java.io.ByteArrayOutputStream
@@ -20,13 +21,25 @@ class Converters {
     @TypeConverter
     fun toGender(value: String?): Gender = Gender.toGender(value)
 
-    @TypeConverter
-    fun fromBitmap(bitmap: Bitmap?): ByteArray? {
+    fun bitmapToByteArray(bitmap: Bitmap?): ByteArray? = bitmap?.let {
         val outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-        return outputStream.toByteArray()
+        it.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        outputStream.toByteArray()
+    }
+
+    fun byteArrayToBitmap(byteArray: ByteArray?): Bitmap? = byteArray?.let {
+        BitmapFactory.decodeByteArray(it, 0, it.size)
     }
 
     @TypeConverter
-    fun toBitmap(byteArray: ByteArray?): Bitmap? = BitmapFactory.decodeByteArray(byteArray, 0, byteArray?.size ?: 0)
+    fun bitmapToString(bitmap: Bitmap?): String? = bitmap?.let {
+        val byteArray = bitmapToByteArray(bitmap)
+        Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
+
+    @TypeConverter
+    fun stringToBitmap(value: String?): Bitmap? = value?.let {
+        val encodeByte = Base64.decode(value, Base64.DEFAULT)
+        byteArrayToBitmap(encodeByte)
+    }
 }

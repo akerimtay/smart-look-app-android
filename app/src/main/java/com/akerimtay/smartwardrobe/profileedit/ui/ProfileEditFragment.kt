@@ -1,7 +1,13 @@
 package com.akerimtay.smartwardrobe.profileedit.ui
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -17,11 +23,31 @@ import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePick
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
+
 
 class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
     ActionsDialog.ActionsDialogCallback {
     private val binding: FragmentProfileEditBinding by viewBinding()
     private val viewModel: ProfileEditViewModel by viewModel()
+
+    private val pickLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            runCatching {
+                val imageUri: Uri? = result.data?.data
+                imageUri?.let {
+                    val inputStream = activity?.contentResolver?.openInputStream(it)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    viewModel.selectImage(bitmap)
+                }
+            }.onFailure {
+                Timber.e(it, "Can't get image from gallery")
+                showToast(R.string.error_getting_image_from_gallery)
+            }.onSuccess {
+                showToast(R.string.success)
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +64,7 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
             }
             editButton.setThrottleOnClickListener {
                 val actionMenuTypes = mutableSetOf(ActionMenuType.CHOOSE_IMAGE_FROM_GALLERY)
-                viewModel.currentUser.value?.image?.let {
+                viewModel.selectedImage.value?.let {
                     actionMenuTypes.add(ActionMenuType.DELETE_IMAGE)
                 }
                 ActionsDialog.show(
@@ -73,14 +99,15 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
         viewModel.progressLoading.observeNotNull(viewLifecycleOwner) { binding.progressStateView.isVisible = it }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
             user?.let {
-                binding.avatarImageView.loadImage(it.image)
                 binding.nameEditText.setText(it.name)
+                viewModel.selectImage(it.image)
                 viewModel.selectBirthDate(it.birthDate)
             }
         }
-        viewModel.selectedBirthDate.observeNotNull(viewLifecycleOwner) { date ->
+        viewModel.selectedBirthDate.observe(viewLifecycleOwner) { date ->
             binding.birthDateEditText.setText(FormatHelper.getDate(date))
         }
+        viewModel.selectedImage.observe(viewLifecycleOwner) { binding.avatarImageView.loadImage(it) }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is ProfileEditAction.ShowPreviousScreen -> {
@@ -99,7 +126,15 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
     }
 
     override fun onActionMenuClick(actionMenuType: ActionMenuType) {
-
+        when (actionMenuType) {
+            ActionMenuType.CHOOSE_IMAGE_FROM_GALLERY -> pickLauncher.launch(
+                Intent(
+                    Intent.ACTION_PICK,
+                    MediaStore.Images.Media.INTERNAL_CONTENT_URI
+                )
+            )
+            ActionMenuType.DELETE_IMAGE -> viewModel.selectImage(bitmap = null)
+        }
     }
 
     private fun showTextFieldError(textInputLayout: TextInputLayout, message: String) {
