@@ -13,12 +13,16 @@ import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
 import com.akerimtay.smartwardrobe.profileedit.ProfileEditValidator
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.UploadImageUseCase
 import timber.log.Timber
 import java.util.*
 
+private const val FILE_LOCATION = "images/users"
+
 class ProfileEditViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
-    private val updateUserUseCase: UpdateUserUseCase
+    private val updateUserUseCase: UpdateUserUseCase,
+    private val uploadImageUseCase: UploadImageUseCase,
 ) : BaseViewModel() {
     private val _actions = SingleLiveEvent<ProfileEditAction>()
     val actions: LiveData<ProfileEditAction> = _actions
@@ -29,8 +33,8 @@ class ProfileEditViewModel(
     private val _selectedBirthDate = MutableLiveData<Date?>()
     val selectedBirthDate: LiveData<Date?> = _selectedBirthDate
 
-    private val _selectedImage = MutableLiveData<Bitmap?>()
-    val selectedImage: LiveData<Bitmap?> = _selectedImage
+    private val _selectedImage = MutableLiveData<String?>()
+    val selectedImage: LiveData<String?> = _selectedImage
 
     val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
 
@@ -38,8 +42,26 @@ class ProfileEditViewModel(
         _selectedBirthDate.value = date
     }
 
-    fun selectImage(bitmap: Bitmap?) {
+    fun selectImage(bitmap: String?) {
         _selectedImage.value = bitmap
+    }
+
+    fun uploadImage(bitmap: Bitmap) {
+        launchSafe(
+            start = { _progressLoading.postValue(true) },
+            finish = { _progressLoading.postValue(false) },
+            body = {
+                val imageUrl = uploadImageUseCase(
+                    UploadImageUseCase.Param(
+                        fileName = "$FILE_LOCATION/$${currentUser.value?.id}",
+                        bitmap = bitmap
+                    )
+                )
+            },
+            handleError = {
+
+            }
+        )
     }
 
     fun save(name: String) {
@@ -59,10 +81,18 @@ class ProfileEditViewModel(
                 start = { _progressLoading.postValue(true) },
                 finish = { _progressLoading.postValue(false) },
                 body = {
+                    val imageUrl = selectedImage.value?.let { bitmap ->
+                        uploadImageUseCase(
+                            UploadImageUseCase.Param(
+                                fileName = "$FILE_LOCATION/$${currentUser.value?.id}",
+                                bitmap = bitmap
+                            )
+                        )
+                    }
                     val user = currentUser.value?.copy(
                         name = name,
                         birthDate = selectedBirthDate.value,
-                        image = selectedImage.value
+                        imageUrl = imageUrl
                     ) ?: throw BaseError.UserNotFound
                     updateUserUseCase(UpdateUserUseCase.Param(user = user))
                     _actions.postValue(ProfileEditAction.ShowPreviousScreen)

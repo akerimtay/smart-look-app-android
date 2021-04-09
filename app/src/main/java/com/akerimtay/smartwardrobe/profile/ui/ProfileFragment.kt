@@ -40,7 +40,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
             user?.let {
-                binding.avatarImageView.loadImage(it.image)
+                binding.avatarImageView.loadImage(it.imageUrl)
                 binding.nameTextView.text = it.name
                 binding.emailTextView.text = it.email
                 binding.birthDateTextView.text = FormatHelper.getDate(it.birthDate)

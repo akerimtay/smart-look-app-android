@@ -1,6 +1,5 @@
 package com.akerimtay.smartwardrobe.user.data.db
 
-import android.graphics.Bitmap
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -22,8 +21,8 @@ data class UserEntity(
     val email: String,
     @ColumnInfo(name = BIRTH_DATE)
     val birthDate: Date?,
-    @ColumnInfo(name = IMAGE, typeAffinity = ColumnInfo.TEXT)
-    val image: Bitmap?
+    @ColumnInfo(name = IMAGE)
+    val imageUrl: String?
 ) {
     companion object {
         const val TABLE_NAME = "user"

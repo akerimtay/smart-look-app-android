@@ -60,6 +60,16 @@ fun ImageView.loadImage(
         .into(this)
 }
 
+fun ImageView.loadImage(
+    imageUrl: String?,
+    @DrawableRes placeholder: Int = R.drawable.placeholder_person
+) {
+    Glide.with(context)
+        .load(imageUrl)
+        .placeholder(placeholder)
+        .into(this)
+}
+
 fun Context.dip(value: Int): Int = dipF(value).toInt()
 fun Context.dipF(value: Int): Float = value * resources.displayMetrics.density
 

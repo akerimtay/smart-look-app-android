@@ -100,7 +100,7 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
             user?.let {
                 binding.nameEditText.setText(it.name)
-                viewModel.selectImage(it.image)
+                viewModel.selectImage(it.imageUrl)
                 viewModel.selectBirthDate(it.birthDate)
             }
         }
