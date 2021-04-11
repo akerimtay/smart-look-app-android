@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class WeatherResponse(
-    @SerializedName("id") val id: Long,
     @SerializedName("name") val cityName: String,
     @SerializedName("coord") val location: LocationResponse,
     @SerializedName("weather") val weather: List<DescriptionResponse>,

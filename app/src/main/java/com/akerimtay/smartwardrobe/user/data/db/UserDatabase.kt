@@ -16,7 +16,7 @@ class UserDatabase(
     override suspend fun getById(id: String): User? = userDao.getById(id)?.let { UserConverter.fromDatabase(it) }
 
     override suspend fun getByIdAsFlow(id: String): LiveData<User?> =
-        userDao.getByIdAsFlow(id).map { it?.let { UserConverter.fromDatabase(it) } }
+        userDao.getByIdAsFlow(id).map { userEntity -> userEntity?.let { UserConverter.fromDatabase(it) } }
 
     override suspend fun deleteById(id: String) {
         userDao.deleteById(id)

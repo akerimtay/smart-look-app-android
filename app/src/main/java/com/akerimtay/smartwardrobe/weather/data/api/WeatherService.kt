@@ -8,8 +8,8 @@ import retrofit2.http.Query
 interface WeatherService {
     @GET("weather")
     fun getWeatherAsync(
-        @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
+        @Query("lat") latitude: Float,
+        @Query("lon") longitude: Float,
         @Query("units") unit: String,
         @Query("lang") language: String
     ): Deferred<WeatherResponse>

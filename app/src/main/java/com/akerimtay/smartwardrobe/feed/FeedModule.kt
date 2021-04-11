@@ -7,6 +7,6 @@ import org.koin.dsl.module
 
 object FeedModule : InjectionModule {
     override fun create(): Module = module {
-        viewModel { FeedViewModel(get()) }
+        viewModel { FeedViewModel(get(), get()) }
     }
 }

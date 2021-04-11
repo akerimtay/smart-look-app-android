@@ -17,6 +17,5 @@ object DatabaseModule : InjectionModule {
                 .fallbackToDestructiveMigrationOnDowngrade()
                 .build()
         }
-        single { get<AppDatabase>().userDao() }
     }
 }

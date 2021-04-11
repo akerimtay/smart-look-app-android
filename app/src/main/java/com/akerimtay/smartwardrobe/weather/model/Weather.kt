@@ -6,11 +6,10 @@ import java.util.*
 
 @Parcelize
 data class Weather(
-    val id: Long,
     val cityName: String,
     val countryCode: String,
-    val longitude: Double,
-    val latitude: Double,
+    val longitude: Float,
+    val latitude: Float,
     val description: String,
     val icon: String,
     val temperature: Double,

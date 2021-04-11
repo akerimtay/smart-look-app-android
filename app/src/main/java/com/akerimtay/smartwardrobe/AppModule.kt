@@ -13,6 +13,7 @@ import org.koin.dsl.module
 object AppModule : InjectionModule {
     override fun create(): Module = module {
         single<PreferencesContract> { AppPreferences(androidContext()) }
+
         factory { ContentAdapter(ItemContentType.values()) }
         factory { PagedContentAdapter(ItemContentType.values()) }
     }

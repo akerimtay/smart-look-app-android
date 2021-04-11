@@ -1,6 +1,7 @@
 package com.akerimtay.smartwardrobe.user
 
 import com.akerimtay.smartwardrobe.common.di.InjectionModule
+import com.akerimtay.smartwardrobe.database.AppDatabase
 import com.akerimtay.smartwardrobe.user.data.UserService
 import com.akerimtay.smartwardrobe.user.data.db.UserDatabase
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
@@ -19,7 +20,10 @@ object UserModule : InjectionModule {
         single { FirebaseFirestore.getInstance() }
         single { FirebaseStorage.getInstance() }
         single<UserRemoteGateway> { UserService(get(), get()) }
+
+        single { get<AppDatabase>().userDao() }
         single<UserLocalGateway> { UserDatabase(get()) }
+
         single { UpdateUserUseCase(get(), get()) }
         single { GetCurrentUserUseCase(get(), get()) }
         single { UploadImageUseCase(get()) }
