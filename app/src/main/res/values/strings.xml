@@ -60,4 +60,8 @@
     <string name="error_upload_image">Не удалось загрузить фото</string>
     <string name="start_upload_image">Начинаем загрузку</string>
     <string name="error_load_user">Не удалось получить пользователя</string>
+    <string name="permission_denied_title">Доступ к геолокации отклонен</string>
+    <string name="permission_denied_message">Разрешите доступ к вашей геолокации для лучшей работы приложения</string>
+    <string name="no_thanks">Нет, спасибо</string>
+    <string name="okey">Хорошо</string>
 </resources>
