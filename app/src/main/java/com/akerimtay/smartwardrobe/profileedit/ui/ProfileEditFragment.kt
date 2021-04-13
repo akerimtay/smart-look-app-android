@@ -61,6 +61,7 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
                 }
                 return@setOnMenuItemClickListener true
             }
+            avatarImageView.setThrottleOnClickListener { editButton.callOnClick() }
             editButton.setThrottleOnClickListener {
                 val actionMenuTypes = mutableSetOf(ActionMenuType.CHOOSE_IMAGE_FROM_GALLERY)
                 viewModel.selectedImage.value?.let {

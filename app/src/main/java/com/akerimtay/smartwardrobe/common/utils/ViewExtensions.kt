@@ -1,13 +1,16 @@
 package com.akerimtay.smartwardrobe.common.utils
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.akerimtay.smartwardrobe.R
 import com.bumptech.glide.Glide
@@ -50,14 +53,20 @@ fun View.hideKeyboard() {
         .hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
-fun ImageView.loadImage(
-    bitmap: Bitmap?,
-    @DrawableRes placeholder: Int = R.drawable.placeholder_person
-) {
-    Glide.with(context)
-        .load(bitmap)
-        .placeholder(placeholder)
-        .into(this)
+@Suppress("unused")
+fun Fragment.isPermissionsGranted(context: Context, permissions: Array<String>): Boolean {
+    return PermissionsUtils.verifyGrantResults(permissions.map {
+        ContextCompat.checkSelfPermission(context, it)
+    }.toIntArray())
+}
+
+fun Fragment.shouldShowRequestPermissionsRationale(permissions: Array<String>): Boolean {
+    permissions.forEach {
+        if (!shouldShowRequestPermissionRationale(it)) {
+            return false
+        }
+    }
+    return true
 }
 
 fun ImageView.loadImage(
@@ -74,3 +83,7 @@ fun Context.dip(value: Int): Int = dipF(value).toInt()
 fun Context.dipF(value: Int): Float = value * resources.displayMetrics.density
 
 fun View.dip(value: Int): Int = context.dip(value)
+
+fun Context.getSettingsIntent() = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+    data = Uri.fromParts("package", packageName, null)
+}

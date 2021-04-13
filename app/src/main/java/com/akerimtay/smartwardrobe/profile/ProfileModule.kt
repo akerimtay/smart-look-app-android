@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 object ProfileModule : InjectionModule {
     override fun create(): Module = module {
-        viewModel { ProfileViewModel(get(), get()) }
+        viewModel { ProfileViewModel(get(), get(),get()) }
     }
 }

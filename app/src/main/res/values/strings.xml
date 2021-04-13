@@ -59,4 +59,16 @@
     <string name="success">Успешно</string>
     <string name="error_upload_image">Не удалось загрузить фото</string>
     <string name="start_upload_image">Начинаем загрузку</string>
+    <string name="error_load_user">Не удалось получить пользователя</string>
+    <string name="permission_denied_title">Доступ к геолокации отклонен</string>
+    <string name="permission_denied_message">Разрешите доступ к вашей геолокации для лучшей работы приложения</string>
+    <string name="no_thanks">Нет, спасибо</string>
+    <string name="okey">Хорошо</string>
+    <string name="settings">Настройки</string>
+    <string name="error_load_weather">Не удалось получить данные по погоде</string>
+    <string name="feels_like">Ощущается как</string>
+    <string name="today">Сегодня</string>
+    <string name="city_name_format">%s, %s</string>
+    <string name="positive_temperature_format">+%d°</string>
+    <string name="negative_temperature_format">%d°</string>
 </resources>
