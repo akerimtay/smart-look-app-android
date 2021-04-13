@@ -6,152 +6,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".feed.FeedFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:liftOnScroll="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            style="@style/AppTheme.MaterialToolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:title="@string/title_feed" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:background="@color/colorPrimaryDark"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snapMargins"
+            app:titleEnabled="false"
+            app:toolbarId="@+id/toolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/weather_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:paddingTop="?attr/actionBarSize"
+                android:paddingBottom="8dp"
+                app:layout_collapseMode="pin">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/today_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/today"
-                    android:textAppearance="@style/textStyleRegular22"
-                    app:layout_constraintStart_toStartOf="@id/start_guideline"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/current_day_text_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textAppearance="@style/textStyleRegular20"
-                    android:textColor="@color/colorWhiteAlpha50"
-                    app:layout_constraintBaseline_toBaselineOf="@id/today_text_view"
-                    app:layout_constraintStart_toEndOf="@id/today_text_view"
-                    tools:text="13 апреля" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/weather_card_view"
-                    style="@style/AppTheme.CardView"
+                    android:id="@+id/city_name_text_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/textStyleBold16"
+                    app:drawableStartCompat="@drawable/ic_twotone_location_on_white"
                     app:layout_constraintEnd_toEndOf="@id/end_guideline"
                     app:layout_constraintStart_toStartOf="@id/start_guideline"
-                    app:layout_constraintTop_toBottomOf="@id/today_text_view">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Нур-Султан, KZ" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="8dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_image_view"
+                    android:layout_width="@dimen/weather_icon_size"
+                    android:layout_height="@dimen/weather_icon_size"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/city_name_text_view"
+                    tools:src="@drawable/i01d_high" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/city_name_text_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawablePadding="4dp"
-                            android:gravity="center_vertical"
-                            android:textAllCaps="true"
-                            android:textAppearance="@style/textStyleBold16"
-                            app:drawableStartCompat="@drawable/ic_twotone_location_on_white"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="Нур-Султан, KZ" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/temperature_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/textStyleRegular30"
+                    app:layout_constraintBottom_toBottomOf="@id/icon_image_view"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintTop_toTopOf="@id/icon_image_view"
+                    tools:text="+2°" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/icon_image_view"
-                            android:layout_width="@dimen/weather_icon_size"
-                            android:layout_height="@dimen/weather_icon_size"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:scaleType="centerCrop"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/city_name_text_view"
-                            tools:src="@drawable/i01d_high" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/description_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textAppearance="@style/textStyleRegular14"
+                    app:layout_constraintBottom_toTopOf="@id/feels_like_title_text_view"
+                    app:layout_constraintEnd_toStartOf="@id/temperature_text_view"
+                    app:layout_constraintStart_toEndOf="@id/icon_image_view"
+                    app:layout_constraintTop_toTopOf="@id/icon_image_view"
+                    tools:text="Солнечно" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/temperature_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/textStyleRegular30"
-                            app:layout_constraintBottom_toBottomOf="@id/icon_image_view"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/icon_image_view"
-                            tools:text="+2°" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/feels_like_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/feels_like"
+                    android:textAppearance="@style/textStyleRegular12"
+                    android:textColor="@color/colorWhiteAlpha50"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/description_text_view" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/description_text_view"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:ellipsize="end"
-                            android:lines="1"
-                            android:textAppearance="@style/textStyleRegular14"
-                            app:layout_constraintBottom_toTopOf="@id/feels_like_title_text_view"
-                            app:layout_constraintEnd_toStartOf="@id/temperature_text_view"
-                            app:layout_constraintStart_toEndOf="@id/icon_image_view"
-                            app:layout_constraintTop_toTopOf="@id/icon_image_view"
-                            tools:text="Солнечно" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/feels_like_title_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="@string/feels_like"
-                            android:textAppearance="@style/textStyleRegular12"
-                            android:textColor="@color/colorWhiteAlpha50"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/icon_image_view"
-                            app:layout_constraintTop_toBottomOf="@id/description_text_view" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/feels_like_value_text_view"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="16dp"
-                            android:ellipsize="end"
-                            android:lines="1"
-                            android:textAppearance="@style/textStyleRegular12"
-                            app:layout_constraintBaseline_toBaselineOf="@id/feels_like_title_text_view"
-                            app:layout_constraintEnd_toStartOf="@id/temperature_text_view"
-                            app:layout_constraintStart_toEndOf="@id/feels_like_title_text_view"
-                            tools:text="+5°" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/feels_like_value_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textAppearance="@style/textStyleRegular12"
+                    app:layout_constraintBaseline_toBaselineOf="@id/feels_like_title_text_view"
+                    app:layout_constraintEnd_toStartOf="@id/temperature_text_view"
+                    app:layout_constraintStart_toEndOf="@id/feels_like_title_text_view"
+                    tools:text="+5°" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/start_guideline"
@@ -167,15 +126,26 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_end="16dp" />
 
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/weather_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="today_text_view, current_day_text_view, weather_card_view" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/AppTheme.MaterialToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="@string/title_feed" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.core.widget.NestedScrollView>
 
