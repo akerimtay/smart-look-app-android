@@ -10,9 +10,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
+import com.akerimtay.smartwardrobe.common.ui.ViewPagerAdapter
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -23,6 +25,7 @@ private val LOCATION_PERMISSIONS = arrayOf(
     Manifest.permission.ACCESS_COARSE_LOCATION
 )
 
+
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     private val binding: FragmentFeedBinding by viewBinding()
     private val viewModel: FeedViewModel by viewModel()
@@ -30,6 +33,20 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            val viewPagerAdapter = ViewPagerAdapter(this@FeedFragment)
+            viewPagerAdapter.addFragments(
+                listOf(
+                    FeedListFragment(),
+                    FeedListFragment(),
+                )
+            )
+            viewPager.apply { adapter = viewPagerAdapter }
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = if (position == 0) "Test" else "Null"
+            }.attach()
+        }
+
         viewModel.weather.observe(viewLifecycleOwner) { weather ->
             binding.weatherView.isVisible = weather.isNull().not()
             if (weather != null) {
