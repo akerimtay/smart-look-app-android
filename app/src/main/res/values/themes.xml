@@ -99,6 +99,8 @@
     <style name="AppTheme.MaterialToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:contentInsetStartWithNavigation">@dimen/toolbar_start_inset</item>
         <item name="titleTextAppearance">@style/textStyleRegular18</item>
+        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
@@ -122,5 +124,9 @@
     <style name="MaterialAlertDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorBlueLight</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 </resources>

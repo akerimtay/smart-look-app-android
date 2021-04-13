@@ -4,7 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
+import java.util.Date
 
 @Entity(tableName = WeatherEntity.TABLE_NAME)
 data class WeatherEntity(
@@ -15,7 +15,7 @@ data class WeatherEntity(
     @ColumnInfo(name = CITY_NAME)
     val cityName: String,
     @ColumnInfo(name = COUNTRY_CODE)
-    val countryCode: String,
+    val countryCode: String?,
     @ColumnInfo(name = LONGITUDE)
     val longitude: Float,
     @ColumnInfo(name = LATITUDE)

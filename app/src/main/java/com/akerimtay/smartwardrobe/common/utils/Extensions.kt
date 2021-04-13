@@ -14,3 +14,7 @@ inline fun <T> T.applyIf(applyCondition: Boolean, block: T.() -> Unit): T {
     if (applyCondition) block(this)
     return this
 }
+
+fun Any?.isNull() = this == null
+
+fun Double.isPositive(): Boolean = this > 0.0

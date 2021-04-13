@@ -66,4 +66,9 @@
     <string name="okey">Хорошо</string>
     <string name="settings">Настройки</string>
     <string name="error_load_weather">Не удалось получить данные по погоде</string>
+    <string name="feels_like">Ощущается как</string>
+    <string name="today">Сегодня</string>
+    <string name="city_name_format">%s, %s</string>
+    <string name="positive_temperature_format">+%d°</string>
+    <string name="negative_temperature_format">%d°</string>
 </resources>

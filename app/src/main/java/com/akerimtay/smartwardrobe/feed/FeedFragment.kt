@@ -5,19 +5,26 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
+import com.akerimtay.smartwardrobe.common.utils.FormatHelper
 import com.akerimtay.smartwardrobe.common.utils.action
 import com.akerimtay.smartwardrobe.common.utils.getSettingsIntent
+import com.akerimtay.smartwardrobe.common.utils.isNull
 import com.akerimtay.smartwardrobe.common.utils.isPermissionsGranted
+import com.akerimtay.smartwardrobe.common.utils.isPositive
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.shouldShowRequestPermissionsRationale
 import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.common.utils.snack
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.Date
+import java.util.Locale
+import kotlin.math.roundToInt
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,8 +54,17 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 )
             }
         }
-        viewModel.weather.observe(viewLifecycleOwner) {
-
+        viewModel.weather.observe(viewLifecycleOwner) { weather ->
+            binding.weatherGroup.isVisible = weather.isNull().not()
+            if (weather != null) {
+                binding.currentDayTextView.text = FormatHelper.getDayMonth(Date())
+                binding.cityNameTextView.text =
+                    getString(R.string.city_name_format, weather.cityName, weather.countryCode.orEmpty())
+                binding.iconImageView.setImageResource(weather.iconResId)
+                binding.temperatureTextView.text = formatTemperature(weather.temperature)
+                binding.descriptionTextView.text = weather.description.capitalize(Locale.ROOT)
+                binding.feelsLikeValueTextView.text = formatTemperature(weather.feelsLike)
+            }
         }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
@@ -84,6 +100,12 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 locationPermissionLauncher.launch(LOCATION_PERMISSIONS)
             }
         }
+    }
+
+    private fun formatTemperature(value: Double): String {
+        val resId =
+            if (value.isPositive()) R.string.positive_temperature_format else R.string.negative_temperature_format
+        return getString(resId, value.roundToInt())
     }
 
     private val locationPermissionLauncher =
