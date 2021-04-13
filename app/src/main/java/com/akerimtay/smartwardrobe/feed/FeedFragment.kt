@@ -9,13 +9,17 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
+import com.akerimtay.smartwardrobe.common.utils.action
+import com.akerimtay.smartwardrobe.common.utils.getSettingsIntent
 import com.akerimtay.smartwardrobe.common.utils.isPermissionsGranted
+import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.shouldShowRequestPermissionsRationale
+import com.akerimtay.smartwardrobe.common.utils.showToast
+import com.akerimtay.smartwardrobe.common.utils.snack
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 private val LOCATION_PERMISSIONS = arrayOf(
     Manifest.permission.ACCESS_FINE_LOCATION,
@@ -29,8 +33,27 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            )
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.loadWeather(
+                    longitude = 71.4459800f,
+                    latitude = 51.1801000f,
+                )
+            }
+        }
         viewModel.weather.observe(viewLifecycleOwner) {
-            binding.weather.text = it.toString()
+
+        }
+        viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
+            when (action) {
+                is FeedAction.ShowMessage -> showToast(messageResId = action.messageResId)
+            }
         }
 
         when {
@@ -65,11 +88,29 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            permissions.entries.forEach {
-                if (it.value == false && !shouldShowRequestPermissionRationale(it.key)) {
-                    // TODO show snackbar
-                    Timber.e("show dialog don't ask again")
+            val isGranted = permissions.entries.map { it.value }.contains(element = false).not()
+            when {
+                isGranted -> viewModel.loadWeather(
+                    longitude = 71.4459800f,
+                    latitude = 51.1801000f,
+                )
+                !isGranted && !shouldShowRequestPermissionsRationale(LOCATION_PERMISSIONS) -> {
+                    binding.content.snack(R.string.permission_denied_title) {
+                        action(R.string.settings) {
+                            settingsLauncher.launch(requireContext().getSettingsIntent())
+                        }
+                    }
                 }
+            }
+        }
+
+    private val settingsLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (isPermissionsGranted(requireContext(), LOCATION_PERMISSIONS)) {
+                viewModel.loadWeather(
+                    longitude = 71.4459800f,
+                    latitude = 51.1801000f,
+                )
             }
         }
 }

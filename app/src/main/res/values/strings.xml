@@ -64,4 +64,6 @@
     <string name="permission_denied_message">Разрешите доступ к вашей геолокации для лучшей работы приложения</string>
     <string name="no_thanks">Нет, спасибо</string>
     <string name="okey">Хорошо</string>
+    <string name="settings">Настройки</string>
+    <string name="error_load_weather">Не удалось получить данные по погоде</string>
 </resources>
