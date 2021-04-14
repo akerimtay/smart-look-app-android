@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:background="@color/colorPrimary"
-    tools:context=".feed.FeedListFragment">
+    tools:context=".feed.ui.list.FeedListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

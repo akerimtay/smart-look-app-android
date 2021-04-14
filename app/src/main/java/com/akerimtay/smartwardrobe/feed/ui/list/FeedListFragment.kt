@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.feed
+package com.akerimtay.smartwardrobe.feed.ui.list
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.feed
+package com.akerimtay.smartwardrobe.feed.ui.main
 
 import android.Manifest
 import android.content.DialogInterface
@@ -13,6 +13,7 @@ import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
 import com.akerimtay.smartwardrobe.common.ui.ViewPagerAdapter
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
+import com.akerimtay.smartwardrobe.feed.ui.list.FeedListFragment
 import com.akerimtay.smartwardrobe.user.model.Gender
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
