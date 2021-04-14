@@ -1,7 +1,5 @@
 package com.akerimtay.smartwardrobe.feed.ui.list
 
-import android.os.Bundle
-import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
@@ -19,9 +17,4 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
 
     private val binding: FragmentFeedListBinding by viewBinding()
     private val gender: Gender by args(GENDER_EXTRA)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.genderTextView.text = getString(gender.displayName)
-    }
 }

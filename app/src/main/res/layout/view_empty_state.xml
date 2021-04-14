@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/coverImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_empty_list_black"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="5"
+        android:textAlignment="center"
+        android:textAppearance="@style/textStyleBold18"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0.52"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="10"
+        android:textAlignment="center"
+        android:textAppearance="@style/textStyleRegular18"
+        tools:text="@tools:sample/lorem/random" />
+
+</LinearLayout>
