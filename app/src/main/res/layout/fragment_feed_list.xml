@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    tools:background="@color/colorPrimary"
     tools:context=".feed.FeedListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,10 +13,12 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/gender_text_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Hello" />
+            android:textAppearance="@style/textStyleBold24"
+            tools:text="@string/male" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

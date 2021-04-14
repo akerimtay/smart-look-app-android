@@ -13,18 +13,20 @@ import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
 import com.akerimtay.smartwardrobe.common.ui.ViewPagerAdapter
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
+import com.akerimtay.smartwardrobe.user.model.Gender
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.math.roundToInt
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private val LOCATION_PERMISSIONS = arrayOf(
     Manifest.permission.ACCESS_FINE_LOCATION,
     Manifest.permission.ACCESS_COARSE_LOCATION
 )
 
+private val GENDERS_FOR_HEADER = listOf(Gender.MALE, Gender.FEMALE)
 
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     private val binding: FragmentFeedBinding by viewBinding()
@@ -37,13 +39,17 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
             val viewPagerAdapter = ViewPagerAdapter(this@FeedFragment)
             viewPagerAdapter.addFragments(
                 listOf(
-                    FeedListFragment(),
-                    FeedListFragment(),
+                    FeedListFragment.create(GENDERS_FOR_HEADER[0]),
+                    FeedListFragment.create(GENDERS_FOR_HEADER[1])
                 )
             )
             viewPager.apply { adapter = viewPagerAdapter }
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = if (position == 0) "Test" else "Null"
+                val item = GENDERS_FOR_HEADER[position]
+                tab.text = when (item) {
+                    Gender.MALE -> getString(item.displayName)
+                    Gender.FEMALE -> getString(item.displayName)
+                }
             }.attach()
         }
 
