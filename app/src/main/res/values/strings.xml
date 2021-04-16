@@ -75,4 +75,8 @@
     <string name="empty_outlets_description">Обновите приложение чтобы отобразились наряды подготовленные вам</string>
     <string name="empty_articles_title">Функционал недоступен</string>
     <string name="empty_articles_description">Данный функционал находится в разработке</string>
+    <string name="unisex">Унисекс</string>
+    <string name="winter">Зима</string>
+    <string name="demi_season">Демисезон</string>
+    <string name="summer">Лето</string>
 </resources>

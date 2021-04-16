@@ -1,6 +1,9 @@
 package com.akerimtay.smartwardrobe.feed.ui.list
 
-import androidx.lifecycle.ViewModel
+import com.akerimtay.smartwardrobe.common.base.BaseViewModel
+import com.akerimtay.smartwardrobe.user.model.Gender
 
-class FeedListViewModel : ViewModel() {
+class FeedListViewModel(
+    private val gender: Gender,
+) : BaseViewModel() {
 }

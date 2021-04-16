@@ -1,8 +1,10 @@
 package com.akerimtay.smartwardrobe.user.model
 
+import androidx.annotation.Keep
 import androidx.annotation.StringRes
 import com.akerimtay.smartwardrobe.R
 
+@Keep
 enum class Gender(
     val serializedName: String,
     @StringRes val displayName: Int

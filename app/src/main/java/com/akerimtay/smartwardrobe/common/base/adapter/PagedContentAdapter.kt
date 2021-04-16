@@ -1,10 +1,10 @@
 package com.akerimtay.smartwardrobe.common.base.adapter
 
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 
 class PagedContentAdapter<T : ContentType>(typeSet: Array<T>) :
-    PagedListAdapter<BaseContentItem<T>, BaseHolder<T, BaseContentItem<T>>>(BaseContentItem.DiffItem()) {
+    PagingDataAdapter<BaseContentItem<T>, BaseHolder<T, BaseContentItem<T>>>(BaseContentItem.DiffItem()) {
     private val delegateAdapter = ContentAdapter(typeSet)
 
     override fun getItemViewType(position: Int) = getItem(position)!!.type.type()
