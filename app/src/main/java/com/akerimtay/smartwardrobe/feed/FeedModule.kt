@@ -11,6 +11,6 @@ import org.koin.dsl.module
 object FeedModule : InjectionModule {
     override fun create(): Module = module {
         viewModel { FeedViewModel(get(), get()) }
-        viewModel { (gender: Gender) -> FeedListViewModel(gender) }
+        viewModel { (gender: Gender) -> FeedListViewModel(gender, get()) }
     }
 }

@@ -14,6 +14,6 @@ enum class Season(
     SUMMER("summer", R.string.summer);
 
     companion object {
-        fun toGender(value: String?): Season = values().firstOrNull { value == it.serializedName } ?: SUMMER
+        fun toSeason(value: String?): Season = values().firstOrNull { value == it.serializedName } ?: SUMMER
     }
 }
