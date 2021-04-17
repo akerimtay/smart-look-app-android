@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
+import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.model.ActionMenuType
 import com.akerimtay.smartwardrobe.common.ui.ActionsDialog
 import com.akerimtay.smartwardrobe.common.utils.*
@@ -107,7 +108,12 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
         viewModel.selectedBirthDate.observe(viewLifecycleOwner) { date ->
             binding.birthDateEditText.setText(FormatHelper.getDate(date))
         }
-        viewModel.selectedImage.observe(viewLifecycleOwner) { binding.avatarImageView.loadImage(it) }
+        viewModel.selectedImage.observe(viewLifecycleOwner) {
+            binding.avatarImageView.load(
+                glide = GlideApp.with(this),
+                imageUrl = it
+            )
+        }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is ProfileEditAction.ShowPreviousScreen -> {

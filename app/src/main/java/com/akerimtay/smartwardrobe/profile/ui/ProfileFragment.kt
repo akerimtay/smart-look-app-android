@@ -8,7 +8,12 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
-import com.akerimtay.smartwardrobe.common.utils.*
+import com.akerimtay.smartwardrobe.common.di.GlideApp
+import com.akerimtay.smartwardrobe.common.utils.FormatHelper
+import com.akerimtay.smartwardrobe.common.utils.load
+import com.akerimtay.smartwardrobe.common.utils.observeNotNull
+import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
+import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,7 +56,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
             user?.let {
-                binding.avatarImageView.loadImage(it.imageUrl)
+                binding.avatarImageView.load(
+                    glide = GlideApp.with(this),
+                    imageUrl = it.imageUrl
+                )
                 binding.nameTextView.text = it.name
                 binding.emailTextView.text = it.email
                 binding.birthDateTextView.text = FormatHelper.getDate(it.birthDate)
