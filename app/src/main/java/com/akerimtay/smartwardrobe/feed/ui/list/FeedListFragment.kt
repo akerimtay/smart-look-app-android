@@ -36,7 +36,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
         }
 
         viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->
-            contentAdapter.submitData(lifecycle, pagingData)
+            contentAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             binding.emptyStateView.isVisible = false
         }
     }
