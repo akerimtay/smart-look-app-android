@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.makeramen.roundedimageview.RoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/image_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/name_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/textStyleRegular16" />
-
-</LinearLayout>
+    android:adjustViewBounds="true"
+    android:scaleType="fitCenter"
+    app:riv_border_color="@color/colorWhiteAlpha50"
+    app:riv_border_width="1dp"
+    app:riv_corner_radius="16dp"
+    tools:src="@tools:sample/backgrounds/scenic" />

@@ -2,10 +2,13 @@ package com.akerimtay.smartwardrobe.common.base.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
+import com.akerimtay.smartwardrobe.common.di.GlideRequests
 
-class PagedContentAdapter<T : ContentType>(typeSet: Array<T>) :
-    PagingDataAdapter<BaseContentItem<T>, BaseHolder<T, BaseContentItem<T>>>(BaseContentItem.DiffItem()) {
-    private val delegateAdapter = ContentAdapter(typeSet)
+class PagedContentAdapter<T : ContentType>(
+    typeSet: Array<T>,
+    glide: GlideRequests?,
+) : PagingDataAdapter<BaseContentItem<T>, BaseHolder<T, BaseContentItem<T>>>(BaseContentItem.DiffItem()) {
+    private val delegateAdapter = ContentAdapter(typeSet, glide)
 
     override fun getItemViewType(position: Int) = getItem(position)!!.type.type()
 
@@ -18,7 +21,7 @@ class PagedContentAdapter<T : ContentType>(typeSet: Array<T>) :
 
     override fun onBindViewHolder(
         holder: BaseHolder<T, BaseContentItem<T>>, position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) = (payloads.firstOrNull()).let { status ->
         if (status == null || status !is Set<*>) {
             super.onBindViewHolder(holder, position, payloads)

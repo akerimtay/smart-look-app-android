@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.akerimtay.smartwardrobe.common.di.GlideRequests
 import kotlin.properties.Delegates
 
-class ContentAdapter<T : ContentType>(private val typeSet: Array<T>) :
-    RecyclerView.Adapter<BaseHolder<T, BaseContentItem<T>>>() {
+class ContentAdapter<T : ContentType>(
+    private val typeSet: Array<T>,
+    private val glide: GlideRequests?,
+) : RecyclerView.Adapter<BaseHolder<T, BaseContentItem<T>>>() {
     private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
     var afterDispatchList: () -> Unit = {}
     var collection: List<BaseContentItem<T>>
@@ -23,7 +26,7 @@ class ContentAdapter<T : ContentType>(private val typeSet: Array<T>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         typeSet[viewType].let {
             LayoutInflater.from(parent.context).inflate(it.getLayout(), parent, false).let { view ->
-                (it.createHolder(view) as BaseHolder<T, BaseContentItem<T>>).apply {
+                (it.createHolder(view, glide) as BaseHolder<T, BaseContentItem<T>>).apply {
                     getNestedRecyclerView()?.setRecycledViewPool(viewPool)
                 }
             }
@@ -32,7 +35,7 @@ class ContentAdapter<T : ContentType>(private val typeSet: Array<T>) :
     override fun onBindViewHolder(
         holder: BaseHolder<T, BaseContentItem<T>>,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) = (payloads.firstOrNull()).let { status ->
         if (status == null || status !is Set<*>) {
             super.onBindViewHolder(holder, position, payloads)

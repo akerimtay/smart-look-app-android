@@ -17,10 +17,13 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:paddingHorizontal="16dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
             tools:listitem="@layout/item_outfit" />
 
         <com.akerimtay.smartwardrobe.common.ui.EmptyStateView

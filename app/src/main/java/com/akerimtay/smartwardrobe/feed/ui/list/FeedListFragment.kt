@@ -3,11 +3,15 @@ package com.akerimtay.smartwardrobe.feed.ui.list
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.base.adapter.PagedContentAdapter
+import com.akerimtay.smartwardrobe.common.di.GlideApp
+import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.args
+import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.withArgs
 import com.akerimtay.smartwardrobe.content.ItemContentType
@@ -18,6 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 private const val GENDER_EXTRA = "GENDER_EXTRA"
+private const val DIVIDER_SIZE = 16
+private const val TOP_SIZE = 8
+private const val HORIZONTAL_SIZE = 4
 
 class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
     companion object {
@@ -30,9 +37,20 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val contentAdapter = get<PagedContentAdapter<ItemContentType>>()
-        with(binding) {
-            recyclerView.adapter = contentAdapter
+        val glide = GlideApp.with(this)
+        val contentAdapter = get<PagedContentAdapter<ItemContentType>> { parametersOf(glide) }
+        with(binding.recyclerView) {
+            adapter = contentAdapter
+            itemAnimator = DefaultItemAnimator().apply { supportsChangeAnimations = false }
+            setHasFixedSize(true)
+            addItemDecoration(
+                DefaultItemDecorator(
+                    top = dip(TOP_SIZE),
+                    right = dip(HORIZONTAL_SIZE),
+                    left = dip(HORIZONTAL_SIZE),
+                    divider = dip(DIVIDER_SIZE)
+                )
+            )
         }
 
         viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->
