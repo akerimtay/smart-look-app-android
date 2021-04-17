@@ -5,12 +5,12 @@ import com.akerimtay.smartwardrobe.outfit.data.db.OutfitEntity
 import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 import com.akerimtay.smartwardrobe.outfit.model.Season
-import java.util.Date
+import java.util.*
 
 object OutfitConverter {
     fun fromNetwork(response: OutfitResponse): Outfit =
         Outfit(
-            id = response.id.orEmpty(),
+            id = response.id ?: 0,
             name = response.name.orEmpty(),
             gender = OutfitGender.toGender(response.gender),
             season = Season.toSeason(response.season),

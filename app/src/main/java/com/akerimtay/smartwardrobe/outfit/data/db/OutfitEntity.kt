@@ -6,14 +6,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 import com.akerimtay.smartwardrobe.outfit.model.Season
-import java.util.Date
+import java.util.*
 
 @Entity(tableName = OutfitEntity.TABLE_NAME)
 data class OutfitEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = ID)
-    val id: String,
+    val id: Long,
     @ColumnInfo(name = NAME)
     val name: String,
     @ColumnInfo(name = GENDER)

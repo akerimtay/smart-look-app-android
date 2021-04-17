@@ -1,18 +1,18 @@
 package com.akerimtay.smartwardrobe.outfit.data
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import com.akerimtay.smartwardrobe.outfit.domain.OutfitLocalGateway
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitRemoteGateway
 import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 import timber.log.Timber
 
-@ExperimentalPagingApi
 class OutfitRemoteMediator(
     private val gender: OutfitGender,
-    private val outfitRemoteGateway: OutfitRemoteGateway
+    private val outfitRemoteGateway: OutfitRemoteGateway,
+    private val outfitLocalGateway: OutfitLocalGateway,
 ) : RemoteMediator<Int, Outfit>() {
     override suspend fun initialize(): InitializeAction = InitializeAction.LAUNCH_INITIAL_REFRESH
 
@@ -32,7 +32,8 @@ class OutfitRemoteMediator(
                 gender = gender,
                 after = loadKey,
                 limit = state.config.pageSize.toLong()
-            )
+            ).also { outfitLocalGateway.save(it) }
+
             MediatorResult.Success(endOfPaginationReached = data.isEmpty())
         } catch (e: Exception) {
             Timber.e(e, "Can't load outfits")

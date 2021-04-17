@@ -4,7 +4,7 @@ import com.akerimtay.smartwardrobe.common.di.InjectionModule
 import com.akerimtay.smartwardrobe.database.AppDatabase
 import com.akerimtay.smartwardrobe.outfit.data.api.OutfitService
 import com.akerimtay.smartwardrobe.outfit.data.db.OutfitDatabase
-import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCaseAsFlow
+import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCase
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitLocalGateway
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitRemoteGateway
 import org.koin.core.module.Module
@@ -15,8 +15,8 @@ object OutfitModule : InjectionModule {
         single<OutfitRemoteGateway> { OutfitService(get()) }
 
         single { get<AppDatabase>().outfitDao() }
-        single<OutfitLocalGateway> { OutfitDatabase(get()) }
+        single<OutfitLocalGateway> { OutfitDatabase(get(), get()) }
 
-        single { GetOutfitsUseCaseAsFlow(get(), get()) }
+        single { GetOutfitsUseCase(get(), get()) }
     }
 }

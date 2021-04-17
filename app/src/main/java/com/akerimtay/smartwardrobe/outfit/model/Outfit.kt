@@ -1,9 +1,9 @@
 package com.akerimtay.smartwardrobe.outfit.model
 
-import java.util.Date
+import java.util.*
 
 data class Outfit(
-    val id: String,
+    val id: Long,
     val name: String,
     val gender: OutfitGender,
     val season: Season,

@@ -9,16 +9,18 @@ import kotlinx.coroutines.tasks.await
 
 private const val OUTFITS = "outfits"
 private const val ID = "id"
+private const val GENDER = "gender"
 
 class OutfitService(
-    private val database: FirebaseFirestore
+    private val database: FirebaseFirestore,
 ) : OutfitRemoteGateway {
-    override suspend fun loadOutlets(gender: OutfitGender, after: String?, limit: Long): List<Outfit> {
+    override suspend fun loadOutlets(gender: OutfitGender, after: Long?, limit: Long): List<Outfit> {
         val query = database.collection(OUTFITS)
+            .whereEqualTo(GENDER, gender.serializedName)
             .orderBy(ID)
             .limit(limit)
-        after?.let { query.startAfter(after) }
-        val response = query.get().await().toObjects(OutfitResponse::class.java)
-        return OutfitConverter.fromNetwork(response).filter { it.gender == gender }
+        val task = after?.let { query.startAfter(after).get() } ?: query.get()
+        val response = task.await().toObjects(OutfitResponse::class.java)
+        return OutfitConverter.fromNetwork(response)
     }
 }

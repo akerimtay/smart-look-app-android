@@ -2,6 +2,7 @@ package com.akerimtay.smartwardrobe.feed.ui.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
@@ -34,8 +35,9 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
             recyclerView.adapter = contentAdapter
         }
 
-        viewModel.outfits.observeNotNull(viewLifecycleOwner) {
-
+        viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->
+            contentAdapter.submitData(lifecycle, pagingData)
+            binding.emptyStateView.isVisible = false
         }
     }
 }

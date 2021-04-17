@@ -6,7 +6,7 @@ import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 interface OutfitRemoteGateway {
     suspend fun loadOutlets(
         gender: OutfitGender,
-        after: String? = null,
+        after: Long? = null,
         limit: Long
     ): List<Outfit>
 }
