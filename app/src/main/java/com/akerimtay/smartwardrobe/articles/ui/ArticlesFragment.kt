@@ -25,6 +25,9 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
             swipeRefreshLayout.setOnRefreshListener { viewModel.loadArticles() }
         }
 
+        viewModel.articles.observeNotNull(viewLifecycleOwner) {
+
+        }
         viewModel.swipeRefreshLoading.observeNotNull(viewLifecycleOwner) {
             binding.swipeRefreshLayout.isRefreshing = it
         }

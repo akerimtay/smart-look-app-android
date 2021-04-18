@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.articles.data
+package com.akerimtay.smartwardrobe.articles.data.api
 
 data class ArticleResponse(
     val id: Long? = null,
