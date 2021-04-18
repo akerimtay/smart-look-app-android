@@ -16,7 +16,7 @@ data class OutfitEntity(
     val id: Long,
     @ColumnInfo(name = NAME)
     val name: String,
-    @ColumnInfo(name = GENDER)
+    @ColumnInfo(name = GENDER, index = true)
     val gender: OutfitGender,
     @ColumnInfo(name = SEASON)
     val season: Season,

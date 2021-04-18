@@ -80,4 +80,5 @@
     <string name="demi_season">Демисезон</string>
     <string name="summer">Лето</string>
     <string name="retry">Повторить</string>
+    <string name="error_load_articles">Не удалось обновить статьи</string>
 </resources>
