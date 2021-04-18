@@ -10,4 +10,5 @@
     <dimen name="action_menu_size">24dp</dimen>
     <dimen name="dialog_corner">16dp</dimen>
     <dimen name="weather_icon_size">48dp</dimen>
+    <dimen name="image_corners">16dp</dimen>
 </resources>
