@@ -8,7 +8,7 @@
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".feed.FeedFragment">
+    tools:context=".feed.ui.main.FeedFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
