@@ -23,6 +23,21 @@ object OutfitConverter {
 
     fun fromNetwork(responses: List<OutfitResponse>): List<Outfit> = responses.map { fromNetwork(it) }
 
+    fun toNetwork(request: Outfit): OutfitResponse =
+        OutfitResponse(
+            id = request.id,
+            name = request.name,
+            gender = request.gender.serializedName,
+            season = request.season.serializedName,
+            temperatureFrom = request.temperatureFrom,
+            temperatureTo = request.temperatureTo,
+            createdDate = request.createdDate,
+            imageUrl = request.imageUrl,
+            sourceUrl = request.sourceUrl
+        )
+
+    fun toNetwork(requests: List<Outfit>): List<OutfitResponse> = requests.map { toNetwork(it) }
+
     fun toDatabase(model: Outfit): OutfitEntity =
         OutfitEntity(
             id = model.id,

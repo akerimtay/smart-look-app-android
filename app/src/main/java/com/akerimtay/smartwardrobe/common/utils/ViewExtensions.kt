@@ -77,7 +77,10 @@ fun ImageView.load(
 ) {
     glide.load(imageUrl)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .centerInside()
+        .centerCrop()
+        .fitCenter()
+        .thumbnail(0.3f)
+        .override(dip(200))
         .placeholder(placeholder)
         .into(this)
 }

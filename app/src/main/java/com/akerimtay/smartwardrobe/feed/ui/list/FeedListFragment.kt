@@ -25,7 +25,7 @@ import org.koin.core.parameter.parametersOf
 
 private const val GENDER_EXTRA = "GENDER_EXTRA"
 private const val DIVIDER_SIZE = 16
-private const val TOP_SIZE = 8
+private const val VERTICAL_SIZE = 8
 private const val HORIZONTAL_SIZE = 4
 
 class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
@@ -59,10 +59,10 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
             setHasFixedSize(true)
             addItemDecoration(
                 DefaultItemDecorator(
-                    top = dip(TOP_SIZE),
                     right = dip(HORIZONTAL_SIZE),
                     left = dip(HORIZONTAL_SIZE),
-                    divider = dip(DIVIDER_SIZE)
+                    bottom = dip(VERTICAL_SIZE),
+                    divider = dip(DIVIDER_SIZE),
                 )
             )
         }
