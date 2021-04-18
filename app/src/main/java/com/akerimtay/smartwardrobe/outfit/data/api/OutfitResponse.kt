@@ -10,4 +10,6 @@ data class OutfitResponse(
     val temperatureFrom: Int? = null,
     val temperatureTo: Int? = null,
     val createdDate: Date? = null,
+    val imageUrl: String? = null,
+    val sourceUrl: String? = null,
 )

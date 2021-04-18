@@ -26,6 +26,10 @@ data class OutfitEntity(
     val temperatureTo: Int,
     @ColumnInfo(name = CREATED_DATE)
     val createdDate: Date,
+    @ColumnInfo(name = IMAGE_URL)
+    val imageUrl: String,
+    @ColumnInfo(name = SOURCE_URL)
+    val sourceUrl: String,
 ) {
     companion object {
         const val TABLE_NAME = "outfits"
@@ -36,5 +40,7 @@ data class OutfitEntity(
         const val TEMPERATURE_FROM = "temperature_from"
         const val TEMPERATURE_TO = "temperature_to"
         const val CREATED_DATE = "CREATED_DATE"
+        const val IMAGE_URL = "IMAGE_URL"
+        const val SOURCE_URL = "SOURCE_URL"
     }
 }

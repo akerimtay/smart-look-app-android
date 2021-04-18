@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
-    android:scaleType="fitCenter"
+    android:scaleType="fitXY"
     app:riv_border_color="@color/colorWhiteAlpha50"
-    app:riv_border_width="1dp"
+    app:riv_border_width="0.5dp"
     app:riv_corner_radius="16dp"
     tools:src="@tools:sample/backgrounds/scenic" />

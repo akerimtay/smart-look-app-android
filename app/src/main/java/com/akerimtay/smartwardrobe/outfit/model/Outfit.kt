@@ -10,4 +10,6 @@ data class Outfit(
     val temperatureFrom: Int,
     val temperatureTo: Int,
     val createdDate: Date,
+    val imageUrl: String,
+    val sourceUrl: String,
 )

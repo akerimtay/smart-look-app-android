@@ -16,7 +16,9 @@ object OutfitConverter {
             season = Season.toSeason(response.season),
             temperatureFrom = response.temperatureFrom ?: 0,
             temperatureTo = response.temperatureTo ?: 0,
-            createdDate = response.createdDate ?: Date()
+            createdDate = response.createdDate ?: Date(),
+            imageUrl = response.imageUrl.orEmpty(),
+            sourceUrl = response.sourceUrl.orEmpty(),
         )
 
     fun fromNetwork(responses: List<OutfitResponse>): List<Outfit> = responses.map { fromNetwork(it) }
@@ -29,7 +31,9 @@ object OutfitConverter {
             season = model.season,
             temperatureFrom = model.temperatureFrom,
             temperatureTo = model.temperatureTo,
-            createdDate = model.createdDate
+            createdDate = model.createdDate,
+            imageUrl = model.imageUrl,
+            sourceUrl = model.sourceUrl,
         )
 
     fun toDatabase(models: List<Outfit>): List<OutfitEntity> = models.map { toDatabase(it) }
@@ -42,7 +46,9 @@ object OutfitConverter {
             season = entity.season,
             temperatureFrom = entity.temperatureFrom,
             temperatureTo = entity.temperatureTo,
-            createdDate = entity.createdDate
+            createdDate = entity.createdDate,
+            imageUrl = entity.imageUrl,
+            sourceUrl = entity.sourceUrl,
         )
 
     fun fromDatabase(entities: List<OutfitEntity>): List<Outfit> = entities.map { fromDatabase(it) }

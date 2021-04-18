@@ -3,6 +3,7 @@ package com.akerimtay.smartwardrobe.feed.ui.list
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
@@ -39,6 +40,11 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
         super.onViewCreated(view, savedInstanceState)
         val glide = GlideApp.with(this)
         val contentAdapter = get<PagedContentAdapter<ItemContentType>> { parametersOf(glide) }
+        contentAdapter.addLoadStateListener { loadState ->
+            binding.emptyStateView.isVisible = loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    contentAdapter.itemCount < 1
+        }
         with(binding.recyclerView) {
             adapter = contentAdapter
             itemAnimator = DefaultItemAnimator().apply { supportsChangeAnimations = false }
