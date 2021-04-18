@@ -15,6 +15,7 @@ import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.item.ActionMenuItem
 import com.akerimtay.smartwardrobe.databinding.DialogActionsBinding
 import org.koin.android.ext.android.get
+import org.koin.core.parameter.parametersOf
 
 private const val EXTRA_BUTTONS = "EXTRA_BUTTONS"
 private const val DIVIDER_SIZE = 0
@@ -23,7 +24,7 @@ class ActionsDialog : BaseBottomSheetDialogFragment(R.layout.dialog_actions) {
     companion object {
         fun show(
             fragmentManager: FragmentManager,
-            actionMenuTypes: Set<ActionMenuType>
+            actionMenuTypes: Set<ActionMenuType>,
         ) {
             ActionsDialog().withArgs(
                 EXTRA_BUTTONS to actionMenuTypes
@@ -36,7 +37,7 @@ class ActionsDialog : BaseBottomSheetDialogFragment(R.layout.dialog_actions) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val contentAdapter = get<ContentAdapter<ItemContentType>>()
+        val contentAdapter = get<ContentAdapter<ItemContentType>> { parametersOf(null) }
         with(binding.recyclerView) {
             adapter = contentAdapter
             setHasFixedSize(true)

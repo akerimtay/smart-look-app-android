@@ -49,6 +49,18 @@
                 app:riv_oval="true"
                 tools:src="@tools:sample/avatars" />
 
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar"
+                style="@style/Widget.MaterialComponents.CircularProgressIndicator.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/colorBlueAction"
+                app:layout_constraintBottom_toBottomOf="@id/avatar_image_view"
+                app:layout_constraintEnd_toEndOf="@id/avatar_image_view"
+                app:layout_constraintStart_toStartOf="@id/avatar_image_view"
+                app:layout_constraintTop_toTopOf="@id/avatar_image_view" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/edit_button"
                 style="@style/AppTheme.TextButton"

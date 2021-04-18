@@ -6,7 +6,7 @@
             <gradient
                 android:angle="90"
                 android:endColor="#84A3FF"
-                android:startColor="#275EFE" />
+                android:startColor="@color/colorBlueAction" />
             <corners android:radius="@dimen/button_radius" />
         </shape>
     </item>

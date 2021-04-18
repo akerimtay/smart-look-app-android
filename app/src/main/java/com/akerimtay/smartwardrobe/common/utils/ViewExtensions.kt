@@ -6,14 +6,10 @@ import android.net.Uri
 import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.akerimtay.smartwardrobe.R
-import com.bumptech.glide.Glide
 
 private const val CLICK_DELAY_MILLIS = 500L
 
@@ -67,16 +63,6 @@ fun Fragment.shouldShowRequestPermissionsRationale(permissions: Array<String>): 
         }
     }
     return true
-}
-
-fun ImageView.loadImage(
-    imageUrl: String?,
-    @DrawableRes placeholder: Int = R.drawable.placeholder_person
-) {
-    Glide.with(context)
-        .load(imageUrl)
-        .placeholder(placeholder)
-        .into(this)
 }
 
 fun Context.dip(value: Int): Int = dipF(value).toInt()

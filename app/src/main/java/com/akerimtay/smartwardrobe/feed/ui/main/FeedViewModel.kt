@@ -1,4 +1,4 @@
-package com.akerimtay.smartwardrobe.feed
+package com.akerimtay.smartwardrobe.feed.ui.main
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData

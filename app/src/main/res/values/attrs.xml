@@ -3,4 +3,10 @@
     <declare-styleable name="ProgressStateView">
         <attr name="text" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="EmptyStateView">
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
+        <attr name="isBlackStyle" format="boolean" />
+    </declare-styleable>
 </resources>
