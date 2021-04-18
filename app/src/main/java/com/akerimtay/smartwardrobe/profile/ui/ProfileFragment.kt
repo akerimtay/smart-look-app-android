@@ -8,8 +8,14 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
-import com.akerimtay.smartwardrobe.common.utils.*
+import com.akerimtay.smartwardrobe.common.di.GlideApp
+import com.akerimtay.smartwardrobe.common.utils.FormatHelper
+import com.akerimtay.smartwardrobe.common.utils.RequestDrawableListenerAdapter
+import com.akerimtay.smartwardrobe.common.utils.observeNotNull
+import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
+import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileBinding
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
@@ -51,7 +57,20 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->
             user?.let {
-                binding.avatarImageView.loadImage(it.imageUrl)
+                GlideApp.with(this)
+                    .load(it.imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .fitCenter()
+                    .thumbnail(0.3f)
+                    .listener(
+                        RequestDrawableListenerAdapter(
+                            onFailed = { binding.progressBar.isVisible = false },
+                            onReady = { binding.progressBar.isVisible = false }
+                        )
+                    )
+                    .placeholder(R.drawable.placeholder_person)
+                    .into(binding.avatarImageView)
                 binding.nameTextView.text = it.name
                 binding.emailTextView.text = it.email
                 binding.birthDateTextView.text = FormatHelper.getDate(it.birthDate)

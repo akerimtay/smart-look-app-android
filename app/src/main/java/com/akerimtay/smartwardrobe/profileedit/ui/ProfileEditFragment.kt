@@ -15,10 +15,12 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
+import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.model.ActionMenuType
 import com.akerimtay.smartwardrobe.common.ui.ActionsDialog
 import com.akerimtay.smartwardrobe.common.utils.*
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileEditBinding
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -107,7 +109,22 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
         viewModel.selectedBirthDate.observe(viewLifecycleOwner) { date ->
             binding.birthDateEditText.setText(FormatHelper.getDate(date))
         }
-        viewModel.selectedImage.observe(viewLifecycleOwner) { binding.avatarImageView.loadImage(it) }
+        viewModel.selectedImage.observe(viewLifecycleOwner) {
+            GlideApp.with(this)
+                .load(it)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .fitCenter()
+                .thumbnail(0.3f)
+                .listener(
+                    RequestDrawableListenerAdapter(
+                        onFailed = { binding.progressBar.isVisible = false },
+                        onReady = { binding.progressBar.isVisible = false }
+                    )
+                )
+                .placeholder(R.drawable.placeholder_person)
+                .into(binding.avatarImageView)
+        }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is ProfileEditAction.ShowPreviousScreen -> {

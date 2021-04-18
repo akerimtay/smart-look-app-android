@@ -10,4 +10,5 @@
     <color name="colorWhiteAlpha70">#B2FFFFFF</color>
     <color name="colorBlackAlpha60">#99000000</color>
     <color name="colorBlueLight">#D4DFFF</color>
+    <color name="colorBlueAction">#275EFE</color>
 </resources>

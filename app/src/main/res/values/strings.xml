@@ -71,4 +71,13 @@
     <string name="city_name_format">%s, %s</string>
     <string name="positive_temperature_format">+%d°</string>
     <string name="negative_temperature_format">%d°</string>
+    <string name="empty_outlets_title">Список нарядов пуст</string>
+    <string name="empty_outlets_description">Обновите приложение чтобы отобразились наряды подготовленные вам</string>
+    <string name="empty_articles_title">Функционал недоступен</string>
+    <string name="empty_articles_description">Данный функционал находится в разработке</string>
+    <string name="unisex">Унисекс</string>
+    <string name="winter">Зима</string>
+    <string name="demi_season">Демисезон</string>
+    <string name="summer">Лето</string>
+    <string name="retry">Повторить</string>
 </resources>

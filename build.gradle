@@ -26,6 +26,17 @@ allprojects {
     }
 }
 
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            // Enable experimental APIs
+            freeCompilerArgs += "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            freeCompilerArgs += "-Xuse-experimental=kotlinx.coroutines.FlowPreview"
+            freeCompilerArgs += "-Xuse-experimental=androidx.paging.ExperimentalPagingApi"
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
