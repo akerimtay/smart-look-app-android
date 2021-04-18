@@ -16,6 +16,7 @@ import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.withArgs
 import com.akerimtay.smartwardrobe.content.ItemContentType
+import com.akerimtay.smartwardrobe.content.LoadStateAdapter
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedListBinding
 import com.akerimtay.smartwardrobe.user.model.Gender
 import org.koin.android.ext.android.get
@@ -40,10 +41,17 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
         super.onViewCreated(view, savedInstanceState)
         val glide = GlideApp.with(this)
         val contentAdapter = get<PagedContentAdapter<ItemContentType>> { parametersOf(glide) }
-        contentAdapter.addLoadStateListener { loadState ->
-            binding.emptyStateView.isVisible = loadState.source.refresh is LoadState.NotLoading &&
-                    loadState.append.endOfPaginationReached &&
-                    contentAdapter.itemCount < 1
+        with(contentAdapter) {
+            addLoadStateListener { loadState ->
+                binding.emptyStateView.isVisible = loadState.source.refresh is LoadState.NotLoading &&
+                        loadState.append.endOfPaginationReached &&
+                        itemCount < 1
+                binding.swipeRefreshLayout.isRefreshing = loadState.refresh is LoadState.Loading
+            }
+            withLoadStateHeaderAndFooter(
+                header = LoadStateAdapter(this),
+                footer = LoadStateAdapter(this)
+            )
         }
         with(binding.recyclerView) {
             adapter = contentAdapter
@@ -57,6 +65,15 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                     divider = dip(DIVIDER_SIZE)
                 )
             )
+        }
+        with(binding.swipeRefreshLayout) {
+            setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            )
+            setOnRefreshListener { contentAdapter.refresh() }
         }
 
         viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->
