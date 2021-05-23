@@ -81,4 +81,8 @@
     <string name="summer">Лето</string>
     <string name="retry">Повторить</string>
     <string name="error_load_articles">Не удалось обновить статьи</string>
+    <string name="logout_message_title">Вы уверены?</string>
+    <string name="logout_message_description">Вы уверены что хотите выйти?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

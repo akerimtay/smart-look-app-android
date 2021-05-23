@@ -1,5 +1,6 @@
 package com.akerimtay.smartwardrobe.profile.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -16,6 +17,7 @@ import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
 import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileBinding
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
@@ -39,7 +41,18 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             favoritesCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             aboutAppCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             contactUsCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
-            logOutCardView.setThrottleOnClickListener { viewModel.logOut() }
+            logOutCardView.setThrottleOnClickListener {
+                MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogStyle)
+                    .setTitle(R.string.logout_message_title)
+                    .setMessage(R.string.logout_message_description)
+                    .setNegativeButton(R.string.no) { dialog: DialogInterface, _: Int -> dialog.cancel() }
+                    .setPositiveButton(R.string.log_out) { dialog: DialogInterface, _: Int ->
+                        dialog.cancel()
+                        viewModel.logOut()
+                    }
+                    .create()
+                    .show()
+            }
         }
 
         viewModel.swipeRefreshLoading.observeNotNull(viewLifecycleOwner) {
