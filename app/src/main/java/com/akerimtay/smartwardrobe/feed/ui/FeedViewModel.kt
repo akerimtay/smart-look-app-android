@@ -21,6 +21,7 @@ import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.item.OutfitItem
 import com.akerimtay.smartwardrobe.feed.ui.FeedAction.ShowMessage
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCaseAsFlow
+import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
 import com.akerimtay.smartwardrobe.user.model.Gender
@@ -64,11 +65,11 @@ class FeedViewModel(
                 ).cachedIn(viewModelScope)
                     .asLiveData()
                     .map { pagingData ->
-                        pagingData.map {
+                        pagingData.map { outfit ->
                             OutfitItem(
-                                outfit = it,
+                                outfit = outfit,
                                 onItemClickListener = {
-                                    Timber.e("click: $it")
+                                    _actions.postValue(FeedAction.ShowOutfitDetailScreen(outfit = outfit))
                                 }
                             )
                         }
@@ -106,4 +107,5 @@ class FeedViewModel(
 
 sealed class FeedAction : Action {
     data class ShowMessage(@StringRes val messageResId: Int) : FeedAction()
+    data class ShowOutfitDetailScreen(val outfit: Outfit) : FeedAction()
 }

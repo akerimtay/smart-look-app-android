@@ -108,6 +108,8 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is FeedAction.ShowMessage -> showToast(messageResId = action.messageResId)
+                is FeedAction.ShowOutfitDetailScreen -> {
+                }
             }
         }
         viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->
@@ -146,8 +148,10 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     }
 
     private fun formatTemperature(value: Double): String {
-        val resId =
-            if (value.isPositive()) R.string.positive_temperature_format else R.string.negative_temperature_format
+        val resId = if (value.isPositive())
+            R.string.positive_temperature_format
+        else
+            R.string.negative_temperature_format
         return getString(resId, value.roundToInt())
     }
 
