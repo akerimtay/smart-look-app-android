@@ -7,6 +7,8 @@ import com.akerimtay.smartwardrobe.outfit.data.OutfitConverter
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitLocalGateway
 import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class OutfitDatabase(
     private val database: AppDatabase,
@@ -24,4 +26,7 @@ class OutfitDatabase(
     override suspend fun deleteAll() {
         outfitDao.deleteAll()
     }
+
+    override fun getByIdAsFlow(id: Long): Flow<Outfit?> =
+        outfitDao.getByIdAsFlow(id).map { entity -> entity?.let { OutfitConverter.fromDatabase(it) } }
 }

@@ -21,7 +21,6 @@ import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.item.OutfitItem
 import com.akerimtay.smartwardrobe.feed.ui.FeedAction.ShowMessage
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCaseAsFlow
-import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
 import com.akerimtay.smartwardrobe.user.model.Gender
@@ -69,7 +68,7 @@ class FeedViewModel(
                             OutfitItem(
                                 outfit = outfit,
                                 onItemClickListener = {
-                                    _actions.postValue(FeedAction.ShowOutfitDetailScreen(outfit = outfit))
+                                    _actions.postValue(FeedAction.ShowOutfitDetailScreen(outfitId = outfit.id))
                                 }
                             )
                         }
@@ -107,5 +106,5 @@ class FeedViewModel(
 
 sealed class FeedAction : Action {
     data class ShowMessage(@StringRes val messageResId: Int) : FeedAction()
-    data class ShowOutfitDetailScreen(val outfit: Outfit) : FeedAction()
+    data class ShowOutfitDetailScreen(val outfitId: Long) : FeedAction()
 }

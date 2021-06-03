@@ -56,11 +56,23 @@
                 android:layout_height="0dp"
                 android:adjustViewBounds="false"
                 android:scaleType="fitXY"
-                app:layout_constraintHeight_percent=".5"
+                app:layout_constraintHeight_percent=".6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_corner_radius_bottom_left="@dimen/image_corners"
                 app:riv_corner_radius_bottom_right="@dimen/image_corners"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar"
+                style="@style/Widget.MaterialComponents.CircularProgressIndicator.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/colorBlueAction"
+                app:layout_constraintBottom_toBottomOf="@id/picture_image_view"
+                app:layout_constraintEnd_toEndOf="@id/picture_image_view"
+                app:layout_constraintStart_toStartOf="@id/picture_image_view"
+                app:layout_constraintTop_toTopOf="@id/picture_image_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/name_text_view"
@@ -86,7 +98,7 @@
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:textAppearance="@style/textStyleRegular16"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintEnd_toStartOf="@id/favorite_check_box"
                 app:layout_constraintStart_toStartOf="@id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@id/name_text_view"
                 tools:text="@string/male" />
@@ -102,10 +114,21 @@
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:textAppearance="@style/textStyleRegular16"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintEnd_toStartOf="@id/favorite_check_box"
                 app:layout_constraintStart_toStartOf="@id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@id/gender_text_view"
                 tools:text="@string/summer" />
+
+            <CheckBox
+                android:id="@+id/favorite_check_box"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_favorite_checkbox"
+                android:button="@null"
+                android:checked="false"
+                app:layout_constraintBottom_toBottomOf="@id/season_text_view"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintTop_toTopOf="@id/gender_text_view" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/start_guideline"
