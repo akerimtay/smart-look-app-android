@@ -6,6 +6,7 @@ import com.akerimtay.smartwardrobe.outfit.data.api.OutfitService
 import com.akerimtay.smartwardrobe.outfit.data.db.OutfitDatabase
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitByIdAsFlowUseCase
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCaseAsFlow
+import com.akerimtay.smartwardrobe.outfit.domain.GetSimilarOutfitsUseCase
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitLocalGateway
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitRemoteGateway
 import com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailViewModel
@@ -22,7 +23,8 @@ object OutfitModule : InjectionModule {
 
         single { GetOutfitsUseCaseAsFlow(get(), get()) }
         single { GetOutfitByIdAsFlowUseCase(get()) }
+        single { GetSimilarOutfitsUseCase(get()) }
 
-        viewModel { (outfitId: Long) -> OutfitDetailViewModel(outfitId = outfitId, get()) }
+        viewModel { (outfitId: Long) -> OutfitDetailViewModel(outfitId = outfitId, get(), get()) }
     }
 }

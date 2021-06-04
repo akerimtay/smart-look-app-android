@@ -7,6 +7,7 @@ import com.akerimtay.smartwardrobe.outfit.data.OutfitConverter
 import com.akerimtay.smartwardrobe.outfit.domain.OutfitLocalGateway
 import com.akerimtay.smartwardrobe.outfit.model.Outfit
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
+import com.akerimtay.smartwardrobe.outfit.model.Season
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -29,4 +30,12 @@ class OutfitDatabase(
 
     override fun getByIdAsFlow(id: Long): Flow<Outfit?> =
         outfitDao.getByIdAsFlow(id).map { entity -> entity?.let { OutfitConverter.fromDatabase(it) } }
+
+    override fun getSimilarAsFlow(id: Long, season: Season, gender: OutfitGender, limit: Long): Flow<List<Outfit>> =
+        outfitDao.getSimilarAsFlow(
+            id = id,
+            season = season,
+            gender = gender,
+            limit = limit
+        ).map { OutfitConverter.fromDatabase(it) }
 }

@@ -85,4 +85,5 @@
     <string name="logout_message_description">Вы уверены что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="similar_outfits">Похожие</string>
 </resources>
