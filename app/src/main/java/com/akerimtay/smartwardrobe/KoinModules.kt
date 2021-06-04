@@ -3,6 +3,7 @@ package com.akerimtay.smartwardrobe
 import com.akerimtay.smartwardrobe.articles.ArticlesModule
 import com.akerimtay.smartwardrobe.auth.AuthModule
 import com.akerimtay.smartwardrobe.database.DatabaseModule
+import com.akerimtay.smartwardrobe.favorites.FavoriteModule
 import com.akerimtay.smartwardrobe.feed.FeedModule
 import com.akerimtay.smartwardrobe.network.NetworkModule
 import com.akerimtay.smartwardrobe.outfit.OutfitModule
@@ -27,5 +28,6 @@ object KoinModules {
         WeatherModule.create(),
         OutfitModule.create(),
         ArticlesModule.create(),
+        FavoriteModule.create()
     )
 }

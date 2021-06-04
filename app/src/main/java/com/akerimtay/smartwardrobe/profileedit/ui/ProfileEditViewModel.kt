@@ -11,16 +11,17 @@ import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
 import com.akerimtay.smartwardrobe.profileedit.ProfileEditValidator
-import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UploadImageUseCase
+import java.util.Date
+import java.util.UUID
 import timber.log.Timber
-import java.util.*
 
 private const val FILE_LOCATION = "images/users"
 
 class ProfileEditViewModel(
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
 ) : BaseViewModel() {
@@ -36,7 +37,7 @@ class ProfileEditViewModel(
     private val _selectedImage = MutableLiveData<String?>()
     val selectedImage: LiveData<String?> = _selectedImage
 
-    val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
+    val currentUser = liveData { emitSource(getCurrentUserAsFlowUseCase(Unit)) }
 
     fun selectBirthDate(date: Date?) {
         _selectedBirthDate.value = date

@@ -25,6 +25,16 @@ object OutfitModule : InjectionModule {
         single { GetOutfitByIdAsFlowUseCase(get()) }
         single { GetSimilarOutfitsUseCase(get()) }
 
-        viewModel { (outfitId: Long) -> OutfitDetailViewModel(outfitId = outfitId, get(), get()) }
+        viewModel { (outfitId: Long) ->
+            OutfitDetailViewModel(
+                outfitId = outfitId,
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get()
+            )
+        }
     }
 }

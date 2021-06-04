@@ -16,6 +16,7 @@ import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.RequestDrawableListenerAdapter
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
+import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.databinding.FragmentOutfitDetailBinding
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -35,7 +36,7 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         binding.favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
-
+            if (isChecked) viewModel.addFavorite() else viewModel.deleteFavorite()
         }
 
         val glide = GlideApp.with(this)
@@ -64,8 +65,8 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
                     .thumbnail(0.3f)
                     .listener(
                         RequestDrawableListenerAdapter(
-                            onFailed = { binding.progressBar.isVisible = false },
-                            onReady = { binding.progressBar.isVisible = false }
+                            onFailed = { binding.imageProgressBar.isVisible = false },
+                            onReady = { binding.imageProgressBar.isVisible = false }
                         )
                     )
                     .placeholder(R.drawable.placeholder)
@@ -73,7 +74,6 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
                 binding.nameTextView.text = it.name
                 binding.genderTextView.text = getString(it.gender.titleResId)
                 binding.seasonTextView.text = getString(it.season.titleResId)
-                binding.favoriteCheckBox.isChecked = false
             }
         }
         viewModel.similarOutfits.observeNotNull(viewLifecycleOwner) {
@@ -83,11 +83,17 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is OutfitDetailAction.ShowSimilarOutfit -> findNavController().navigate(
-                    OutfitDetailFragmentDirections.actionOutfitDetailFragmentSelf(
-                        action.outfitId
-                    )
+                    OutfitDetailFragmentDirections.actionOutfitDetailFragmentSelf(action.outfitId)
                 )
+                is OutfitDetailAction.ShowMessage -> showToast(messageResId = action.messageResId)
             }
+        }
+        viewModel.isFavoriteOutfit.observeNotNull(viewLifecycleOwner) {
+            binding.favoriteCheckBox.isChecked = it
+        }
+        viewModel.favoriteProgressLoading.observeNotNull(viewLifecycleOwner) {
+            binding.favoriteCheckBox.isVisible = !it
+            binding.favoriteProgressBar.isVisible = it
         }
     }
 }

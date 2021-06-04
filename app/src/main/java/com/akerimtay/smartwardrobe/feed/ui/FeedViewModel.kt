@@ -22,7 +22,7 @@ import com.akerimtay.smartwardrobe.content.item.OutfitItem
 import com.akerimtay.smartwardrobe.feed.ui.FeedAction.ShowMessage
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitsUseCaseAsFlow
 import com.akerimtay.smartwardrobe.outfit.model.OutfitGender
-import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.model.Gender
 import com.akerimtay.smartwardrobe.weather.domain.GetCurrentWeatherUseCase
 import com.akerimtay.smartwardrobe.weather.domain.LoadWeatherUseCase
@@ -37,7 +37,7 @@ class FeedViewModel(
     private val getOutfitsUseCaseAsFlow: GetOutfitsUseCaseAsFlow,
     private val loadWeatherUseCase: LoadWeatherUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
 ) : BaseViewModel() {
     private val _actions = SingleLiveEvent<FeedAction>()
     val actions: LiveData<FeedAction> = _actions
@@ -47,7 +47,7 @@ class FeedViewModel(
 
     val weather: LiveData<Weather?> = liveData { emitSource(getCurrentWeatherUseCase(Unit)) }
 
-    private val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
+    private val currentUser = liveData { emitSource(getCurrentUserAsFlowUseCase(Unit)) }
 
     val outfits = currentUser.switchMap { user ->
         liveData<PagingData<BaseContentItem<ItemContentType>>> {

@@ -4,7 +4,7 @@ import com.akerimtay.smartwardrobe.common.di.InjectionModule
 import com.akerimtay.smartwardrobe.database.AppDatabase
 import com.akerimtay.smartwardrobe.user.data.UserService
 import com.akerimtay.smartwardrobe.user.data.db.UserDatabase
-import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.LoadCurrentUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UploadImageUseCase
@@ -25,7 +25,7 @@ object UserModule : InjectionModule {
         single<UserLocalGateway> { UserDatabase(get()) }
 
         single { UpdateUserUseCase(get(), get()) }
-        single { GetCurrentUserUseCase(get(), get()) }
+        single { GetCurrentUserAsFlowUseCase(get(), get()) }
         single { UploadImageUseCase(get()) }
         single { LoadCurrentUserUseCase(get(), get(), get(), get()) }
     }

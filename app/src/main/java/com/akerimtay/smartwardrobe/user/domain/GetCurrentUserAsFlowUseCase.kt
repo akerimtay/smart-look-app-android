@@ -8,7 +8,7 @@ import com.akerimtay.smartwardrobe.user.model.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class GetCurrentUserUseCase(
+class GetCurrentUserAsFlowUseCase(
     private val sessionManager: SessionManager,
     private val userLocalGateway: UserLocalGateway
 ) : UseCase<Unit, LiveData<User?>>() {

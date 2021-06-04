@@ -63,7 +63,7 @@
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/progress_bar"
+                android:id="@+id/image_progress_bar"
                 style="@style/Widget.MaterialComponents.CircularProgressIndicator.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,6 +129,19 @@
                 app:layout_constraintBottom_toBottomOf="@id/season_text_view"
                 app:layout_constraintEnd_toEndOf="@id/end_guideline"
                 app:layout_constraintTop_toTopOf="@id/gender_text_view" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/favorite_progress_bar"
+                style="@style/Widget.MaterialComponents.CircularProgressIndicator.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/colorBlueAction"
+                app:layout_constraintBottom_toBottomOf="@id/favorite_check_box"
+                app:layout_constraintEnd_toEndOf="@id/favorite_check_box"
+                app:layout_constraintStart_toStartOf="@id/favorite_check_box"
+                app:layout_constraintTop_toTopOf="@id/favorite_check_box" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/similar_text_view"
