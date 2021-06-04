@@ -50,7 +50,7 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
 
         viewModel.favorites.observeNotNull(viewLifecycleOwner) {
             contentAdapter.collection = it
-            binding.emptyStateView.isVisible = false
+            binding.emptyStateView.isVisible = it.isEmpty()
         }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
