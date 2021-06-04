@@ -22,6 +22,9 @@
         <argument
             android:name="outfitId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_outfitDetailFragment_self"
+            app:destination="@id/outfitDetailFragment" />
     </fragment>
 
 </navigation>

@@ -80,5 +80,14 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
             contentAdapter.collection = it
             binding.similarTextView.isVisible = it.isNotEmpty()
         }
+        viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
+            when (action) {
+                is OutfitDetailAction.ShowSimilarOutfit -> findNavController().navigate(
+                    OutfitDetailFragmentDirections.actionOutfitDetailFragmentSelf(
+                        action.outfitId
+                    )
+                )
+            }
+        }
     }
 }
