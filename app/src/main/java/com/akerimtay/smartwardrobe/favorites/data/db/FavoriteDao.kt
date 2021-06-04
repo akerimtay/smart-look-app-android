@@ -13,7 +13,13 @@ interface FavoriteDao {
     fun save(entity: FavoriteEntity)
 
     @Transaction
-    @Query("SELECT * FROM ${FavoriteEntity.TABLE_NAME} WHERE ${FavoriteEntity.USER_ID} = :userId")
+    @Query(
+        """
+        SELECT * FROM ${FavoriteEntity.TABLE_NAME} 
+        WHERE ${FavoriteEntity.USER_ID} = :userId
+        GROUP BY ${FavoriteEntity.OUTFIT_ID}
+        """
+    )
     fun getAllByUserIdAsFlow(userId: String): Flow<List<FavoriteDetailEntity>>
 
     @Query("DELETE FROM ${FavoriteEntity.TABLE_NAME} WHERE ${FavoriteEntity.ID} = :id")

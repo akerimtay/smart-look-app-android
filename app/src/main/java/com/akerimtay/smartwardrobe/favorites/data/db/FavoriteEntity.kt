@@ -14,16 +14,12 @@ import com.akerimtay.smartwardrobe.user.data.db.UserEntity
         ForeignKey(
             entity = UserEntity::class,
             parentColumns = [UserEntity.ID],
-            childColumns = [FavoriteEntity.USER_ID],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
+            childColumns = [FavoriteEntity.USER_ID]
         ),
         ForeignKey(
             entity = OutfitEntity::class,
             parentColumns = [OutfitEntity.ID],
-            childColumns = [FavoriteEntity.OUTFIT_ID],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
+            childColumns = [FavoriteEntity.OUTFIT_ID]
         )
     ]
 )

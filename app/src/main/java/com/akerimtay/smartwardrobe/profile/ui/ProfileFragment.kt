@@ -38,7 +38,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             editProfileCardView.setThrottleOnClickListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
             }
-            favoritesCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
+            favoritesCardView.setThrottleOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFavoritesFragment())
+            }
             aboutAppCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             contactUsCardView.setThrottleOnClickListener { showToast(R.string.on_dev) }
             logOutCardView.setThrottleOnClickListener {

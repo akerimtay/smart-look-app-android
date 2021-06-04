@@ -35,9 +35,6 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        binding.favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) viewModel.addFavorite() else viewModel.deleteFavorite()
-        }
 
         val glide = GlideApp.with(this)
         val contentAdapter = get<ContentAdapter<ItemContentType>> { parametersOf(glide) }
@@ -90,6 +87,9 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
         }
         viewModel.isFavoriteOutfit.observeNotNull(viewLifecycleOwner) {
             binding.favoriteCheckBox.isChecked = it
+            binding.favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) viewModel.addFavorite() else viewModel.deleteFavorite()
+            }
         }
         viewModel.favoriteProgressLoading.observeNotNull(viewLifecycleOwner) {
             binding.favoriteCheckBox.isVisible = !it
