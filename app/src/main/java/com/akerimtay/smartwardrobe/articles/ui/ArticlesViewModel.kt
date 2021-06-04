@@ -34,7 +34,7 @@ class ArticlesViewModel(
                     ArticleItem(
                         article = it,
                         onItemClickListener = {
-                            Timber.e("click: $it")
+                            _actions.postValue(ArticlesAction.OpenWebSite(it.sourceUrl))
                         }
                     )
                 }
@@ -68,4 +68,5 @@ class ArticlesViewModel(
 
 sealed class ArticlesAction : Action {
     data class ShowMessage(@StringRes val messageResId: Int) : ArticlesAction()
+    data class OpenWebSite(val url: String) : ArticlesAction()
 }
