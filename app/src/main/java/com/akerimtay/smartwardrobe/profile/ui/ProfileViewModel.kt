@@ -3,14 +3,14 @@ package com.akerimtay.smartwardrobe.profile.ui
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.domain.LogOutUseCase
 import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
-import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.LoadCurrentUserUseCase
 import kotlinx.coroutines.delay
 import timber.log.Timber
@@ -19,7 +19,7 @@ private const val DELAY_TIME_IN_MILLIS = 2_000L
 
 class ProfileViewModel(
     private val logOutUseCase: LogOutUseCase,
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
     private val loadCurrentUserUseCase: LoadCurrentUserUseCase,
 ) : BaseViewModel() {
     private val _actions = SingleLiveEvent<ProfileAction>()
@@ -31,7 +31,7 @@ class ProfileViewModel(
     private val _swipeRefreshLoading = MutableLiveData(false)
     val swipeRefreshLoading: LiveData<Boolean> = _swipeRefreshLoading
 
-    val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
+    val currentUser = getCurrentUserAsFlowUseCase(Unit).asLiveData()
 
     init {
         loadUser()

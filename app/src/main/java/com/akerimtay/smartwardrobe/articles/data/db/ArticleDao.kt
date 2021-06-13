@@ -1,11 +1,11 @@
 package com.akerimtay.smartwardrobe.articles.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
@@ -13,7 +13,7 @@ interface ArticleDao {
     fun save(articles: List<ArticleEntity>)
 
     @Query("SELECT * FROM ${ArticleEntity.TABLE_NAME}")
-    fun getAllAsLiveData(): LiveData<List<ArticleEntity>>
+    fun getAllAsLiveData(): Flow<List<ArticleEntity>>
 
     @Transaction
     @Query("DELETE FROM ${ArticleEntity.TABLE_NAME}")

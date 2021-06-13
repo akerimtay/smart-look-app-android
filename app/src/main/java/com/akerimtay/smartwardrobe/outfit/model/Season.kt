@@ -7,7 +7,7 @@ import com.akerimtay.smartwardrobe.R
 @Keep
 enum class Season(
     val serializedName: String,
-    @StringRes val displayName: Int
+    @StringRes val titleResId: Int
 ) {
     WINTER("winter", R.string.winter),
     DEMI_SEASON("demiSeason", R.string.demi_season),

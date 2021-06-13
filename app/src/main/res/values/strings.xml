@@ -81,4 +81,13 @@
     <string name="summer">Лето</string>
     <string name="retry">Повторить</string>
     <string name="error_load_articles">Не удалось обновить статьи</string>
+    <string name="logout_message_title">Вы уверены?</string>
+    <string name="logout_message_description">Вы уверены что хотите выйти?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="similar_outfits">Похожие</string>
+    <string name="error_favorite_save">Не удалось сохранить в избранные</string>
+    <string name="error_favorite_delete">Не удалось удалить из избранных</string>
+    <string name="empty_favorites_title">Список избранных пуст</string>
+    <string name="empty_favorites_description">Добавьте наряды в избранные чтобы увидеть их тут</string>
 </resources>

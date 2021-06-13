@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.akerimtay.smartwardrobe.feed.ui.main.FeedFragment"
+        android:name="com.akerimtay.smartwardrobe.feed.ui.FeedFragment"
         android:label="@string/title_feed"
         tools:layout="@layout/fragment_feed" />
 
