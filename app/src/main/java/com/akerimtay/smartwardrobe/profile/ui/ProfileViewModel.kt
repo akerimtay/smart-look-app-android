@@ -1,15 +1,15 @@
 package com.akerimtay.smartwardrobe.profile.ui
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.domain.LogOutUseCase
 import com.akerimtay.smartwardrobe.common.base.Action
-import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
+import com.akerimtay.smartwardrobe.common.model.ErrorMessage
+import com.akerimtay.smartwardrobe.common.utils.getErrorMessage
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.LoadCurrentUserUseCase
 import kotlinx.coroutines.delay
@@ -45,10 +45,7 @@ class ProfileViewModel(
             handleError = {
                 Timber.e(it, "Can't load user")
                 _actions.postValue(
-                    when (it) {
-                        is BaseError -> ProfileAction.ShowMessage(messageResId = it.errorResId)
-                        else -> ProfileAction.ShowMessage(messageResId = R.string.error_load_user)
-                    }
+                    ProfileAction.ShowErrorMessage(it.getErrorMessage(R.string.error_load_user))
                 )
             }
         )
@@ -65,12 +62,15 @@ class ProfileViewModel(
             },
             handleError = {
                 Timber.e(it, "Cannot logout")
+                _actions.postValue(
+                    ProfileAction.ShowErrorMessage(it.getErrorMessage(R.string.error_log_out))
+                )
             }
         )
     }
 }
 
 sealed class ProfileAction : Action {
-    data class ShowMessage(@StringRes val messageResId: Int) : ProfileAction()
+    data class ShowErrorMessage(val errorMessage: ErrorMessage) : ProfileAction()
     object ShowLoginScreen : ProfileAction()
 }

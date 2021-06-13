@@ -14,7 +14,7 @@ import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
-import com.akerimtay.smartwardrobe.common.utils.showToast
+import com.akerimtay.smartwardrobe.common.utils.showErrorMessage
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.databinding.FragmentArticlesBinding
 import org.koin.android.ext.android.get
@@ -71,7 +71,7 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(action.url))
                     startActivity(intent)
                 }
-                is ArticlesAction.ShowMessage -> showToast(action.messageResId)
+                is ArticlesAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
             }
         }
     }

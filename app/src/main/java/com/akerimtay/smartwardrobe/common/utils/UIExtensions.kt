@@ -1,15 +1,13 @@
 package com.akerimtay.smartwardrobe.common.utils
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.akerimtay.smartwardrobe.common.model.ErrorMessage
 
 private const val CLICK_DELAY_MILLIS = 500L
 
@@ -70,6 +68,6 @@ fun Context.dipF(value: Int): Float = value * resources.displayMetrics.density
 
 fun View.dip(value: Int): Int = context.dip(value)
 
-fun Context.getSettingsIntent() = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-    data = Uri.fromParts("package", packageName, null)
+fun Fragment.showErrorMessage(errorMessage: ErrorMessage) {
+    context?.toast(errorMessage.message.takeIf { !it.isNullOrEmpty() } ?: getString(errorMessage.resId))
 }

@@ -16,7 +16,7 @@ import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.RequestDrawableListenerAdapter
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
-import com.akerimtay.smartwardrobe.common.utils.showToast
+import com.akerimtay.smartwardrobe.common.utils.showErrorMessage
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.databinding.FragmentOutfitDetailBinding
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -82,7 +82,7 @@ class OutfitDetailFragment : BaseFragment(R.layout.fragment_outfit_detail) {
                 is OutfitDetailAction.ShowSimilarOutfit -> findNavController().navigate(
                     OutfitDetailFragmentDirections.actionOutfitDetailFragmentSelf(action.outfitId)
                 )
-                is OutfitDetailAction.ShowMessage -> showToast(messageResId = action.messageResId)
+                is OutfitDetailAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
             }
         }
         viewModel.isFavoriteOutfit.observeNotNull(viewLifecycleOwner) {

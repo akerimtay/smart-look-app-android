@@ -10,11 +10,14 @@ import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
+import com.akerimtay.smartwardrobe.common.model.ErrorMessage
+import com.akerimtay.smartwardrobe.common.utils.getErrorMessage
 import com.akerimtay.smartwardrobe.profileedit.ProfileEditValidator
 import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UploadImageUseCase
-import java.util.*
+import java.util.Date
+import java.util.UUID
 import timber.log.Timber
 
 private const val FILE_LOCATION = "images/users"
@@ -62,7 +65,7 @@ class ProfileEditViewModel(
             },
             handleError = {
                 Timber.e(it, "Can't upload image")
-                _actions.postValue(ProfileEditAction.ShowMessage(errorResId = R.string.error_upload_image))
+                _actions.postValue(ProfileEditAction.ShowErrorMessage(it.getErrorMessage(R.string.error_upload_image)))
             }
         )
     }
@@ -94,12 +97,7 @@ class ProfileEditViewModel(
                 },
                 handleError = {
                     Timber.e(it, "Error while save user data")
-                    _actions.postValue(
-                        when (it) {
-                            is BaseError -> ProfileEditAction.ShowMessage(it.errorResId)
-                            else -> ProfileEditAction.ShowMessage(R.string.error_auth)
-                        }
-                    )
+                    _actions.postValue(ProfileEditAction.ShowErrorMessage(it.getErrorMessage(R.string.error_auth)))
                 }
             )
         } else {
@@ -118,6 +116,6 @@ sealed class ProfileEditAction : Action {
         @StringRes val errorMessageId: Int,
     ) : ProfileEditAction()
 
-    data class ShowMessage(@StringRes val errorResId: Int) : ProfileEditAction()
+    data class ShowErrorMessage(val errorMessage: ErrorMessage) : ProfileEditAction()
     object ShowPreviousScreen : ProfileEditAction()
 }

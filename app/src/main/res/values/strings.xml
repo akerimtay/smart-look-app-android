@@ -90,4 +90,5 @@
     <string name="error_favorite_delete">Не удалось удалить из избранных</string>
     <string name="empty_favorites_title">Список избранных пуст</string>
     <string name="empty_favorites_description">Добавьте наряды в избранные чтобы увидеть их тут</string>
+    <string name="error_log_out">Не удалось выполнить выход</string>
 </resources>

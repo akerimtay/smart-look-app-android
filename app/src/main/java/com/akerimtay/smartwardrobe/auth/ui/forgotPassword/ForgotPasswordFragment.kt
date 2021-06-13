@@ -12,6 +12,7 @@ import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.utils.hideKeyboard
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
+import com.akerimtay.smartwardrobe.common.utils.showErrorMessage
 import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentForgotPasswordBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -45,7 +46,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password) {
                     },
                     message = getString(action.errorMessageId)
                 )
-                is ForgotPasswordAction.ShowMessage -> showToast(messageResId = action.errorResId)
+                is ForgotPasswordAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
                 is ForgotPasswordAction.ShowSignInScreen -> {
                     showToast(messageResId = R.string.mail_for_restore_password_sent)
                     findNavController().popBackStack()

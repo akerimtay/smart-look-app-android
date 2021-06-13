@@ -1,10 +1,8 @@
 package com.akerimtay.smartwardrobe.outfit.ui
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.Action
@@ -12,8 +10,10 @@ import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
 import com.akerimtay.smartwardrobe.common.base.adapter.BaseContentItem
+import com.akerimtay.smartwardrobe.common.model.ErrorMessage
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
 import com.akerimtay.smartwardrobe.common.utils.RandomHelper
+import com.akerimtay.smartwardrobe.common.utils.getErrorMessage
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.item.OutfitDetailItem
 import com.akerimtay.smartwardrobe.favorites.domain.DeleteFavoriteByOutfitIdUseCase
@@ -23,6 +23,8 @@ import com.akerimtay.smartwardrobe.favorites.model.Favorite
 import com.akerimtay.smartwardrobe.outfit.domain.GetOutfitByIdAsFlowUseCase
 import com.akerimtay.smartwardrobe.outfit.domain.GetSimilarOutfitsUseCase
 import com.akerimtay.smartwardrobe.outfit.model.Outfit
+import com.akerimtay.smartwardrobe.outfit.model.OutfitGender.MALE
+import com.akerimtay.smartwardrobe.outfit.model.Season.SUMMER
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
@@ -31,7 +33,7 @@ private const val LIMIT = 10L
 class OutfitDetailViewModel(
     private val outfitId: Long,
     private val preferences: PreferencesContract,
-    private val getOutfitByIdAsFlowUseCase: GetOutfitByIdAsFlowUseCase,
+    getOutfitByIdAsFlowUseCase: GetOutfitByIdAsFlowUseCase,
     private val getSimilarOutfitsUseCase: GetSimilarOutfitsUseCase,
     isFavoriteOutfitUseCase: IsFavoriteOutfitUseCase,
     private val saveFavoriteUseCase: SaveFavoriteUseCase,
@@ -40,34 +42,29 @@ class OutfitDetailViewModel(
     private val _actions = SingleLiveEvent<OutfitDetailAction>()
     val actions: LiveData<OutfitDetailAction> = _actions
 
-    private val _favoriteProgressLoading = MutableLiveData<Boolean>(false)
+    private val _favoriteProgressLoading = MutableLiveData(false)
     val favoriteProgressLoading: LiveData<Boolean> = _favoriteProgressLoading
 
-    val outfit: LiveData<Outfit?> = liveData {
-        emitSource(getOutfitByIdAsFlowUseCase(GetOutfitByIdAsFlowUseCase.Param(outfitId = outfitId)).asLiveData())
-    }
-    val similarOutfits = outfit.switchMap { data ->
-        liveData {
-            data?.let { data ->
-                getSimilarOutfitsUseCase(
-                    GetSimilarOutfitsUseCase.Param(
-                        id = outfitId,
-                        season = data.season,
-                        gender = data.gender,
-                        limit = LIMIT
-                    )
-                ).map { list ->
-                    list.map {
-                        OutfitDetailItem(
-                            outfit = it,
-                            onItemClickListener = {
-                                _actions.postValue(OutfitDetailAction.ShowSimilarOutfit(outfitId = it.id))
-                            }
-                        ) as BaseContentItem<ItemContentType>
+    val outfit: LiveData<Outfit?> =
+        getOutfitByIdAsFlowUseCase(GetOutfitByIdAsFlowUseCase.Param(outfitId = outfitId)).asLiveData()
+    val similarOutfits: LiveData<List<BaseContentItem<ItemContentType>>> = outfit.switchMap { data ->
+        getSimilarOutfitsUseCase(
+            GetSimilarOutfitsUseCase.Param(
+                id = outfitId,
+                season = data?.season ?: SUMMER,
+                gender = data?.gender ?: MALE,
+                limit = LIMIT
+            )
+        ).map { list ->
+            list.map {
+                OutfitDetailItem(
+                    outfit = it,
+                    onItemClickListener = {
+                        _actions.postValue(OutfitDetailAction.ShowSimilarOutfit(outfitId = it.id))
                     }
-                }.asLiveData()
-            }?.let { emitSource(it) }
-        }
+                ) as BaseContentItem<ItemContentType>
+            }
+        }.asLiveData()
     }
     val isFavoriteOutfit: LiveData<Boolean> =
         isFavoriteOutfitUseCase(IsFavoriteOutfitUseCase.Param(outfitId = outfitId)).asLiveData()
@@ -87,10 +84,7 @@ class OutfitDetailViewModel(
             handleError = {
                 Timber.e(it, "Couldn't save favorite")
                 _actions.postValue(
-                    when (it) {
-                        is BaseError -> OutfitDetailAction.ShowMessage(messageResId = it.errorResId)
-                        else -> OutfitDetailAction.ShowMessage(messageResId = R.string.error_favorite_save)
-                    }
+                    OutfitDetailAction.ShowErrorMessage(it.getErrorMessage(R.string.error_favorite_save))
                 )
             }
         )
@@ -105,13 +99,15 @@ class OutfitDetailViewModel(
             },
             handleError = {
                 Timber.e(it, "Couldn't delete favorite")
-                _actions.postValue(OutfitDetailAction.ShowMessage(messageResId = R.string.error_favorite_delete))
+                _actions.postValue(
+                    OutfitDetailAction.ShowErrorMessage(it.getErrorMessage(R.string.error_favorite_delete))
+                )
             }
         )
     }
 }
 
 sealed class OutfitDetailAction : Action {
-    data class ShowMessage(@StringRes val messageResId: Int) : OutfitDetailAction()
+    data class ShowErrorMessage(val errorMessage: ErrorMessage) : OutfitDetailAction()
     data class ShowSimilarOutfit(val outfitId: Long) : OutfitDetailAction()
 }

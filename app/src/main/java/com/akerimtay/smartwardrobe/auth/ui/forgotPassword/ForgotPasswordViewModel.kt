@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.auth.AuthValidator
 import com.akerimtay.smartwardrobe.auth.domain.RestorePasswordUseCase
+import com.akerimtay.smartwardrobe.auth.ui.forgotPassword.ForgotPasswordViewModel.Field.EMAIL
 import com.akerimtay.smartwardrobe.common.base.Action
-import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
+import com.akerimtay.smartwardrobe.common.model.ErrorMessage
+import com.akerimtay.smartwardrobe.common.utils.getErrorMessage
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import timber.log.Timber
 
@@ -28,7 +30,7 @@ class ForgotPasswordViewModel(
         if (!AuthValidator.emailValidator.isValid(email)) {
             errorActions.add(
                 ForgotPasswordAction.ShowFieldError(
-                    field = ForgotPasswordViewModel.Field.EMAIL,
+                    field = EMAIL,
                     errorMessageId = if (email.isBlank()) R.string.required_field else R.string.invalid_email
                 )
             )
@@ -46,9 +48,12 @@ class ForgotPasswordViewModel(
                     Timber.e(it, "Error while sign up")
                     _actions.postValue(
                         when (it) {
-                            is BaseError -> ForgotPasswordAction.ShowMessage(it.errorResId)
-                            is FirebaseAuthInvalidUserException -> ForgotPasswordAction.ShowMessage(R.string.error_user_not_found)
-                            else -> ForgotPasswordAction.ShowMessage(R.string.error_auth)
+                            is FirebaseAuthInvalidUserException -> ForgotPasswordAction.ShowErrorMessage(
+                                ErrorMessage(resId = R.string.error_user_not_found)
+                            )
+                            else -> ForgotPasswordAction.ShowErrorMessage(
+                                it.getErrorMessage(defaultResId = R.string.error_auth)
+                            )
                         }
                     )
                 }
@@ -69,6 +74,6 @@ sealed class ForgotPasswordAction : Action {
         @StringRes val errorMessageId: Int = 0
     ) : ForgotPasswordAction()
 
-    data class ShowMessage(@StringRes val errorResId: Int) : ForgotPasswordAction()
+    data class ShowErrorMessage(val errorMessage: ErrorMessage) : ForgotPasswordAction()
     object ShowSignInScreen : ForgotPasswordAction()
 }

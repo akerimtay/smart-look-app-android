@@ -2,7 +2,7 @@ package com.akerimtay.smartwardrobe.common.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import java.util.*
+import java.util.Locale
 
 inline fun <T> LiveData<T>.observeNotNull(
     owner: LifecycleOwner,

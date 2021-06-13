@@ -131,7 +131,7 @@ class ProfileEditFragment : BaseFragment(R.layout.fragment_profile_edit),
                     showToast(R.string.success_saved)
                     findNavController().popBackStack()
                 }
-                is ProfileEditAction.ShowMessage -> showToast(messageResId = action.errorResId)
+                is ProfileEditAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
                 is ProfileEditAction.ShowFieldError -> showTextFieldError(
                     textInputLayout = when (action.field) {
                         ProfileEditViewModel.Field.NAME -> binding.nameTextInputLayout

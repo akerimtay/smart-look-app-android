@@ -14,6 +14,7 @@ import com.akerimtay.smartwardrobe.common.utils.FormatHelper
 import com.akerimtay.smartwardrobe.common.utils.RequestDrawableListenerAdapter
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.setThrottleOnClickListener
+import com.akerimtay.smartwardrobe.common.utils.showErrorMessage
 import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.databinding.FragmentProfileBinding
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -67,7 +68,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                     val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     navController.navigate(R.id.action_mainFragment_to_authFlow)
                 }
-                is ProfileAction.ShowMessage -> showToast(action.messageResId)
+                is ProfileAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
             }
         }
         viewModel.currentUser.observeNotNull(viewLifecycleOwner) { user ->

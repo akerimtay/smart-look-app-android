@@ -2,7 +2,10 @@ package com.akerimtay.smartwardrobe.feed.ui
 
 import android.Manifest
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -19,13 +22,12 @@ import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.action
 import com.akerimtay.smartwardrobe.common.utils.capitalize
 import com.akerimtay.smartwardrobe.common.utils.dip
-import com.akerimtay.smartwardrobe.common.utils.getSettingsIntent
 import com.akerimtay.smartwardrobe.common.utils.isNull
 import com.akerimtay.smartwardrobe.common.utils.isPermissionsGranted
 import com.akerimtay.smartwardrobe.common.utils.isPositive
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.common.utils.shouldShowRequestPermissionsRationale
-import com.akerimtay.smartwardrobe.common.utils.showToast
+import com.akerimtay.smartwardrobe.common.utils.showErrorMessage
 import com.akerimtay.smartwardrobe.common.utils.snack
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.LoadStateAdapter
@@ -107,7 +109,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
-                is FeedAction.ShowMessage -> showToast(messageResId = action.messageResId)
+                is FeedAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
                 is FeedAction.ShowOutfitDetailScreen -> {
                     val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     navController.navigate(
@@ -171,7 +173,9 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 !isGranted && !shouldShowRequestPermissionsRationale(LOCATION_PERMISSIONS) -> {
                     binding.content.snack(R.string.permission_denied_title) {
                         action(R.string.settings) {
-                            settingsLauncher.launch(requireContext().getSettingsIntent())
+                            settingsLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                data = Uri.fromParts("package", requireContext().packageName, null)
+                            })
                         }
                     }
                 }
