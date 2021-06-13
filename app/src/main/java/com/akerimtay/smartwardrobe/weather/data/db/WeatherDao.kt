@@ -1,18 +1,19 @@
 package com.akerimtay.smartwardrobe.weather.data.db
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(weatherEntity: WeatherEntity)
 
-    @Transaction
     @Query("SELECT * FROM ${WeatherEntity.TABLE_NAME} WHERE ${WeatherEntity.ID} = :id")
-    fun getByIdAsFlow(id: Int): LiveData<WeatherEntity?>
+    fun getByIdAsFlow(id: Int): Flow<WeatherEntity?>
 
-    @Transaction
     @Query("DELETE FROM ${WeatherEntity.TABLE_NAME} WHERE ${WeatherEntity.ID} = :id")
     fun deleteById(id: Int)
 }

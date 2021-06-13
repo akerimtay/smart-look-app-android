@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outfit_navigation_graph"
+    app:startDestination="@id/outfitDetailFragment">
+
+    <fragment
+        android:id="@+id/outfitDetailFragment"
+        android:name="com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragment"
+        tools:layout="@layout/fragment_outfit_detail">
+        <argument
+            android:name="outfitId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_outfitDetailFragment_self"
+            app:destination="@id/outfitDetailFragment" />
+    </fragment>
+
+</navigation>

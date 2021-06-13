@@ -1,5 +1,7 @@
 package com.akerimtay.smartwardrobe.articles.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -12,6 +14,7 @@ import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
+import com.akerimtay.smartwardrobe.common.utils.showToast
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.databinding.FragmentArticlesBinding
 import org.koin.android.ext.android.get
@@ -61,6 +64,15 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
         }
         viewModel.swipeRefreshLoading.observeNotNull(viewLifecycleOwner) {
             binding.swipeRefreshLayout.isRefreshing = it
+        }
+        viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
+            when (action) {
+                is ArticlesAction.OpenWebSite -> {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(action.url))
+                    startActivity(intent)
+                }
+                is ArticlesAction.ShowMessage -> showToast(action.messageResId)
+            }
         }
     }
 }

@@ -4,23 +4,23 @@ import android.graphics.Bitmap
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.common.base.Action
 import com.akerimtay.smartwardrobe.common.base.BaseError
 import com.akerimtay.smartwardrobe.common.base.BaseViewModel
 import com.akerimtay.smartwardrobe.common.base.SingleLiveEvent
 import com.akerimtay.smartwardrobe.profileedit.ProfileEditValidator
-import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserUseCase
+import com.akerimtay.smartwardrobe.user.domain.GetCurrentUserAsFlowUseCase
 import com.akerimtay.smartwardrobe.user.domain.UpdateUserUseCase
 import com.akerimtay.smartwardrobe.user.domain.UploadImageUseCase
-import timber.log.Timber
 import java.util.*
+import timber.log.Timber
 
 private const val FILE_LOCATION = "images/users"
 
 class ProfileEditViewModel(
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
 ) : BaseViewModel() {
@@ -36,7 +36,7 @@ class ProfileEditViewModel(
     private val _selectedImage = MutableLiveData<String?>()
     val selectedImage: LiveData<String?> = _selectedImage
 
-    val currentUser = liveData { emitSource(getCurrentUserUseCase(Unit)) }
+    val currentUser = getCurrentUserAsFlowUseCase(Unit).asLiveData()
 
     fun selectBirthDate(date: Date?) {
         _selectedBirthDate.value = date
@@ -115,7 +115,7 @@ class ProfileEditViewModel(
 sealed class ProfileEditAction : Action {
     data class ShowFieldError(
         val field: ProfileEditViewModel.Field,
-        @StringRes val errorMessageId: Int
+        @StringRes val errorMessageId: Int,
     ) : ProfileEditAction()
 
     data class ShowMessage(@StringRes val errorResId: Int) : ProfileEditAction()

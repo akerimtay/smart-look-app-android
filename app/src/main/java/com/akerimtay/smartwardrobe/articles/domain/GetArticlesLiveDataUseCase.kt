@@ -1,16 +1,12 @@
 package com.akerimtay.smartwardrobe.articles.domain
 
-import androidx.lifecycle.LiveData
 import com.akerimtay.smartwardrobe.articles.domain.gateway.ArticleLocalGateway
 import com.akerimtay.smartwardrobe.articles.model.Article
-import com.akerimtay.smartwardrobe.common.base.UseCase
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import com.akerimtay.smartwardrobe.common.base.UseCaseSync
+import kotlinx.coroutines.flow.Flow
 
 class GetArticlesLiveDataUseCase(
     private val articleLocalGateway: ArticleLocalGateway,
-) : UseCase<Unit, LiveData<List<Article>>>() {
-    override val dispatcher: CoroutineDispatcher = Dispatchers.IO
-
-    override suspend fun execute(parameters: Unit): LiveData<List<Article>> = articleLocalGateway.getAllAsLiveData()
+) : UseCaseSync<Unit, Flow<List<Article>>>() {
+    override fun execute(parameters: Unit): Flow<List<Article>> = articleLocalGateway.getAllAsLiveData()
 }

@@ -7,7 +7,7 @@ import com.akerimtay.smartwardrobe.R
 @Keep
 enum class OutfitGender(
     val serializedName: String,
-    @StringRes val displayName: Int
+    @StringRes val titleResId: Int
 ) {
     MALE("male", R.string.male),
     FEMALE("female", R.string.female),

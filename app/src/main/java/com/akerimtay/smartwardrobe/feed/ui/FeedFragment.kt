@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,6 +17,7 @@ import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
 import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.action
+import com.akerimtay.smartwardrobe.common.utils.capitalize
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.getSettingsIntent
 import com.akerimtay.smartwardrobe.common.utils.isNull
@@ -28,8 +30,8 @@ import com.akerimtay.smartwardrobe.common.utils.snack
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.LoadStateAdapter
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
+import com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragmentArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.*
 import kotlin.math.roundToInt
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
@@ -99,9 +101,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 )
                 binding.iconImageView.setImageResource(weather.iconResId)
                 binding.temperatureTextView.text = formatTemperature(weather.temperature)
-                binding.descriptionTextView.text = weather.description.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
-                }
+                binding.descriptionTextView.text = weather.description.capitalize()
                 binding.feelsLikeValueTextView.text = formatTemperature(weather.feelsLike)
             }
         }
@@ -109,6 +109,11 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
             when (action) {
                 is FeedAction.ShowMessage -> showToast(messageResId = action.messageResId)
                 is FeedAction.ShowOutfitDetailScreen -> {
+                    val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    navController.navigate(
+                        R.id.action_mainFragment_to_outfitFlow,
+                        OutfitDetailFragmentArgs(outfitId = action.outfitId).toBundle()
+                    )
                 }
             }
         }
