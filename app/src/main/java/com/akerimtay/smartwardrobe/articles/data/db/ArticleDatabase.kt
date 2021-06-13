@@ -10,8 +10,11 @@ class ArticleDatabase(
     private val articleDao: ArticleDao,
 ) : ArticleLocalGateway {
 
-    override fun getAllAsLiveData(): Flow<List<Article>> =
-        articleDao.getAllAsLiveData().map { ArticleConverter.fromDatabase(it) }
+    override fun getAllAsFlow(): Flow<List<Article>> =
+        articleDao.getAllAsFlow().map { ArticleConverter.fromDatabase(it) }
+
+    override fun getByIdAsFlow(id: Long): Flow<Article?> =
+        articleDao.getByIdAsFlow(id).map { it?.let { ArticleConverter.fromDatabase(it) } }
 
     override suspend fun save(articles: List<Article>) {
         articleDao.save(ArticleConverter.toDatabase(articles))

@@ -31,9 +31,7 @@ class ArticlesViewModel(
         list.map {
             ArticleItem(
                 article = it,
-                onItemClickListener = {
-                    _actions.postValue(ArticlesAction.OpenWebSite(it.sourceUrl))
-                }
+                onItemClickListener = { _actions.postValue(ArticlesAction.ShowDetailScreen(it.id)) }
             )
         }
     }.asLiveData()
@@ -59,5 +57,5 @@ class ArticlesViewModel(
 
 sealed class ArticlesAction : Action {
     data class ShowErrorMessage(val errorMessage: ErrorMessage) : ArticlesAction()
-    data class OpenWebSite(val url: String) : ArticlesAction()
+    data class ShowDetailScreen(val articleId: Long) : ArticlesAction()
 }

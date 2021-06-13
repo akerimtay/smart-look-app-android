@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/article_detail_navigation_graph"
+    app:startDestination="@id/articleDetailFragment">
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.akerimtay.smartwardrobe.articles.ui.detail.ArticleDetailFragment"
+        tools:layout="@layout/fragment_article_detail">
+        <argument
+            android:name="articleId"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

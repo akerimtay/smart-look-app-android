@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 class GetArticlesLiveDataUseCase(
     private val articleLocalGateway: ArticleLocalGateway,
 ) : UseCaseSync<Unit, Flow<List<Article>>>() {
-    override fun execute(parameters: Unit): Flow<List<Article>> = articleLocalGateway.getAllAsLiveData()
+    override fun execute(parameters: Unit): Flow<List<Article>> = articleLocalGateway.getAllAsFlow()
 }

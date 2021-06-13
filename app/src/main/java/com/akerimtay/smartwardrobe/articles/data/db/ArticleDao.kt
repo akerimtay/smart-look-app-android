@@ -13,9 +13,12 @@ interface ArticleDao {
     fun save(articles: List<ArticleEntity>)
 
     @Query("SELECT * FROM ${ArticleEntity.TABLE_NAME}")
-    fun getAllAsLiveData(): Flow<List<ArticleEntity>>
+    fun getAllAsFlow(): Flow<List<ArticleEntity>>
 
     @Transaction
     @Query("DELETE FROM ${ArticleEntity.TABLE_NAME}")
     fun deleteAll()
+
+    @Query("SELECT * FROM ${ArticleEntity.TABLE_NAME} WHERE ${ArticleEntity.ID} = :id")
+    fun getByIdAsFlow(id: Long): Flow<ArticleEntity?>
 }

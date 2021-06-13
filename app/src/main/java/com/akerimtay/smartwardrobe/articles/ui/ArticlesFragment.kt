@@ -1,13 +1,13 @@
 package com.akerimtay.smartwardrobe.articles.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.akerimtay.smartwardrobe.R
+import com.akerimtay.smartwardrobe.articles.ui.detail.ArticleDetailFragmentArgs
 import com.akerimtay.smartwardrobe.common.base.BaseFragment
 import com.akerimtay.smartwardrobe.common.base.adapter.ContentAdapter
 import com.akerimtay.smartwardrobe.common.di.GlideApp
@@ -67,9 +67,12 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
         }
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
-                is ArticlesAction.OpenWebSite -> {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(action.url))
-                    startActivity(intent)
+                is ArticlesAction.ShowDetailScreen -> {
+                    val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    navController.navigate(
+                        R.id.action_mainFragment_to_articleDetailFlow,
+                        ArticleDetailFragmentArgs(articleId = action.articleId).toBundle()
+                    )
                 }
                 is ArticlesAction.ShowErrorMessage -> showErrorMessage(action.errorMessage)
             }
