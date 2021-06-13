@@ -1,10 +1,10 @@
 package com.akerimtay.smartwardrobe.articles.domain.gateway
 
-import androidx.lifecycle.LiveData
 import com.akerimtay.smartwardrobe.articles.model.Article
+import kotlinx.coroutines.flow.Flow
 
 interface ArticleLocalGateway {
-    suspend fun getAllAsLiveData(): LiveData<List<Article>>
+    fun getAllAsLiveData(): Flow<List<Article>>
     suspend fun save(articles: List<Article>)
     suspend fun deleteAll()
 }

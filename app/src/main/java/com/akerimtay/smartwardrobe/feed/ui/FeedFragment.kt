@@ -17,6 +17,7 @@ import com.akerimtay.smartwardrobe.common.di.GlideApp
 import com.akerimtay.smartwardrobe.common.persistence.PreferencesContract
 import com.akerimtay.smartwardrobe.common.ui.DefaultItemDecorator
 import com.akerimtay.smartwardrobe.common.utils.action
+import com.akerimtay.smartwardrobe.common.utils.capitalize
 import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.getSettingsIntent
 import com.akerimtay.smartwardrobe.common.utils.isNull
@@ -31,7 +32,6 @@ import com.akerimtay.smartwardrobe.content.LoadStateAdapter
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
 import com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragmentArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.*
 import kotlin.math.roundToInt
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
@@ -101,9 +101,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 )
                 binding.iconImageView.setImageResource(weather.iconResId)
                 binding.temperatureTextView.text = formatTemperature(weather.temperature)
-                binding.descriptionTextView.text = weather.description.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
-                }
+                binding.descriptionTextView.text = weather.description.capitalize()
                 binding.feelsLikeValueTextView.text = formatTemperature(weather.feelsLike)
             }
         }

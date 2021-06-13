@@ -36,8 +36,8 @@ private const val PAGE_SIZE = 20
 class FeedViewModel(
     private val getOutfitsUseCaseAsFlow: GetOutfitsUseCaseAsFlow,
     private val loadWeatherUseCase: LoadWeatherUseCase,
-    private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
-    private val getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
+    getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
+    getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
 ) : BaseViewModel() {
     private val _actions = SingleLiveEvent<FeedAction>()
     val actions: LiveData<FeedAction> = _actions
@@ -45,9 +45,9 @@ class FeedViewModel(
     private val _progressLoading = MutableLiveData(false)
     val progressLoading: LiveData<Boolean> = _progressLoading
 
-    val weather: LiveData<Weather?> = liveData { emitSource(getCurrentWeatherUseCase(Unit)) }
+    val weather: LiveData<Weather?> = getCurrentWeatherUseCase(Unit).asLiveData()
 
-    private val currentUser = liveData { emitSource(getCurrentUserAsFlowUseCase(Unit)) }
+    private val currentUser = getCurrentUserAsFlowUseCase(Unit).asLiveData()
 
     val outfits = currentUser.switchMap { user ->
         liveData<PagingData<BaseContentItem<ItemContentType>>> {

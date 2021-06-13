@@ -16,12 +16,12 @@ import kotlinx.coroutines.flow.map
 
 class FavoritesViewModel(
     getFavoritesByUserIdAsFlowUseCase: GetFavoritesByUserIdAsFlowUseCase,
-    private val getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
+    getCurrentUserAsFlowUseCase: GetCurrentUserAsFlowUseCase,
 ) : BaseViewModel() {
     private val _actions = SingleLiveEvent<FavoritesAction>()
     val actions: LiveData<FavoritesAction> = _actions
 
-    private val currentUser = liveData { emitSource(getCurrentUserAsFlowUseCase(Unit)) }
+    private val currentUser = getCurrentUserAsFlowUseCase(Unit).asLiveData()
     val favorites = currentUser.switchMap { user ->
         liveData {
             user?.let { user ->
