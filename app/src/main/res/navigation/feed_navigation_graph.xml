@@ -9,22 +9,6 @@
         android:id="@+id/feedFragment"
         android:name="com.akerimtay.smartwardrobe.feed.ui.FeedFragment"
         android:label="@string/title_feed"
-        tools:layout="@layout/fragment_feed">
-        <action
-            android:id="@+id/action_feedFragment_to_outfitDetailFragment"
-            app:destination="@id/outfitDetailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/outfitDetailFragment"
-        android:name="com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragment"
-        tools:layout="@layout/fragment_outfit_detail">
-        <argument
-            android:name="outfitId"
-            app:argType="long" />
-        <action
-            android:id="@+id/action_outfitDetailFragment_self"
-            app:destination="@id/outfitDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_feed" />
 
 </navigation>

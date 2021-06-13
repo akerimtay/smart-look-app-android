@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -29,8 +29,9 @@ import com.akerimtay.smartwardrobe.common.utils.snack
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.content.LoadStateAdapter
 import com.akerimtay.smartwardrobe.databinding.FragmentFeedBinding
+import com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragmentArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Locale
+import java.util.*
 import kotlin.math.roundToInt
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
@@ -109,9 +110,13 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is FeedAction.ShowMessage -> showToast(messageResId = action.messageResId)
-                is FeedAction.ShowOutfitDetailScreen -> findNavController().navigate(
-                    FeedFragmentDirections.actionFeedFragmentToOutfitDetailFragment(action.outfitId)
-                )
+                is FeedAction.ShowOutfitDetailScreen -> {
+                    val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    navController.navigate(
+                        R.id.action_mainFragment_to_outfitFlow,
+                        OutfitDetailFragmentArgs(outfitId = action.outfitId).toBundle()
+                    )
+                }
             }
         }
         viewModel.outfits.observeNotNull(viewLifecycleOwner) { pagingData ->

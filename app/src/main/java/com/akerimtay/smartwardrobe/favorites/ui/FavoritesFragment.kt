@@ -3,6 +3,7 @@ package com.akerimtay.smartwardrobe.favorites.ui
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +16,7 @@ import com.akerimtay.smartwardrobe.common.utils.dip
 import com.akerimtay.smartwardrobe.common.utils.observeNotNull
 import com.akerimtay.smartwardrobe.content.ItemContentType
 import com.akerimtay.smartwardrobe.databinding.FragmentFavoritesBinding
+import com.akerimtay.smartwardrobe.outfit.ui.OutfitDetailFragmentArgs
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -55,6 +57,11 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
         viewModel.actions.observeNotNull(viewLifecycleOwner) { action ->
             when (action) {
                 is FavoritesAction.ShowOutfitDetailScreen -> {
+                    val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    navController.navigate(
+                        R.id.action_mainFragment_to_outfitFlow,
+                        OutfitDetailFragmentArgs(outfitId = action.outfitId).toBundle()
+                    )
                 }
             }
         }

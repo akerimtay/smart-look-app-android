@@ -21,8 +21,14 @@
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
 
+        <action
+            android:id="@+id/action_mainFragment_to_outfitFlow"
+            app:destination="@id/outfit_navigation_graph" />
+
     </fragment>
 
     <include app:graph="@navigation/auth_navigation_graph" />
+
+    <include app:graph="@navigation/outfit_navigation_graph" />
 
 </navigation>
