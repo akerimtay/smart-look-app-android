@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        kotlin_version = "1.5.0"
-        build_tools_version = '4.2.1'
+        kotlin_version = "1.5.31"
+        build_tools_version = '7.0.2'
         google_services_version = "4.3.5"
-        crashlytics_version = "2.5.1"
+        crashlytics_version = '2.5.2'
         nav_version = "2.3.4"
     }
     repositories {

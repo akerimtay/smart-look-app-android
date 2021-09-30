@@ -3,7 +3,7 @@ package com.akerimtay.smartwardrobe.articles.ui
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-`import androidx.lifecycle.asLiveData
+import androidx.lifecycle.asLiveData
 import com.akerimtay.smartwardrobe.R
 import com.akerimtay.smartwardrobe.articles.domain.GetArticlesLiveDataUseCase
 import com.akerimtay.smartwardrobe.articles.domain.LoadArticlesUseCase
